@@ -20,6 +20,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vcc.aprender.domain.cards.AnswerFeedbackFactory
 
 @Composable
 fun DiscoverCardsScreen(
@@ -79,12 +80,7 @@ fun DiscoverCardsScreen(
             }
         }
         state.answer?.let { answer ->
-            Text(
-                if (answer.correct) "Muito bem! Acertaste! ⭐"
-                else "Boa tentativa! ${state.card.explanation.ifBlank { "Tenta outra pergunta." }}",
-                style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center
-            )
+            AnswerFeedbackPanel(AnswerFeedbackFactory.from(state.card, answer))
             Button(onClick = onNext) { Text(if (state.index == state.total - 1) "Terminar" else "Próximo cartão") }
         }
         state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
