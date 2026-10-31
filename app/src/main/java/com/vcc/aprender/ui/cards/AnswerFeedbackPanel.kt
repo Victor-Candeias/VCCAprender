@@ -16,12 +16,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.cards.AnswerFeedback
-import com.vcc.aprender.domain.cards.FeedbackKind
 
 @Composable
 fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
-    val background = if (feedback.kind == FeedbackKind.CORRECT)
-        MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.secondaryContainer
     Card(modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
