@@ -12,7 +12,7 @@ class ActivityContentTest {
     }
 
     @Test fun everyQuestionHasThreeDistinctAnswersAndIncludesCorrectOne() {
-        listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES).forEach { topic ->
+        listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES, LearningTopic.ANIMALS, LearningTopic.SOUNDS, LearningTopic.WORDS).forEach { topic ->
             assertTrue(ActivityContent.questions(topic).isNotEmpty())
             ActivityContent.questions(topic).forEach { question ->
                 assertEquals(3, question.options.distinct().size)
@@ -21,7 +21,7 @@ class ActivityContentTest {
         }
     }
 
-    @Test fun unsupportedTopicsHaveNoQuestions() {
-        assertTrue(ActivityContent.questions(LearningTopic.ANIMALS).isEmpty())
+    @Test fun lettersUseDedicatedAlphabetModule() {
+        assertTrue(ActivityContent.questions(LearningTopic.LETTERS).isEmpty())
     }
 }
