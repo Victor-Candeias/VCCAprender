@@ -13,6 +13,9 @@ import androidx.compose.runtime.LaunchedEffect
 import com.vcc.aprender.ui.profiles.ProfileScreen
 import com.vcc.aprender.ui.profiles.ProfileViewModel
 import com.vcc.aprender.ui.profiles.ProfileViewModelFactory
+import com.vcc.aprender.ui.progress.ProgressScreen
+import com.vcc.aprender.ui.progress.ProgressViewModel
+import com.vcc.aprender.ui.progress.ProgressViewModelFactory
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -31,6 +34,7 @@ import com.vcc.aprender.ui.home.HomeViewModelFactory
 
 private const val PROFILES = "profiles"
 private const val HOME = "home"
+private const val PROGRESS = "progress"
 private const val TOPIC = "topic/{topicId}"
 
 @Composable
@@ -40,6 +44,9 @@ fun AprenderNavHost(container: AppContainer) {
     val profiles by profileModel.profiles.collectAsStateWithLifecycle()
     val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
     val error by profileModel.error.collectAsStateWithLifecycle()
+    val progressModel: ProgressViewModel = viewModel(factory = ProgressViewModelFactory(container.progressRepository))
+    val progress by progressModel.progress.collectAsStateWithLifecycle()
+    LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
 
     LaunchedEffect(selectedId, profiles) {
         if (selectedId != null && profiles.any { it.id == selectedId }) {
@@ -72,11 +79,15 @@ fun AprenderNavHost(container: AppContainer) {
             androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
                 Text("Mudar de perfil")
             }
+            androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) { Text("Ver progresso") }
             HomeScreen(
                 state = state,
                 onRetry = model::refresh,
                 onTopicClick = { topic -> navController.navigate("topic/${topic.name}") }
             )
+        }
+        composable(PROGRESS) {
+            if (selectedId != null) ProgressScreen(progress = progress, onBack = { navController.popBackStack() })
         }
         composable(
             route = TOPIC,
