@@ -28,6 +28,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.ui.cards.DiscoverCardsScreen
+import com.vcc.aprender.ui.cards.DiscoverCardsViewModel
+import com.vcc.aprender.ui.cards.DiscoverCardsViewModelFactory
 import com.vcc.aprender.ui.activities.ActivityScreen
 import com.vcc.aprender.ui.activities.ActivityViewModel
 import com.vcc.aprender.ui.activities.ActivityViewModelFactory
@@ -43,6 +46,7 @@ private const val HOME = "home"
 private const val PROGRESS = "progress"
 private const val TOPIC = "topic/{topicId}"
 private const val ALPHABET = "alphabet"
+private const val CARDS = "discover-cards"
 
 @Composable
 fun AprenderNavHost(container: AppContainer) {
@@ -87,11 +91,29 @@ fun AprenderNavHost(container: AppContainer) {
                 Text("Mudar de perfil")
             }
             androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) { Text("Ver progresso") }
+            androidx.compose.material3.TextButton(onClick = { navController.navigate(CARDS) }) { Text("Descobre a Resposta A/B/C") }
             HomeScreen(
                 state = state,
                 onRetry = model::refresh,
                 onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
             )
+        }
+        composable(CARDS) {
+            val childId = selectedId
+            if (childId != null && profiles.any { it.id == childId }) {
+                val model: DiscoverCardsViewModel = viewModel(
+                    key = "cards-$childId",
+                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository)
+                )
+                val cardsState by model.state.collectAsStateWithLifecycle()
+                DiscoverCardsScreen(
+                    state = cardsState,
+                    onChoose = model::choose,
+                    onNext = model::next,
+                    onRestart = model::restart,
+                    onBack = { navController.popBackStack() }
+                )
+            }
         }
         composable(ALPHABET) {
             val childId = selectedId
