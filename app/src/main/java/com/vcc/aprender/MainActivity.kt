@@ -8,7 +8,7 @@ import com.vcc.aprender.ui.navigation.AprenderNavHost
 import com.vcc.aprender.ui.theme.AprenderTheme
 
 class MainActivity : ComponentActivity() {
-    private val container by lazy { AppContainer() }
+    private val container by lazy { AppContainer(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
