@@ -41,6 +41,20 @@ object OfflineCardCatalog {
             illustration = "🐱",
             options = listOf(CardOption("dog", "Cão", "🐶"), CardOption("cat", "Gato", "🐱"), CardOption("cow", "Vaca", "🐄")),
             correctOptionId = "cat", difficulty = CardDifficulty.EASY, explanation = "O gato faz miau."
+        ),
+        DiscoverCard(
+            id = "sounds-dog", topic = LearningTopic.SOUNDS,
+            question = "Que animal faz au-au?",
+            illustration = "🔊",
+            options = listOf(CardOption("dog", "Cão", "🐶"), CardOption("cat", "Gato", "🐱"), CardOption("duck", "Pato", "🦆")),
+            correctOptionId = "dog", explanation = "O cão faz au-au."
+        ),
+        DiscoverCard(
+            id = "words-apple", topic = LearningTopic.WORDS,
+            question = "Qual é a palavra desta imagem?",
+            illustration = "🍎",
+            options = listOf(CardOption("apple", "Maçã"), CardOption("pear", "Pera"), CardOption("banana", "Banana")),
+            correctOptionId = "apple", explanation = "Esta fruta é uma maçã."
         )
     )
 
