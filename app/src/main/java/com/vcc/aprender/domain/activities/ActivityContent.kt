@@ -61,7 +61,7 @@ object ActivityContent {
         Triple("Mééé", "🐑", listOf("Ovelha", "Vaca", "Gato")),
         Triple("Quá-quá", "🦆", listOf("Pato", "Cão", "Leão")),
         Triple("Cocorocó", "🐓", listOf("Galo", "Pato", "Cão"))
-    ).map { (sound, symbol, choices) ->
+    ).map { (sound, _, choices) ->
         val answer = when (sound) {
             "Miau" -> "Gato"
             "Au-au" -> "Cão"
@@ -70,7 +70,7 @@ object ActivityContent {
             "Quá-quá" -> "Pato"
             else -> "Galo"
         }
-        LearningQuestion("Que animal faz o som «$sound»?", symbol, choices.sorted(), answer)
+        LearningQuestion("Que animal faz o som «$sound»?", "🔊", choices.sorted(), answer)
     }
 
     private val words = listOf(
