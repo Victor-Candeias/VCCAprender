@@ -5,6 +5,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.vcc.aprender.data.settings.ParentalSettingsRepository
 import com.vcc.aprender.data.profile.ProfileDatabase
 import com.vcc.aprender.data.profile.ProfileRepository
 import com.vcc.aprender.data.progress.ProgressRepository
@@ -34,6 +35,7 @@ private val MIGRATION_1_2 = object : Migration(1, 2) {
 class AppContainer(context: Context) {
     private val learningRepository: LearningRepository = OfflineLearningRepository()
     val getLearningTopics = GetLearningTopicsUseCase(learningRepository)
+    val parentalSettingsRepository = ParentalSettingsRepository(context)
     private val database = Room.databaseBuilder(
         context.applicationContext, ProfileDatabase::class.java, "vcc_profiles.db"
     ).addMigrations(MIGRATION_1_2).build()

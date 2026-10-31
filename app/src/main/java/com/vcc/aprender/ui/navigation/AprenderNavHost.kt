@@ -37,6 +37,9 @@ import com.vcc.aprender.ui.activities.ActivityViewModelFactory
 import com.vcc.aprender.ui.alphabet.AlphabetScreen
 import com.vcc.aprender.ui.alphabet.AlphabetViewModel
 import com.vcc.aprender.ui.alphabet.AlphabetViewModelFactory
+import com.vcc.aprender.ui.parents.ParentalSettingsScreen
+import com.vcc.aprender.ui.parents.ParentalSettingsViewModel
+import com.vcc.aprender.ui.parents.ParentalSettingsViewModelFactory
 import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeViewModel
 import com.vcc.aprender.ui.home.HomeViewModelFactory
@@ -44,6 +47,7 @@ import com.vcc.aprender.ui.home.HomeViewModelFactory
 private const val PROFILES = "profiles"
 private const val HOME = "home"
 private const val PROGRESS = "progress"
+private const val PARENTS = "parents"
 private const val TOPIC = "topic/{topicId}"
 private const val ALPHABET = "alphabet"
 private const val CARDS = "discover-cards"
@@ -87,16 +91,25 @@ fun AprenderNavHost(container: AppContainer) {
             if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
             val model: HomeViewModel = viewModel(factory = HomeViewModelFactory(container.getLearningTopics))
             val state by model.uiState.collectAsStateWithLifecycle()
-            androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
-                Text("Mudar de perfil")
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
+                    Text("Mudar de perfil")
+                }
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) {
+                    Text("Ver progresso")
+                }
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
+                    Text("Área parental e preferências")
+                }
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(CARDS) }) {
+                    Text("Descobre a Resposta A/B/C")
+                }
+                HomeScreen(
+                    state = state,
+                    onRetry = model::refresh,
+                    onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
+                )
             }
-            androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) { Text("Ver progresso") }
-            androidx.compose.material3.TextButton(onClick = { navController.navigate(CARDS) }) { Text("Descobre a Resposta A/B/C") }
-            HomeScreen(
-                state = state,
-                onRetry = model::refresh,
-                onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
-            )
         }
         composable(CARDS) {
             val childId = selectedId
@@ -132,6 +145,18 @@ fun AprenderNavHost(container: AppContainer) {
                     onBack = { navController.popBackStack() }
                 )
             }
+        }
+        composable(PARENTS) {
+            val model: ParentalSettingsViewModel = viewModel(
+                factory = ParentalSettingsViewModelFactory(container.parentalSettingsRepository)
+            )
+            val settings by model.settings.collectAsStateWithLifecycle()
+            ParentalSettingsScreen(
+                settings = settings,
+                onAudioChanged = model::setAudioEnabled,
+                onSpeechRateChanged = model::setSpeechRate,
+                onBack = { navController.popBackStack() }
+            )
         }
         composable(PROGRESS) {
             if (selectedId != null) ProgressScreen(progress = progress, onBack = { navController.popBackStack() })
