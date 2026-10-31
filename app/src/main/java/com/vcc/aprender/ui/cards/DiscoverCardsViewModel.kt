@@ -46,6 +46,10 @@ class DiscoverCardsViewModel(
     fun choose(optionId: String) {
         if (_state.value.finished || session.answer != null) return
         val topic = session.current.topic
+        if (session.current.options.none { it.id == optionId }) {
+            _state.value = _state.value.copy(error = "Esta resposta não está disponível.")
+            return
+        }
         val result = session.submit(optionId)
         tiles = tiles.revealAll()
         _state.value = snapshot()
