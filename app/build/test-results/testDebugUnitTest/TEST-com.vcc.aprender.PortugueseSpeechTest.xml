@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.PortugueseSpeechTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-31T23:18:52" hostname="codespaces-82de8f" time="0.015">
+<testsuite name="com.vcc.aprender.PortugueseSpeechTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-31T23:26:00" hostname="codespaces-82de8f" time="0.008">
   <properties/>
-  <testcase name="emptySpeechIsRejected" classname="com.vcc.aprender.PortugueseSpeechTest" time="0.008"/>
+  <testcase name="emptySpeechIsRejected" classname="com.vcc.aprender.PortugueseSpeechTest" time="0.005"/>
   <testcase name="localeIsPortugueseFromPortugal" classname="com.vcc.aprender.PortugueseSpeechTest" time="0.001"/>
-  <testcase name="whitespaceIsNormalized" classname="com.vcc.aprender.PortugueseSpeechTest" time="0.001"/>
+  <testcase name="whitespaceIsNormalized" classname="com.vcc.aprender.PortugueseSpeechTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
