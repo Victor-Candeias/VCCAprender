@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 fun DiscoverCardsScreen(
     state: DiscoverCardsUiState,
     onChoose: (String) -> Unit,
+    onReveal: (Int) -> Unit,
     onNext: () -> Unit,
     onRestart: () -> Unit,
     onBack: () -> Unit
@@ -48,7 +49,16 @@ fun DiscoverCardsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                state.card.illustration?.let { Text(it, style = MaterialTheme.typography.displayLarge) }
+                state.card.illustration?.let { illustration ->
+                    Text("Toca nos quadrados para descobrir a imagem")
+                    RevealTilesGrid(
+                        illustration = illustration,
+                        tiles = state.tiles,
+                        enabled = state.answer == null,
+                        onReveal = onReveal
+                    )
+                    Text("Quadrados por revelar: ${state.tiles.remaining}")
+                }
                 Text(state.card.question, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
             }
         }
