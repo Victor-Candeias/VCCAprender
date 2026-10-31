@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vcc.aprender.ui.audio.SpeechControls
 
 @Composable
 fun ActivityScreen(
@@ -36,6 +37,7 @@ fun ActivityScreen(
         Text("Exercício ${state.index + 1} de ${state.questions.size}")
         Text(question.illustration, style = MaterialTheme.typography.displayLarge, textAlign = TextAlign.Center)
         Text(question.prompt, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             question.options.forEach { option ->
                 Button(onClick = { onAnswer(option) }, enabled = state.answer == null) {

@@ -20,6 +20,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vcc.aprender.ui.audio.SpeechControls
 import com.vcc.aprender.domain.cards.AnswerFeedbackFactory
 
 @Composable
@@ -44,6 +45,7 @@ fun DiscoverCardsScreen(
             return@Column
         }
         Text("Cartão ${state.index + 1} de ${state.total}")
+        SpeechControls(state.card.question + ". " + state.card.options.mapIndexed { index, option -> "${'A' + index}: ${option.label}" }.joinToString(". "))
         Card(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier.fillMaxWidth().padding(20.dp),

@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vcc.aprender.ui.audio.SpeechControls
 
 @Composable
 fun AlphabetScreen(
@@ -36,6 +37,7 @@ fun AlphabetScreen(
         Text("${state.card.letter}  ${state.card.letter.lowercaseChar()}", style = MaterialTheme.typography.displayLarge)
         Text(state.card.emoji, style = MaterialTheme.typography.displayLarge)
         Text(state.card.word, style = MaterialTheme.typography.headlineMedium)
+        SpeechControls("Letra ${state.card.letter}. ${state.card.word}. Qual é a primeira letra de ${state.card.word}?")
         Text("Qual é a primeira letra de ${state.card.word}?", textAlign = TextAlign.Center)
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             state.options.forEach { option ->
