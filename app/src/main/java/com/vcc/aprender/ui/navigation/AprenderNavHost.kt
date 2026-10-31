@@ -28,6 +28,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.ui.activities.ActivityScreen
+import com.vcc.aprender.ui.activities.ActivityViewModel
+import com.vcc.aprender.ui.activities.ActivityViewModelFactory
 import com.vcc.aprender.ui.alphabet.AlphabetScreen
 import com.vcc.aprender.ui.alphabet.AlphabetViewModel
 import com.vcc.aprender.ui.alphabet.AlphabetViewModelFactory
@@ -117,7 +120,24 @@ fun AprenderNavHost(container: AppContainer) {
             val topic = entry.arguments?.getString("topicId")?.let { id ->
                 LearningTopic.entries.firstOrNull { it.name == id }
             }
-            TopicScreen(topic = topic, onBack = { navController.popBackStack() })
+            val childId = selectedId
+            if (topic in listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES)
+                && childId != null && profiles.any { it.id == childId }) {
+                val model: ActivityViewModel = viewModel(
+                    key = "activity-${topic!!.name}-$childId",
+                    factory = ActivityViewModelFactory(topic, childId, container.progressRepository)
+                )
+                val activityState by model.state.collectAsStateWithLifecycle()
+                ActivityScreen(
+                    state = activityState,
+                    onAnswer = model::answer,
+                    onPrevious = model::previous,
+                    onNext = model::next,
+                    onBack = { navController.popBackStack() }
+                )
+            } else {
+                TopicScreen(topic = topic, onBack = { navController.popBackStack() })
+            }
         }
     }
 }
