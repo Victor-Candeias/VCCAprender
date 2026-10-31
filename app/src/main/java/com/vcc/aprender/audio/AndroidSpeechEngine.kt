@@ -10,6 +10,7 @@ enum class SpeechStatus { INITIALIZING, READY, UNAVAILABLE }
 class AndroidSpeechEngine(context: Context) : TextToSpeech.OnInitListener {
     private val _status = MutableStateFlow(SpeechStatus.INITIALIZING)
     val status = _status.asStateFlow()
+    private var speechRate = 0.85f
     private var released = false
     private var engine: TextToSpeech? = TextToSpeech(context.applicationContext, this)
 
@@ -27,9 +28,14 @@ class AndroidSpeechEngine(context: Context) : TextToSpeech.OnInitListener {
         }
         val result = tts.setLanguage(PortugueseSpeech.preferredLocale)
         _status.value = if (result >= TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-            tts.setSpeechRate(0.85f)
+            tts.setSpeechRate(speechRate)
             SpeechStatus.READY
         } else SpeechStatus.UNAVAILABLE
+    }
+
+    fun configure(rate: Float) {
+        speechRate = rate.coerceIn(0.5f, 1.5f)
+        if (!released && _status.value == SpeechStatus.READY) engine?.setSpeechRate(speechRate)
     }
 
     fun speak(text: String): Boolean {
