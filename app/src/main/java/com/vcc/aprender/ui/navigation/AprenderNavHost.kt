@@ -109,6 +109,7 @@ fun AprenderNavHost(container: AppContainer) {
                 DiscoverCardsScreen(
                     state = cardsState,
                     onChoose = model::choose,
+                    onReveal = model::reveal,
                     onNext = model::next,
                     onRestart = model::restart,
                     onBack = { navController.popBackStack() }
