@@ -144,7 +144,7 @@ fun AprenderNavHost(container: AppContainer) {
                 LearningTopic.entries.firstOrNull { it.name == id }
             }
             val childId = selectedId
-            if (topic in listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES)
+            if (topic in listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES, LearningTopic.ANIMALS, LearningTopic.SOUNDS, LearningTopic.WORDS)
                 && childId != null && profiles.any { it.id == childId }) {
                 val model: ActivityViewModel = viewModel(
                     key = "activity-${topic!!.name}-$childId",
