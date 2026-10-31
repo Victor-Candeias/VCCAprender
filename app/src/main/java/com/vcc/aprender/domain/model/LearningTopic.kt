@@ -5,5 +5,7 @@ enum class LearningTopic(val title: String, val description: String) {
     NUMBERS("Números", "Aprende a contar"),
     COLORS("Cores", "Explora as cores"),
     SHAPES("Formas", "Conhece as formas"),
-    ANIMALS("Animais", "Descobre os animais")
+    ANIMALS("Animais", "Descobre os animais"),
+    SOUNDS("Sons", "Reconhece os sons dos animais"),
+    WORDS("Palavras", "Aprende palavras do dia a dia")
 }
