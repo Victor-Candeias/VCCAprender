@@ -47,6 +47,11 @@ fun AprenderNavHost(container: AppContainer) {
                 popUpTo(PROFILES) { inclusive = false }
                 launchSingleTop = true
             }
+        } else if (selectedId == null && navController.currentDestination?.route != PROFILES) {
+            navController.navigate(PROFILES) {
+                popUpTo(PROFILES) { inclusive = true }
+                launchSingleTop = true
+            }
         }
     }
 
@@ -64,6 +69,9 @@ fun AprenderNavHost(container: AppContainer) {
             if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
             val model: HomeViewModel = viewModel(factory = HomeViewModelFactory(container.getLearningTopics))
             val state by model.uiState.collectAsStateWithLifecycle()
+            androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
+                Text("Mudar de perfil")
+            }
             HomeScreen(
                 state = state,
                 onRetry = model::refresh,
