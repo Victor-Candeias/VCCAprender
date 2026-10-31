@@ -36,12 +36,13 @@ class DiscoverCardsViewModel(
 
     fun choose(optionId: String) {
         if (_state.value.finished || session.answer != null) return
+        val topic = session.current.topic
         val result = session.submit(optionId)
         _state.value = snapshot()
         viewModelScope.launch {
             runCatching {
-                progressRepository.recordAnswer(profileId, session.current.topic, result.correct)
-                if (result.correct) progressRepository.completeActivity(profileId, session.current.topic)
+                progressRepository.recordAnswer(profileId, topic, result.correct)
+                if (result.correct) progressRepository.completeActivity(profileId, topic)
             }.onFailure { _state.value = _state.value.copy(error = "Não foi possível guardar o progresso.") }
         }
     }
