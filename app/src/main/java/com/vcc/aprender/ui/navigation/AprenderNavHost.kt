@@ -9,6 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
+import com.vcc.aprender.ui.profiles.ProfileScreen
+import com.vcc.aprender.ui.profiles.ProfileViewModel
+import com.vcc.aprender.ui.profiles.ProfileViewModelFactory
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,14 +29,39 @@ import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeViewModel
 import com.vcc.aprender.ui.home.HomeViewModelFactory
 
+private const val PROFILES = "profiles"
 private const val HOME = "home"
 private const val TOPIC = "topic/{topicId}"
 
 @Composable
 fun AprenderNavHost(container: AppContainer) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = HOME) {
+    val profileModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(container.profileRepository))
+    val profiles by profileModel.profiles.collectAsStateWithLifecycle()
+    val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
+    val error by profileModel.error.collectAsStateWithLifecycle()
+
+    LaunchedEffect(selectedId, profiles) {
+        if (selectedId != null && profiles.any { it.id == selectedId }) {
+            navController.navigate(HOME) {
+                popUpTo(PROFILES) { inclusive = false }
+                launchSingleTop = true
+            }
+        }
+    }
+
+    NavHost(navController = navController, startDestination = PROFILES) {
+        composable(PROFILES) {
+            ProfileScreen(
+                profiles = profiles, error = error,
+                onClearError = profileModel::clearError,
+                onSave = profileModel::save,
+                onSelect = profileModel::select,
+                onDelete = profileModel::delete
+            )
+        }
         composable(HOME) {
+            if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
             val model: HomeViewModel = viewModel(factory = HomeViewModelFactory(container.getLearningTopics))
             val state by model.uiState.collectAsStateWithLifecycle()
             HomeScreen(
