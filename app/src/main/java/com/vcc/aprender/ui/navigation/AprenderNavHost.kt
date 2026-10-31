@@ -13,6 +13,9 @@ import androidx.compose.runtime.LaunchedEffect
 import com.vcc.aprender.ui.profiles.ProfileScreen
 import com.vcc.aprender.ui.profiles.ProfileViewModel
 import com.vcc.aprender.ui.profiles.ProfileViewModelFactory
+import com.vcc.aprender.ui.progress.ProgressScreen
+import com.vcc.aprender.ui.progress.ProgressViewModel
+import com.vcc.aprender.ui.progress.ProgressViewModelFactory
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,13 +28,18 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.ui.alphabet.AlphabetScreen
+import com.vcc.aprender.ui.alphabet.AlphabetViewModel
+import com.vcc.aprender.ui.alphabet.AlphabetViewModelFactory
 import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeViewModel
 import com.vcc.aprender.ui.home.HomeViewModelFactory
 
 private const val PROFILES = "profiles"
 private const val HOME = "home"
+private const val PROGRESS = "progress"
 private const val TOPIC = "topic/{topicId}"
+private const val ALPHABET = "alphabet"
 
 @Composable
 fun AprenderNavHost(container: AppContainer) {
@@ -40,6 +48,9 @@ fun AprenderNavHost(container: AppContainer) {
     val profiles by profileModel.profiles.collectAsStateWithLifecycle()
     val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
     val error by profileModel.error.collectAsStateWithLifecycle()
+    val progressModel: ProgressViewModel = viewModel(factory = ProgressViewModelFactory(container.progressRepository))
+    val progress by progressModel.progress.collectAsStateWithLifecycle()
+    LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
 
     LaunchedEffect(selectedId, profiles) {
         if (selectedId != null && profiles.any { it.id == selectedId }) {
@@ -72,11 +83,32 @@ fun AprenderNavHost(container: AppContainer) {
             androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
                 Text("Mudar de perfil")
             }
+            androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) { Text("Ver progresso") }
             HomeScreen(
                 state = state,
                 onRetry = model::refresh,
-                onTopicClick = { topic -> navController.navigate("topic/${topic.name}") }
+                onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
             )
+        }
+        composable(ALPHABET) {
+            val childId = selectedId
+            if (childId != null && profiles.any { it.id == childId }) {
+                val model: AlphabetViewModel = viewModel(
+                    key = "alphabet-$childId",
+                    factory = AlphabetViewModelFactory(container.progressRepository, childId)
+                )
+                val alphabetState by model.state.collectAsStateWithLifecycle()
+                AlphabetScreen(
+                    state = alphabetState,
+                    onPrevious = model::previous,
+                    onNext = model::next,
+                    onAnswer = model::answer,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+        }
+        composable(PROGRESS) {
+            if (selectedId != null) ProgressScreen(progress = progress, onBack = { navController.popBackStack() })
         }
         composable(
             route = TOPIC,
