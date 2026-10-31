@@ -11,11 +11,14 @@ import androidx.room.util.DBUtil;
 import androidx.room.util.TableInfo;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
+import com.vcc.aprender.data.progress.ProgressDao;
+import com.vcc.aprender.data.progress.ProgressDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,20 +31,26 @@ import javax.annotation.processing.Generated;
 public final class ProfileDatabase_Impl extends ProfileDatabase {
   private volatile ProfileDao _profileDao;
 
+  private volatile ProgressDao _progressDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `child_profiles` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `age` INTEGER NOT NULL, `avatar` TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `learning_progress` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `profileId` INTEGER NOT NULL, `topicId` TEXT NOT NULL, `completedActivities` INTEGER NOT NULL, `correctAnswers` INTEGER NOT NULL, `totalAnswers` INTEGER NOT NULL, `lastActivityAt` INTEGER NOT NULL, FOREIGN KEY(`profileId`) REFERENCES `child_profiles`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_learning_progress_profileId` ON `learning_progress` (`profileId`)");
+        db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_learning_progress_profileId_topicId` ON `learning_progress` (`profileId`, `topicId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '65dc1273820c63e3220cf4fdbd6d5c36')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '46f6e9d602531163d52bff48f1e95da6')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `child_profiles`");
+        db.execSQL("DROP TABLE IF EXISTS `learning_progress`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -63,6 +72,7 @@ public final class ProfileDatabase_Impl extends ProfileDatabase {
       @Override
       public void onOpen(@NonNull final SupportSQLiteDatabase db) {
         mDatabase = db;
+        db.execSQL("PRAGMA foreign_keys = ON");
         internalInitInvalidationTracker(db);
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
@@ -99,9 +109,29 @@ public final class ProfileDatabase_Impl extends ProfileDatabase {
                   + " Expected:\n" + _infoChildProfiles + "\n"
                   + " Found:\n" + _existingChildProfiles);
         }
+        final HashMap<String, TableInfo.Column> _columnsLearningProgress = new HashMap<String, TableInfo.Column>(7);
+        _columnsLearningProgress.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("profileId", new TableInfo.Column("profileId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("topicId", new TableInfo.Column("topicId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("completedActivities", new TableInfo.Column("completedActivities", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("correctAnswers", new TableInfo.Column("correctAnswers", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("totalAnswers", new TableInfo.Column("totalAnswers", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLearningProgress.put("lastActivityAt", new TableInfo.Column("lastActivityAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysLearningProgress = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysLearningProgress.add(new TableInfo.ForeignKey("child_profiles", "CASCADE", "NO ACTION", Arrays.asList("profileId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesLearningProgress = new HashSet<TableInfo.Index>(2);
+        _indicesLearningProgress.add(new TableInfo.Index("index_learning_progress_profileId", false, Arrays.asList("profileId"), Arrays.asList("ASC")));
+        _indicesLearningProgress.add(new TableInfo.Index("index_learning_progress_profileId_topicId", true, Arrays.asList("profileId", "topicId"), Arrays.asList("ASC", "ASC")));
+        final TableInfo _infoLearningProgress = new TableInfo("learning_progress", _columnsLearningProgress, _foreignKeysLearningProgress, _indicesLearningProgress);
+        final TableInfo _existingLearningProgress = TableInfo.read(db, "learning_progress");
+        if (!_infoLearningProgress.equals(_existingLearningProgress)) {
+          return new RoomOpenHelper.ValidationResult(false, "learning_progress(com.vcc.aprender.data.progress.LearningProgress).\n"
+                  + " Expected:\n" + _infoLearningProgress + "\n"
+                  + " Found:\n" + _existingLearningProgress);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "65dc1273820c63e3220cf4fdbd6d5c36", "b2b25b0a8ed98b0526aa995b1066341a");
+    }, "46f6e9d602531163d52bff48f1e95da6", "fe594ecaf4b807ba72eabd1bc1da1f57");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -112,19 +142,30 @@ public final class ProfileDatabase_Impl extends ProfileDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "child_profiles");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "child_profiles","learning_progress");
   }
 
   @Override
   public void clearAllTables() {
     super.assertNotMainThread();
     final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
+    final boolean _supportsDeferForeignKeys = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP;
     try {
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = FALSE");
+      }
       super.beginTransaction();
+      if (_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA defer_foreign_keys = TRUE");
+      }
       _db.execSQL("DELETE FROM `child_profiles`");
+      _db.execSQL("DELETE FROM `learning_progress`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = TRUE");
+      }
       _db.query("PRAGMA wal_checkpoint(FULL)").close();
       if (!_db.inTransaction()) {
         _db.execSQL("VACUUM");
@@ -137,6 +178,7 @@ public final class ProfileDatabase_Impl extends ProfileDatabase {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(ProfileDao.class, ProfileDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(ProgressDao.class, ProgressDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -165,6 +207,20 @@ public final class ProfileDatabase_Impl extends ProfileDatabase {
           _profileDao = new ProfileDao_Impl(this);
         }
         return _profileDao;
+      }
+    }
+  }
+
+  @Override
+  public ProgressDao progressDao() {
+    if (_progressDao != null) {
+      return _progressDao;
+    } else {
+      synchronized(this) {
+        if(_progressDao == null) {
+          _progressDao = new ProgressDao_Impl(this);
+        }
+        return _progressDao;
       }
     }
   }
