@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.vcc.aprender.data.cards.OfflineCardCatalog
 import com.vcc.aprender.data.progress.ProgressRepository
+import com.vcc.aprender.domain.cards.CardDecks
+import com.vcc.aprender.domain.cards.DeckFilter
 import com.vcc.aprender.domain.cards.CardAnswer
 import com.vcc.aprender.domain.cards.DiscoverCard
 import com.vcc.aprender.domain.cards.DiscoverCardSession
@@ -25,9 +27,10 @@ data class DiscoverCardsUiState(
 
 class DiscoverCardsViewModel(
     private val profileId: Long,
-    private val progressRepository: ProgressRepository
+    private val progressRepository: ProgressRepository,
+    private val filter: DeckFilter = DeckFilter()
 ) : ViewModel() {
-    private val session = DiscoverCardSession(OfflineCardCatalog.cards)
+    private val session = DiscoverCardSession(requireNotNull(CardDecks.build(OfflineCardCatalog.cards, filter)) { "Baralho vazio." }.cards)
     private var tiles = RevealTiles()
     private val _state = MutableStateFlow(snapshot())
     val state = _state.asStateFlow()
@@ -79,11 +82,12 @@ class DiscoverCardsViewModel(
 
 class DiscoverCardsViewModelFactory(
     private val profileId: Long,
-    private val progressRepository: ProgressRepository
+    private val progressRepository: ProgressRepository,
+    private val filter: DeckFilter = DeckFilter()
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass.isAssignableFrom(DiscoverCardsViewModel::class.java))
-        return DiscoverCardsViewModel(profileId, progressRepository) as T
+        return DiscoverCardsViewModel(profileId, progressRepository, filter) as T
     }
 }
