@@ -55,6 +55,7 @@ import com.vcc.aprender.ui.home.HomeViewModelFactory
 private const val PROFILES = "profiles"
 private const val HOME = "home"
 private const val PROGRESS = "progress"
+private const val READING = "reading"
 private const val PARENTS = "parents"
 private const val TOPIC = "topic/{topicId}"
 private const val ALPHABET = "alphabet"
@@ -112,6 +113,9 @@ fun AprenderNavHost(container: AppContainer) {
                 }
                 androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
                     Text("Área parental e preferências")
+                }
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(READING) }) {
+                    Text("Leitura e reconhecimento de palavras")
                 }
                 androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
                     Text("Descobre a Resposta A/B/C")
@@ -194,6 +198,23 @@ fun AprenderNavHost(container: AppContainer) {
                     onReveal = model::reveal,
                     onNext = model::next,
                     onRestart = model::restart,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+        }
+        composable(READING) {
+            val childId = selectedId
+            if (childId != null && profiles.any { it.id == childId }) {
+                val model: ActivityViewModel = viewModel(
+                    key = "reading-$childId",
+                    factory = ActivityViewModelFactory(LearningTopic.WORDS, childId, container.progressRepository, readingMode = true)
+                )
+                val readingState by model.state.collectAsStateWithLifecycle()
+                ActivityScreen(
+                    state = readingState,
+                    onAnswer = model::answer,
+                    onPrevious = model::previous,
+                    onNext = model::next,
                     onBack = { navController.popBackStack() }
                 )
             }
