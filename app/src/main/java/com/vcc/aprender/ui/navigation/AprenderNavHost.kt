@@ -28,6 +28,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.ui.cards.DeckSelectionScreen
+import com.vcc.aprender.domain.cards.CardDifficulty
+import com.vcc.aprender.domain.cards.DeckFilter
 import com.vcc.aprender.ui.cards.DiscoverCardsScreen
 import com.vcc.aprender.ui.cards.DiscoverCardsViewModel
 import com.vcc.aprender.ui.cards.DiscoverCardsViewModelFactory
@@ -51,6 +54,8 @@ private const val PARENTS = "parents"
 private const val TOPIC = "topic/{topicId}"
 private const val ALPHABET = "alphabet"
 private const val CARDS = "discover-cards"
+private const val DECKS = "discover-decks"
+private const val CARDS_FILTERED = "discover-cards/{topic}/{level}"
 
 @Composable
 fun AprenderNavHost(container: AppContainer) {
@@ -101,13 +106,52 @@ fun AprenderNavHost(container: AppContainer) {
                 androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
                     Text("Área parental e preferências")
                 }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(CARDS) }) {
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
                     Text("Descobre a Resposta A/B/C")
                 }
                 HomeScreen(
                     state = state,
                     onRetry = model::refresh,
                     onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
+                )
+            }
+        }
+        composable(DECKS) {
+            DeckSelectionScreen(
+                onStart = { filter ->
+                    navController.navigate("discover-cards/${filter.topic?.name ?: "ALL"}/${filter.difficulty?.name ?: "ALL"}")
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(
+            route = CARDS_FILTERED,
+            arguments = listOf(
+                navArgument("topic") { type = NavType.StringType },
+                navArgument("level") { type = NavType.StringType }
+            )
+        ) { entry ->
+            val topic = entry.arguments?.getString("topic")?.let { name ->
+                LearningTopic.entries.firstOrNull { it.name == name }
+            }
+            val level = entry.arguments?.getString("level")?.let { name ->
+                CardDifficulty.entries.firstOrNull { it.name == name }
+            }
+            val filter = DeckFilter(topic, level)
+            val childId = selectedId
+            if (childId != null && profiles.any { it.id == childId }) {
+                val model: DiscoverCardsViewModel = viewModel(
+                    key = "cards-$childId-${topic?.name ?: "ALL"}-${level?.name ?: "ALL"}",
+                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, filter)
+                )
+                val cardsState by model.state.collectAsStateWithLifecycle()
+                DiscoverCardsScreen(
+                    state = cardsState,
+                    onChoose = model::choose,
+                    onReveal = model::reveal,
+                    onNext = model::next,
+                    onRestart = model::restart,
+                    onBack = { navController.popBackStack() }
                 )
             }
         }
