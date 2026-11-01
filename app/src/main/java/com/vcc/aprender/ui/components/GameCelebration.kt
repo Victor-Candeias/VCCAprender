@@ -19,6 +19,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.theme.AprenderColors
@@ -82,9 +84,10 @@ fun GameCompletionBanner(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        BrandArtwork(BrandSymbol.Trophy, description = "Atividade concluída")
+        BrandArtwork(BrandSymbol.Trophy, description = null)
         GameCelebration()
-        Text(title, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        Text(title, modifier = Modifier.semantics { heading() },
+            style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
         Text(message, style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center)
     }
 }
