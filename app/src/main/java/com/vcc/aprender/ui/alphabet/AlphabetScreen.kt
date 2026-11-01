@@ -24,6 +24,8 @@ import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameFeedback
 import com.vcc.aprender.ui.components.GameNavigation
+import com.vcc.aprender.ui.components.TopicIllustration
+import com.vcc.aprender.domain.model.LearningTopic
 import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
@@ -44,7 +46,7 @@ fun AlphabetScreen(
         Text("Descobre o alfabeto", style = MaterialTheme.typography.headlineMedium)
         GameProgress(state.index + 1, 26, label = "Letra")
         Text("${state.card.letter}  ${state.card.letter.lowercaseChar()}", style = MaterialTheme.typography.displayLarge)
-        Text(state.card.emoji, style = MaterialTheme.typography.displayLarge)
+        TopicIllustration(LearningTopic.LETTERS)
         Text(state.card.word, style = MaterialTheme.typography.headlineMedium)
         SpeechControls("Letra ${state.card.letter}. ${state.card.word}. Qual é a primeira letra de ${state.card.word}?")
         Text("Qual é a primeira letra de ${state.card.word}?", textAlign = TextAlign.Center)

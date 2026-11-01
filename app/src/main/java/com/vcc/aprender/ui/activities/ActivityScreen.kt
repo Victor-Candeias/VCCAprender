@@ -25,6 +25,7 @@ import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameFeedback
 import com.vcc.aprender.ui.components.GameNavigation
+import com.vcc.aprender.ui.components.TopicIllustration
 import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
@@ -45,7 +46,7 @@ fun ActivityScreen(
         OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
         Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
         GameProgress(state.index + 1, state.questions.size)
-        Text(question.illustration, style = MaterialTheme.typography.displayLarge, textAlign = TextAlign.Center)
+        TopicIllustration(state.topic)
         Text(question.prompt, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
         SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
         Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {

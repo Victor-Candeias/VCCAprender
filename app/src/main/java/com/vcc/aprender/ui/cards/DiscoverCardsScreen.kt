@@ -28,6 +28,8 @@ import com.vcc.aprender.domain.cards.AnswerFeedbackFactory
 import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameFeedback
+import com.vcc.aprender.ui.components.BrandArtwork
+import com.vcc.aprender.ui.components.BrandSymbol
 
 @Composable
 fun DiscoverCardsScreen(
@@ -55,7 +57,8 @@ fun DiscoverCardsScreen(
             return@Column
         }
         if (state.finished) {
-            Text("Parabéns! Terminaste os cartões! 🎉", style = MaterialTheme.typography.titleLarge)
+            BrandArtwork(BrandSymbol.Trophy, description = "Jogo terminado")
+            Text("Parabéns! Terminaste os cartões!", style = MaterialTheme.typography.titleLarge)
             Button(onClick = onRestart) { Text("Jogar novamente") }
             return@Column
         }

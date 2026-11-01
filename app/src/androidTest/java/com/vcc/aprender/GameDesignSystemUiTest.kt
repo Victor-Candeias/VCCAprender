@@ -49,7 +49,7 @@ class GameDesignSystemUiTest {
             }
         }
         composeRule.onNodeWithText("Cartão 2 de 4").assertIsDisplayed()
-        composeRule.onNodeWithText("🌟  Muito bem!").assertExists()
+        composeRule.onNodeWithText("Muito bem!").assertExists()
         composeRule.onNodeWithText("Acertos: 75%").assertExists()
     }
 

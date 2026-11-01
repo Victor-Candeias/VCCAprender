@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.profile.ChildProfile
 import com.vcc.aprender.ui.components.FamilyHeader
 import com.vcc.aprender.ui.components.FamilySection
+import com.vcc.aprender.ui.components.BrandArtwork
+import com.vcc.aprender.ui.components.avatarSymbol
+import androidx.compose.ui.Alignment
 import com.vcc.aprender.ui.theme.AprenderColors
 import androidx.compose.material3.MaterialTheme
 
@@ -56,7 +59,7 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { FamilyHeader("👧 🧒", "Quem vai aprender?", "Escolhe o teu perfil para começar a aventura!", AprenderColors.Lavender) }
-        item { Text("🔒 Os perfis e resultados ficam neste dispositivo. Não é necessária conta nem Internet.", style = MaterialTheme.typography.bodyMedium) }
+        item { Text("Os perfis e resultados ficam neste dispositivo. Não é necessária conta nem Internet.", style = MaterialTheme.typography.bodyMedium) }
         items(profiles, key = { it.id }) { profile ->
             FamilySection(profile.name, profile.avatar, AprenderColors.Sky) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -109,7 +112,10 @@ fun ProfileScreen(
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         listOf("🌟", "🐻", "🦊", "🐼").forEach { option ->
                             TextButton(onClick = { avatar = option }) {
-                                Text(if (avatar == option) "✓$option" else option)
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    BrandArtwork(avatarSymbol(option), description = "Avatar ${option}")
+                                    if (avatar == option) Text("Selecionado")
+                                }
                             }
                         }
                     }
