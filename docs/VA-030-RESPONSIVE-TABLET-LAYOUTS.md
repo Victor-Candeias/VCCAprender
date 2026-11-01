@@ -75,6 +75,12 @@ gradle :app:connectedDebugAndroidTest \
   --console=plain --no-daemon --max-workers=2
 ```
 
+## Integração contínua
+
+O workflow [Android UI CI](../.github/workflows/android-ui-ci.yml) foi adicionado para executar automaticamente, em pushes para esta branch e em Pull Requests para `main`, a compilação Kotlin, os testes unitários e a criação dos APKs Debug/Release com Gradle 8.9 e JDK 17. Envia artefactos de resultados unitários quando disponíveis.
+
+**Os testes instrumentados não são executados neste workflow**, pois requerem um emulador/dispositivo. Devem ser executados com o comando `connectedDebugAndroidTest` apresentado acima. A existência do workflow **não significa que já tenha passado**.
+
 ## Matriz de validação manual
 
 - [ ] Build Debug e Release (incluindo recursos VA-028 e animações VA-029).
