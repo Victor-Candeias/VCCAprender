@@ -19,17 +19,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.cards.OfflineCardCatalog
+import com.vcc.aprender.domain.cards.DiscoverCard
 import com.vcc.aprender.domain.cards.CardDecks
 import com.vcc.aprender.domain.cards.CardDifficulty
 import com.vcc.aprender.domain.cards.DeckFilter
 import com.vcc.aprender.domain.model.LearningTopic
 
 @Composable
-fun DeckSelectionScreen(onStart: (DeckFilter) -> Unit, onBack: () -> Unit) {
+fun DeckSelectionScreen(onStart: (DeckFilter) -> Unit, onBack: () -> Unit, cards: List<DiscoverCard> = OfflineCardCatalog.cards) {
     var topic by remember { mutableStateOf<LearningTopic?>(null) }
     var difficulty by remember { mutableStateOf<CardDifficulty?>(null) }
     val filter = DeckFilter(topic, difficulty)
-    val count = CardDecks.filter(OfflineCardCatalog.cards, filter).size
+    val count = CardDecks.filter(cards, filter).size
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
