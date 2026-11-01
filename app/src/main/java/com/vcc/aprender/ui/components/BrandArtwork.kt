@@ -10,6 +10,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -18,9 +19,13 @@ import com.vcc.aprender.ui.theme.AprenderColors
 enum class BrandSymbol { Star, Bear, Fox, Panda, Shield, Book, Trophy, Chart, Sound, Puzzle, Success, Encourage, Lock, Add, Calendar, Target, Person }
 
 @Composable
-fun BrandArtwork(symbol: BrandSymbol, modifier: Modifier = Modifier, description: String = symbol.name) {
+fun BrandArtwork(symbol: BrandSymbol, modifier: Modifier = Modifier, description: String? = symbol.name) {
+    // When a heading, button or feedback already says what this symbol represents,
+    // hide the artwork from TalkBack to prevent repeated announcements.
+    val accessibilityModifier = if (description == null) Modifier.clearAndSetSemantics { }
+        else Modifier.semantics { contentDescription = description }
     Canvas(modifier = modifier.size(48.dp).background(AprenderColors.Sky, CircleShape)
-        .semantics { contentDescription = description }) {
+        .then(accessibilityModifier)) {
         val u = size.minDimension / 100f
         fun circle(x: Float, y: Float, r: Float, color: Color) =
             drawCircle(color, r*u, Offset(x*u,y*u))
