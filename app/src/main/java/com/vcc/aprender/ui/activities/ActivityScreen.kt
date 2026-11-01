@@ -21,7 +21,7 @@ import com.vcc.aprender.ui.components.GameFeedback
 import com.vcc.aprender.ui.components.GameNavigation
 import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameQuestionTransition
-import com.vcc.aprender.ui.components.TopicIllustration
+import com.vcc.aprender.ui.components.LearningArtwork
 
 @Composable
 fun ActivityScreen(
@@ -46,7 +46,7 @@ fun ActivityScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        TopicIllustration(state.topic)
+                        LearningArtwork(question.illustration)
                         Text(question.prompt, style = MaterialTheme.typography.titleLarge,
                             textAlign = TextAlign.Center)
                     }

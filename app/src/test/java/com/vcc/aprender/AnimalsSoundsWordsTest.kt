@@ -19,9 +19,9 @@ class AnimalsSoundsWordsTest {
         }
     }
 
-    @Test fun soundQuestionsDoNotRevealAnswerAsAnimalEmoji() {
+    @Test fun soundQuestionsDoNotRevealAnswerAsAnimalArtwork() {
         val questions = ActivityContent.questions(LearningTopic.SOUNDS)
-        assertTrue(questions.all { it.illustration == "🔊" })
+        assertTrue(questions.all { it.illustration == "sound" })
     }
 
     @Test fun wordsAndAnimalsHaveMultipleExamples() {

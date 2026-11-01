@@ -1,4 +1,5 @@
 import com.android.build.api.variant.impl.VariantOutputImpl
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -15,6 +16,22 @@ require(Regex("[0-9]+\\.[0-9]+\\.[0-9]+").matches(appVersion)) {
     "appVersion deve usar o formato MAJOR.MINOR.PATCH."
 }
 
+// Credentials live in an ignored local file or environment variables (also usable in CI).
+val releaseCredentials = Properties().apply {
+    val credentialsFile = rootProject.file("keystore.properties")
+    if (credentialsFile.isFile) credentialsFile.reader(Charsets.UTF_8).use { load(it) }
+}
+fun releaseSetting(environment: String, property: String): String? =
+    providers.environmentVariable(environment).orNull?.takeIf { it.isNotBlank() }
+        ?: releaseCredentials.getProperty(property)?.takeIf { it.isNotBlank() }
+
+val releaseStoreFile = rootProject.file(
+    releaseSetting("VCC_RELEASE_STORE_FILE", "storeFile")
+        ?: "${System.getProperty("user.home")}/.keystores/VCCProjects.jks"
+)
+val releaseStorePassword = releaseSetting("VCC_RELEASE_STORE_PASSWORD", "storePassword")
+val releaseKeyAlias = releaseSetting("VCC_RELEASE_KEY_ALIAS", "keyAlias") ?: "vccprojects"
+val releaseKeyPassword = releaseSetting("VCC_RELEASE_KEY_PASSWORD", "keyPassword") ?: releaseStorePassword
 
 android {
     namespace = "com.vcc.aprender"
@@ -33,6 +50,31 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true }
+    signingConfigs {
+        create("release") {
+            storeFile = releaseStoreFile
+            storeType = "PKCS12"
+            storePassword = releaseStorePassword
+            keyAlias = releaseKeyAlias
+            keyPassword = releaseKeyPassword
+        }
+    }
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+}
+
+// A release must never silently fall back to an unsigned APK.
+tasks.matching { it.name == "preReleaseBuild" }.configureEach {
+    doFirst {
+        require(releaseStoreFile.isFile) { "Keystore de release não encontrado: $releaseStoreFile" }
+        require(!releaseStorePassword.isNullOrBlank() && !releaseKeyPassword.isNullOrBlank()) {
+            "Configura storePassword em keystore.properties (ignorado pelo Git) ou VCC_RELEASE_STORE_PASSWORD. " +
+                "Se a chave tiver outra password, configura também keyPassword ou VCC_RELEASE_KEY_PASSWORD."
+        }
+    }
 }
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))

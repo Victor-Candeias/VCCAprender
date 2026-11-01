@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp" android:height="160dp"
+    android:viewportWidth="100" android:viewportHeight="100">
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M79.00,50.00L92.00,50.00" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M70.51,70.51L79.70,79.70" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M50.00,79.00L50.00,92.00" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M29.49,70.51L20.30,79.70" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M21.00,50.00L8.00,50.00" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M29.49,29.49L20.30,20.30" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M50.00,21.00L50.00,8.00" />
+    <path android:fillColor="#00000000" android:strokeColor="#EB9152" android:strokeWidth="4" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M70.51,29.49L79.70,20.30" />
+    <path android:fillColor="#FFC44D" android:strokeColor="#243B53" android:strokeWidth="2" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M27,50a23,23 0 1,0 46,0a23,23 0 1,0 -46,0" />
+</vector>

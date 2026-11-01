@@ -1,22 +1,22 @@
 package com.vcc.aprender.domain.alphabet
 
-data class LetterCard(val letter: Char, val word: String, val emoji: String)
+data class LetterCard(val letter: Char, val word: String, val illustration: String)
 
 object AlphabetContent {
     val cards: List<LetterCard> = listOf(
-        LetterCard('A', "Abelha", "🐝"), LetterCard('B', "Bola", "⚽"),
-        LetterCard('C', "Casa", "🏠"), LetterCard('D', "Dado", "🎲"),
-        LetterCard('E', "Elefante", "🐘"), LetterCard('F', "Flor", "🌼"),
-        LetterCard('G', "Gato", "🐱"), LetterCard('H', "Helicóptero", "🚁"),
-        LetterCard('I', "Ilha", "🏝️"), LetterCard('J', "Janela", "🪟"),
-        LetterCard('K', "Kiwi", "🥝"), LetterCard('L', "Lua", "🌙"),
-        LetterCard('M', "Maçã", "🍎"), LetterCard('N', "Navio", "🚢"),
-        LetterCard('O', "Ovelha", "🐑"), LetterCard('P', "Pato", "🦆"),
-        LetterCard('Q', "Queijo", "🧀"), LetterCard('R', "Rato", "🐭"),
-        LetterCard('S', "Sol", "☀️"), LetterCard('T', "Tartaruga", "🐢"),
-        LetterCard('U', "Uva", "🍇"), LetterCard('V', "Vaca", "🐄"),
-        LetterCard('W', "Waffle", "🧇"), LetterCard('X', "Xilofone", "🎼"),
-        LetterCard('Y', "Yoga", "🧘"), LetterCard('Z', "Zebra", "🦓")
+        LetterCard('A', "Abelha", "bee"), LetterCard('B', "Bola", "ball"),
+        LetterCard('C', "Casa", "house"), LetterCard('D', "Dado", "die"),
+        LetterCard('E', "Elefante", "elephant"), LetterCard('F', "Flor", "flower"),
+        LetterCard('G', "Gato", "cat"), LetterCard('H', "Helicóptero", "helicopter"),
+        LetterCard('I', "Ilha", "island"), LetterCard('J', "Janela", "window"),
+        LetterCard('K', "Kiwi", "kiwi"), LetterCard('L', "Lua", "moon"),
+        LetterCard('M', "Maçã", "apple"), LetterCard('N', "Navio", "ship"),
+        LetterCard('O', "Ovelha", "sheep"), LetterCard('P', "Pato", "duck"),
+        LetterCard('Q', "Queijo", "cheese"), LetterCard('R', "Rato", "mouse"),
+        LetterCard('S', "Sol", "sun"), LetterCard('T', "Tartaruga", "turtle"),
+        LetterCard('U', "Uva", "grapes"), LetterCard('V', "Vaca", "cow"),
+        LetterCard('W', "Waffle", "waffle"), LetterCard('X', "Xilofone", "xylophone"),
+        LetterCard('Y', "Yoga", "yoga"), LetterCard('Z', "Zebra", "zebra")
     )
 
     fun optionsFor(index: Int): List<Char> {
