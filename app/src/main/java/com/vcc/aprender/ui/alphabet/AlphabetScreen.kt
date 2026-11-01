@@ -54,7 +54,11 @@ fun AlphabetScreen(
                         Text(card.word, style = MaterialTheme.typography.headlineMedium)
                     }
                     SpeechControls(
-                        "Letra ${card.letter}. ${card.word}. Qual é a primeira letra de ${card.word}?"
+                        textToRead = "Letra ${card.letter}. ${card.word}. Qual é a primeira letra de ${card.word}?",
+                        feedbackText = if (current && state.selected != null)
+                            if (state.correct == true) "Resposta correta. Muito bem! Acertaste!"
+                            else "Boa tentativa. A resposta é ${card.letter}."
+                        else null
                     )
                 },
                 secondary = {
