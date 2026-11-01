@@ -28,6 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.data.cards.OfflineCardCatalog
+import com.vcc.aprender.data.cards.toDiscoverCard
 import com.vcc.aprender.ui.editor.ActivityEditorScreen
 import com.vcc.aprender.ui.editor.ActivityEditorViewModel
 import com.vcc.aprender.ui.editor.ActivityEditorViewModelFactory
@@ -136,7 +138,9 @@ fun AprenderNavHost(container: AppContainer) {
             )
         }
         composable(DECKS) {
+            val customCards by container.customCardRepository.cards.collectAsStateWithLifecycle(initialValue = emptyList())
             DeckSelectionScreen(
+                cards = OfflineCardCatalog.cards + customCards.mapNotNull { it.toDiscoverCard() },
                 onStart = { filter ->
                     navController.navigate("discover-cards/${filter.topic?.name ?: "ALL"}/${filter.difficulty?.name ?: "ALL"}")
                 },
