@@ -28,6 +28,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.data.cards.OfflineCardCatalog
+import com.vcc.aprender.data.cards.toDiscoverCard
+import com.vcc.aprender.ui.editor.ActivityEditorScreen
+import com.vcc.aprender.ui.editor.ActivityEditorViewModel
+import com.vcc.aprender.ui.editor.ActivityEditorViewModelFactory
 import com.vcc.aprender.ui.cards.DeckSelectionScreen
 import com.vcc.aprender.domain.cards.CardDifficulty
 import com.vcc.aprender.domain.cards.DeckFilter
@@ -55,6 +60,7 @@ private const val TOPIC = "topic/{topicId}"
 private const val ALPHABET = "alphabet"
 private const val CARDS = "discover-cards"
 private const val DECKS = "discover-decks"
+private const val EDITOR = "activity-editor"
 private const val CARDS_FILTERED = "discover-cards/{topic}/{level}"
 
 @Composable
@@ -109,6 +115,9 @@ fun AprenderNavHost(container: AppContainer) {
                 androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
                     Text("Descobre a Resposta A/B/C")
                 }
+                androidx.compose.material3.TextButton(onClick = { navController.navigate(EDITOR) }) {
+                    Text("Editor de atividades")
+                }
                 HomeScreen(
                     state = state,
                     onRetry = model::refresh,
@@ -116,8 +125,22 @@ fun AprenderNavHost(container: AppContainer) {
                 )
             }
         }
+        composable(EDITOR) {
+            val model: ActivityEditorViewModel = viewModel(
+                factory = ActivityEditorViewModelFactory(container.customCardRepository)
+            )
+            val cards by model.cards.collectAsStateWithLifecycle()
+            val message by model.message.collectAsStateWithLifecycle()
+            ActivityEditorScreen(
+                cards = cards, message = message,
+                onSave = model::save, onDelete = model::delete,
+                onBack = { navController.popBackStack() }
+            )
+        }
         composable(DECKS) {
+            val customCards by container.customCardRepository.cards.collectAsStateWithLifecycle(initialValue = emptyList())
             DeckSelectionScreen(
+                cards = OfflineCardCatalog.cards + customCards.mapNotNull { it.toDiscoverCard() },
                 onStart = { filter ->
                     navController.navigate("discover-cards/${filter.topic?.name ?: "ALL"}/${filter.difficulty?.name ?: "ALL"}")
                 },
@@ -142,7 +165,7 @@ fun AprenderNavHost(container: AppContainer) {
             if (childId != null && profiles.any { it.id == childId }) {
                 val model: DiscoverCardsViewModel = viewModel(
                     key = "cards-$childId-${topic?.name ?: "ALL"}-${level?.name ?: "ALL"}",
-                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, filter)
+                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, filter, container.customCardRepository)
                 )
                 val cardsState by model.state.collectAsStateWithLifecycle()
                 DiscoverCardsScreen(
@@ -160,7 +183,7 @@ fun AprenderNavHost(container: AppContainer) {
             if (childId != null && profiles.any { it.id == childId }) {
                 val model: DiscoverCardsViewModel = viewModel(
                     key = "cards-$childId",
-                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository)
+                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, customCardRepository = container.customCardRepository)
                 )
                 val cardsState by model.state.collectAsStateWithLifecycle()
                 DiscoverCardsScreen(

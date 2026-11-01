@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.vcc.aprender.data.cards.OfflineCardCatalog
+import com.vcc.aprender.data.cards.CustomCardRepository
 import com.vcc.aprender.data.progress.ProgressRepository
 import com.vcc.aprender.domain.cards.CardDecks
 import com.vcc.aprender.domain.cards.DeckFilter
@@ -22,18 +23,40 @@ data class DiscoverCardsUiState(
     val answer: CardAnswer? = null,
     val finished: Boolean = false,
     val tiles: RevealTiles = RevealTiles(),
-    val error: String? = null
+    val error: String? = null,
+    val loading: Boolean = false
 )
 
 class DiscoverCardsViewModel(
     private val profileId: Long,
     private val progressRepository: ProgressRepository,
-    private val filter: DeckFilter = DeckFilter()
+    private val filter: DeckFilter = DeckFilter(),
+    private val customCardRepository: CustomCardRepository? = null
 ) : ViewModel() {
-    private val session = DiscoverCardSession(requireNotNull(CardDecks.build(OfflineCardCatalog.cards, filter)) { "Baralho vazio." }.cards)
+    private var session = DiscoverCardSession(OfflineCardCatalog.cards)
     private var tiles = RevealTiles()
-    private val _state = MutableStateFlow(snapshot())
+    private val _state = MutableStateFlow(snapshot().copy(loading = true))
     val state = _state.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            runCatching {
+                val combined = OfflineCardCatalog.cards + (customCardRepository?.gameCards() ?: emptyList())
+                CardDecks.build(combined, filter)?.cards
+            }.onSuccess { cards ->
+                if (cards.isNullOrEmpty()) {
+                    _state.value = _state.value.copy(error = "Não existem cartões neste baralho.", loading = false)
+                } else {
+                    session = DiscoverCardSession(cards)
+                    tiles = RevealTiles()
+                    _state.value = snapshot()
+                }
+            }.onFailure {
+                _state.value = _state.value.copy(error = "Não foi possível carregar os cartões.", loading = false)
+            }
+        }
+    }
+
 
     private fun snapshot(finished: Boolean = false, error: String? = null) = DiscoverCardsUiState(
         card = session.current, index = session.index, total = session.size,
@@ -41,7 +64,7 @@ class DiscoverCardsViewModel(
     )
 
     fun reveal(index: Int) {
-        if (_state.value.finished || session.answer != null) return
+        if (_state.value.loading || _state.value.finished || session.answer != null) return
         tiles = tiles.reveal(index)
         _state.value = snapshot()
     }
@@ -65,7 +88,7 @@ class DiscoverCardsViewModel(
     }
 
     fun next() {
-        if (session.answer == null) return
+        if (_state.value.loading || session.answer == null) return
         if (session.next()) {
             tiles = RevealTiles()
             _state.value = snapshot()
@@ -74,6 +97,7 @@ class DiscoverCardsViewModel(
     }
 
     fun restart() {
+        if (_state.value.loading) return
         session.reset()
         tiles = RevealTiles()
         _state.value = snapshot()
@@ -83,11 +107,12 @@ class DiscoverCardsViewModel(
 class DiscoverCardsViewModelFactory(
     private val profileId: Long,
     private val progressRepository: ProgressRepository,
-    private val filter: DeckFilter = DeckFilter()
+    private val filter: DeckFilter = DeckFilter(),
+    private val customCardRepository: CustomCardRepository? = null
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass.isAssignableFrom(DiscoverCardsViewModel::class.java))
-        return DiscoverCardsViewModel(profileId, progressRepository, filter) as T
+        return DiscoverCardsViewModel(profileId, progressRepository, filter, customCardRepository) as T
     }
 }
