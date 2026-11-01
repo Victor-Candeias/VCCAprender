@@ -2,6 +2,8 @@ package com.vcc.aprender.ui.parents
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.settings.ParentalSettings
+import com.vcc.aprender.ui.components.FamilyHeader
+import com.vcc.aprender.ui.components.FamilySection
+import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
 fun ParentalSettingsScreen(
@@ -29,20 +34,27 @@ fun ParentalSettingsScreen(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        Text("Área parental", style = MaterialTheme.typography.headlineMedium)
-        Text("Preferências guardadas neste dispositivo. Não é necessária ligação à internet.")
-        Text("Leitura por voz", style = MaterialTheme.typography.titleMedium)
-        Switch(checked = settings.audioEnabled, onCheckedChange = onAudioChanged)
-        Text(if (settings.audioEnabled) "Áudio ativado" else "Áudio desativado")
-        Text("Velocidade da voz: ${(settings.speechRate * 100).toInt()}%")
-        Slider(
-            value = settings.speechRate,
-            onValueChange = onSpeechRateChanged,
-            valueRange = 0.5f..1.5f,
-            steps = 9,
-            enabled = settings.audioEnabled
-        )
-        Text("A gestão dos perfis e o progresso de aprendizagem estão disponíveis no menu inicial.")
-        Button(onClick = onBack) { Text("Voltar ao início") }
+        FamilyHeader("🛡️", "Área parental", "Personaliza a experiência de aprendizagem.", AprenderColors.Sky)
+        FamilySection("Leitura por voz", "🔊", AprenderColors.Mint) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+                Text(if (settings.audioEnabled) "Áudio ativado" else "Áudio desativado",
+                    style = MaterialTheme.typography.bodyLarge)
+                Switch(checked = settings.audioEnabled, onCheckedChange = onAudioChanged)
+            }
+            Text("Velocidade da voz: ${(settings.speechRate * 100).toInt()}%")
+            Slider(
+                value = settings.speechRate,
+                onValueChange = onSpeechRateChanged,
+                valueRange = 0.5f..1.5f,
+                steps = 9,
+                enabled = settings.audioEnabled
+            )
+        }
+        FamilySection("Privacidade", "🔒", AprenderColors.Sunshine) {
+            Text("As preferências ficam guardadas neste dispositivo. Não é necessária ligação à Internet.")
+            Text("A gestão dos perfis e o progresso de aprendizagem estão disponíveis no menu inicial.")
+        }
+        Button(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Voltar ao início") }
     }
 }

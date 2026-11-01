@@ -25,6 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.profile.ChildProfile
+import com.vcc.aprender.ui.components.FamilyHeader
+import com.vcc.aprender.ui.components.FamilySection
+import com.vcc.aprender.ui.theme.AprenderColors
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun ProfileScreen(
@@ -48,12 +52,12 @@ fun ProfileScreen(
         modifier = Modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { Text("Quem vai aprender?") }
-        item { Text("Privacidade: os perfis e resultados ficam neste dispositivo. Não é necessária conta nem ligação à Internet.") }
+        item { FamilyHeader("👧 🧒", "Quem vai aprender?", "Escolhe o teu perfil para começar a aventura!", AprenderColors.Lavender) }
+        item { Text("🔒 Os perfis e resultados ficam neste dispositivo. Não é necessária conta nem Internet.", style = MaterialTheme.typography.bodyMedium) }
         items(profiles, key = { it.id }) { profile ->
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text("${profile.avatar} ${profile.name} · ${profile.age} anos")
+            FamilySection(profile.name, profile.avatar, AprenderColors.Sky) {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text("${profile.age} anos", style = MaterialTheme.typography.bodyLarge)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(onClick = { onSelect(profile.id) }) { Text("Entrar") }
                         OutlinedButton(onClick = {
@@ -68,7 +72,7 @@ fun ProfileScreen(
         item {
             Button(onClick = {
                 id = 0L; name = ""; age = 5; avatar = "🌟"; editing = true
-            }) { Text("Adicionar criança") }
+            }, modifier = Modifier.fillMaxWidth()) { Text("➕ Adicionar criança") }
         }
         if (profiles.isNotEmpty()) {
             item { TextButton(onClick = { confirmDeleteAll = true }) { Text("Eliminar todos os perfis e resultados") } }
