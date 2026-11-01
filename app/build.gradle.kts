@@ -1,5 +1,11 @@
 import com.android.build.api.variant.impl.VariantOutputImpl
 
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.devtools.ksp")
+}
 val appVersion = providers.gradleProperty("appVersion").orElse("0.1.0").get()
 val buildNumber = providers.gradleProperty("buildNumber")
     .orElse(providers.environmentVariable("GITHUB_RUN_NUMBER"))
@@ -9,12 +15,7 @@ require(Regex("[0-9]+\\.[0-9]+\\.[0-9]+").matches(appVersion)) {
     "appVersion deve usar o formato MAJOR.MINOR.PATCH."
 }
 
-plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("com.google.devtools.ksp")
-}
+
 android {
     namespace = "com.vcc.aprender"
     compileSdk = 35
