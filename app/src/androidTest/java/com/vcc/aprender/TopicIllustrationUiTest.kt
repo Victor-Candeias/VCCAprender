@@ -15,8 +15,12 @@ class TopicIllustrationUiTest {
     @get:Rule val composeRule = createComposeRule()
 
     @Test fun allTopicIllustrationsExposeAccessibleDescriptions() {
-        for (topic in LearningTopic.entries) {
-            composeRule.setContent { TopicIllustration(topic) }
+        composeRule.setContent {
+            androidx.compose.foundation.layout.Column {
+                LearningTopic.entries.forEach { topic -> TopicIllustration(topic) }
+            }
+        }
+        LearningTopic.entries.forEach { topic ->
             composeRule.onNodeWithContentDescription("Ilustração de ${topic.title}").assertExists()
         }
     }
