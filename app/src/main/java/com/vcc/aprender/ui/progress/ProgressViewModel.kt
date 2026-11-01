@@ -3,6 +3,7 @@ package com.vcc.aprender.ui.progress
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.vcc.aprender.data.progress.AnswerHistory
 import com.vcc.aprender.data.progress.LearningProgress
 import com.vcc.aprender.data.progress.ProgressRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,10 @@ class ProgressViewModel(private val repository: ProgressRepository) : ViewModel(
     val progress = profileId.flatMapLatest { id ->
         if (id == null) flowOf(emptyList()) else repository.observe(id)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList<LearningProgress>())
+
+    val history = profileId.flatMapLatest { id ->
+        if (id == null) flowOf(emptyList()) else repository.observeHistory(id)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList<AnswerHistory>())
 
     fun selectProfile(id: Long?) { profileId.value = id }
 }

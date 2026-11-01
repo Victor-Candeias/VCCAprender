@@ -15,14 +15,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.vcc.aprender.data.progress.AnswerHistory
 import com.vcc.aprender.data.progress.LearningProgress
+import com.vcc.aprender.domain.progress.CompetencyReportCalculator
 import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.domain.progress.ProgressSummaryCalculator
 import java.text.DateFormat
 import java.util.Date
 
 @Composable
-fun ProgressScreen(progress: List<LearningProgress>, onBack: () -> Unit) {
+fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory> = emptyList(), onBack: () -> Unit) {
+    val report = CompetencyReportCalculator.calculate(history)
     val summary = ProgressSummaryCalculator.calculate(progress)
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(20.dp),
@@ -46,6 +49,39 @@ fun ProgressScreen(progress: List<LearningProgress>, onBack: () -> Unit) {
                     )
                 }
             }
+        }
+        item {
+            Text("Relatório por competência", style = MaterialTheme.typography.titleLarge)
+            if (report.competencies.isEmpty()) {
+                Text("O histórico detalhado começa a ser registado nesta versão.")
+            }
+        }
+        items(report.competencies, key = { "competency-${it.topicId}" }) { item ->
+            val name = LearningTopic.entries.firstOrNull { it.name == item.topicId }?.title ?: item.topicId
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(name, style = MaterialTheme.typography.titleMedium)
+                    Text("Respostas certas: ${item.correct} de ${item.total}")
+                    Text("Taxa de acerto: ${item.accuracy}%")
+                    LinearProgressIndicator(progress = { item.accuracy / 100f }, modifier = Modifier.fillMaxWidth())
+                }
+            }
+        }
+        item { Text("Histórico diário", style = MaterialTheme.typography.titleLarge) }
+        if (report.dailyHistory.isEmpty()) {
+            item { Text("Ainda não existem respostas registadas no histórico.") }
+        }
+        items(report.dailyHistory, key = { "day-${it.dayStartUtc}" }) { day ->
+            val date = DateFormat.getDateInstance(DateFormat.MEDIUM, java.util.Locale.forLanguageTag("pt-PT"))
+                .format(Date(day.dayStartUtc))
+            Text("$date: ${day.correct} respostas certas em ${day.total}")
+        }
+        item { Text("Últimas respostas", style = MaterialTheme.typography.titleLarge) }
+        items(report.recentAnswers, key = { "answer-${it.id}" }) { answer ->
+            val name = LearningTopic.entries.firstOrNull { it.name == answer.topicId }?.title ?: answer.topicId
+            Text("$name · ${if (answer.correct) "Certa" else "Incorreta"} · " +
+                DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, java.util.Locale.forLanguageTag("pt-PT"))
+                    .format(Date(answer.answeredAt)))
         }
         if (summary.topics.isEmpty()) {
             item { Text("Ainda não existem resultados. Experimenta uma atividade para começar!") }
