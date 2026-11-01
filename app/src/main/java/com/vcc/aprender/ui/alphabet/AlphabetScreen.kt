@@ -47,7 +47,7 @@ fun AlphabetScreen(
             OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
             Text("Descobre o alfabeto", style = MaterialTheme.typography.headlineMedium)
             GameProgress(state.index + 1, AlphabetContent.cards.size, label = "Letra")
-            GameQuestionTransition(index = state.index, modifier = Modifier.fillMaxWidth()) { visibleIndex ->
+            GameQuestionTransition(target = state.index, modifier = Modifier.fillMaxWidth()) { visibleIndex ->
                 val card = AlphabetContent.cards[visibleIndex]
                 val options = AlphabetContent.optionsFor(visibleIndex)
                 val isCurrent = visibleIndex == state.index
