@@ -50,7 +50,13 @@ fun ActivityScreen(
                         Text(question.prompt, style = MaterialTheme.typography.titleLarge,
                             textAlign = TextAlign.Center)
                     }
-                    SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
+                    SpeechControls(
+                        textToRead = question.prompt + ". " + question.options.joinToString(". "),
+                        feedbackText = if (current && state.answer != null)
+                            if (state.correct == true) "Resposta correta. Muito bem! Acertaste!"
+                            else "Boa tentativa. A resposta é ${question.correctAnswer}."
+                        else null
+                    )
                 },
                 secondary = {
                     Text("Escolhe a tua resposta", style = MaterialTheme.typography.titleMedium)
