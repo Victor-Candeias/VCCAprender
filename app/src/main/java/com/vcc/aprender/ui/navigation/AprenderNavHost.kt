@@ -72,6 +72,7 @@ fun AprenderNavHost(container: AppContainer) {
     val error by profileModel.error.collectAsStateWithLifecycle()
     val progressModel: ProgressViewModel = viewModel(factory = ProgressViewModelFactory(container.progressRepository))
     val progress by progressModel.progress.collectAsStateWithLifecycle()
+    val answerHistory by progressModel.history.collectAsStateWithLifecycle()
     LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
 
     LaunchedEffect(selectedId, profiles) {
@@ -227,7 +228,7 @@ fun AprenderNavHost(container: AppContainer) {
             )
         }
         composable(PROGRESS) {
-            if (selectedId != null) ProgressScreen(progress = progress, onBack = { navController.popBackStack() })
+            if (selectedId != null) ProgressScreen(progress = progress, history = answerHistory, onBack = { navController.popBackStack() })
         }
         composable(
             route = TOPIC,
