@@ -32,7 +32,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -94,17 +98,23 @@ fun ProfileScreen(
                         Text("${profile.age} anos", style = MaterialTheme.typography.bodyLarge)
                         Button(
                             onClick = { onSelect(profile.id) },
-                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).semantics {
+                                contentDescription = "Entrar no perfil de ${profile.name}"
+                            }
                         ) { Text("Entrar") }
                         OutlinedButton(onClick = {
                             id = profile.id; name = profile.name
                             age = profile.age; avatar = profile.avatar; editing = true
-                        }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
+                        }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).semantics {
+                            contentDescription = "Editar perfil de ${profile.name}"
+                        }) {
                             Text("Editar")
                         }
                         TextButton(
                             onClick = { pendingDelete = profile },
-                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).semantics {
+                                contentDescription = "Eliminar perfil de ${profile.name}"
+                            }
                         ) { Text("Eliminar") }
                     }
                 }
@@ -171,13 +181,15 @@ fun ProfileScreen(
                                     onClick = { avatar = option },
                                     modifier = Modifier.weight(1f).heightIn(min = 84.dp).semantics {
                                         selected = avatar == option
+                                        role = Role.RadioButton
                                         contentDescription = "Avatar ${avatarName(option)}"
                                     }
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        BrandArtwork(avatarSymbol(option), description = avatarName(option))
+                                        BrandArtwork(avatarSymbol(option), description = null)
                                         Text(avatarName(option))
-                                        if (avatar == option) Text("Selecionado")
+                                        if (avatar == option) Text("Selecionado",
+                                            modifier = Modifier.clearAndSetSemantics { })
                                     }
                                 }
                             }
