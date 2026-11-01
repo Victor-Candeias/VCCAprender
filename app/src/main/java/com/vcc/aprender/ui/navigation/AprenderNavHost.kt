@@ -2,6 +2,11 @@ package com.vcc.aprender.ui.navigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -112,30 +117,44 @@ fun AprenderNavHost(container: AppContainer) {
             if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
             val model: HomeViewModel = viewModel(factory = HomeViewModelFactory(container.getLearningTopics))
             val state by model.uiState.collectAsStateWithLifecycle()
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
-                    Text("Mudar de perfil")
+            Column(modifier = Modifier.fillMaxSize()) {
+                // A single, horizontally scrollable navigation row avoids losing all
+                // vertical space to six stacked actions on landscape phones.
+                Row(
+                    modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())
+                        .padding(horizontal = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
+                        Text("Mudar de perfil")
+                    }
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) {
+                        Text("Ver progresso")
+                    }
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
+                        Text("Área parental e preferências")
+                    }
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(READING) }) {
+                        Text("Leitura e reconhecimento de palavras")
+                    }
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
+                        Text("Descobre a Resposta A/B/C")
+                    }
+                    androidx.compose.material3.TextButton(onClick = { navController.navigate(EDITOR) }) {
+                        Text("Editor de atividades")
+                    }
                 }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) {
-                    Text("Ver progresso")
+                Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+                    HomeScreen(
+                        state = state,
+                        onRetry = model::refresh,
+                        onTopicClick = { topic ->
+                            navController.navigate(
+                                if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}"
+                            )
+                        }
+                    )
                 }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
-                    Text("Área parental e preferências")
-                }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(READING) }) {
-                    Text("Leitura e reconhecimento de palavras")
-                }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
-                    Text("Descobre a Resposta A/B/C")
-                }
-                androidx.compose.material3.TextButton(onClick = { navController.navigate(EDITOR) }) {
-                    Text("Editor de atividades")
-                }
-                HomeScreen(
-                    state = state,
-                    onRetry = model::refresh,
-                    onTopicClick = { topic -> navController.navigate(if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}") }
-                )
             }
         }
         composable(EDITOR) {
