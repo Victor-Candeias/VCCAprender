@@ -33,7 +33,8 @@ fun ProfileScreen(
     onClearError: () -> Unit,
     onSave: (Long, String, Int, String) -> Unit,
     onSelect: (Long) -> Unit,
-    onDelete: (ChildProfile) -> Unit
+    onDelete: (ChildProfile) -> Unit,
+    onDeleteAll: () -> Unit = {}
 ) {
     var editing by remember { mutableStateOf(false) }
     var id by remember { mutableLongStateOf(0L) }
@@ -41,12 +42,14 @@ fun ProfileScreen(
     var age by remember { mutableIntStateOf(5) }
     var avatar by remember { mutableStateOf("🌟") }
     var pendingDelete by remember { mutableStateOf<ChildProfile?>(null) }
+    var confirmDeleteAll by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { Text("Quem vai aprender?") }
+        item { Text("Privacidade: os perfis e resultados ficam neste dispositivo. Não é necessária conta nem ligação à Internet.") }
         items(profiles, key = { it.id }) { profile ->
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -67,8 +70,20 @@ fun ProfileScreen(
                 id = 0L; name = ""; age = 5; avatar = "🌟"; editing = true
             }) { Text("Adicionar criança") }
         }
+        if (profiles.isNotEmpty()) {
+            item { TextButton(onClick = { confirmDeleteAll = true }) { Text("Eliminar todos os perfis e resultados") } }
+        }
     }
 
+    if (confirmDeleteAll) {
+        AlertDialog(
+            onDismissRequest = { confirmDeleteAll = false },
+            title = { Text("Eliminar todos os dados das crianças?") },
+            text = { Text("Todos os perfis, resultados e históricos de respostas serão eliminados definitivamente deste dispositivo. Os cartões personalizados do editor não serão eliminados.") },
+            confirmButton = { TextButton(onClick = { onDeleteAll(); confirmDeleteAll = false }) { Text("Eliminar tudo") } },
+            dismissButton = { TextButton(onClick = { confirmDeleteAll = false }) { Text("Cancelar") } }
+        )
+    }
     if (editing) {
         AlertDialog(
             onDismissRequest = { editing = false },
@@ -104,7 +119,7 @@ fun ProfileScreen(
         AlertDialog(
             onDismissRequest = { pendingDelete = null },
             title = { Text("Eliminar perfil?") },
-            text = { Text("Eliminar o perfil de ${profile.name}?") },
+            text = { Text("Eliminar definitivamente o perfil de ${profile.name}, o progresso e todo o histórico de respostas desta criança? Esta ação não pode ser anulada.") },
             confirmButton = {
                 TextButton(onClick = { onDelete(profile); pendingDelete = null }) { Text("Eliminar") }
             },

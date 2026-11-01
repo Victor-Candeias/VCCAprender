@@ -86,6 +86,33 @@ object ActivityContent {
         LearningQuestion("Que palavra corresponde à imagem?", symbol, choices.sorted(), name)
     }
 
+    private val reading = listOf(
+        Triple("Pato", "🦆", listOf("Pato", "Gato", "Rato")),
+        Triple("Rato", "🐭", listOf("Rato", "Pato", "Gato")),
+        Triple("Dado", "🎲", listOf("Dado", "Dedo", "Dia")),
+        Triple("Dedo", "☝️", listOf("Dedo", "Dado", "Dia")),
+        Triple("Pão", "🍞", listOf("Pão", "Mão", "Cão")),
+        Triple("Mão", "✋", listOf("Mão", "Pão", "Cão")),
+        Triple("Cão", "🐶", listOf("Cão", "Pão", "Mão")),
+        Triple("Lua", "🌙", listOf("Lua", "Rua", "Luva")),
+        Triple("Rua", "🛣️", listOf("Rua", "Lua", "Luva")),
+        Triple("Luva", "🧤", listOf("Luva", "Lua", "Rua")),
+        Triple("Sapo", "🐸", listOf("Sapo", "Saco", "Sapato")),
+        Triple("Saco", "🛍️", listOf("Saco", "Sapo", "Sapato")),
+        Triple("Leite", "🥛", listOf("Leite", "Peixe", "Dente")),
+        Triple("Peixe", "🐟", listOf("Peixe", "Leite", "Dente")),
+        Triple("Dente", "🦷", listOf("Dente", "Leite", "Peixe")),
+        Triple("Mesa", "🪑", listOf("Mesa", "Casa", "Mala")),
+        Triple("Casa", "🏠", listOf("Casa", "Mesa", "Mala")),
+        Triple("Mala", "🧳", listOf("Mala", "Casa", "Mesa")),
+        Triple("Bola", "⚽", listOf("Bola", "Bolo", "Balão")),
+        Triple("Bolo", "🎂", listOf("Bolo", "Bola", "Balão"))
+    ).map { (word, symbol, choices) ->
+        LearningQuestion("Lê e escolhe a palavra correspondente à imagem.", symbol, choices.sorted(), word)
+    }
+
+    fun readingQuestions(): List<LearningQuestion> = reading
+
     fun questions(topic: LearningTopic): List<LearningQuestion> = when (topic) {
         LearningTopic.NUMBERS -> numbers
         LearningTopic.COLORS -> colors

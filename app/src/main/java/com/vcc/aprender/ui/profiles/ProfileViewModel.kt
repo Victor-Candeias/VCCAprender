@@ -34,6 +34,11 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
             .onFailure { _error.value = it.message ?: "Erro ao selecionar o perfil." }
     }
 
+    fun deleteAll() = viewModelScope.launch {
+        runCatching { repository.deleteAll() }
+            .onFailure { _error.value = it.message ?: "Erro ao eliminar os dados." }
+    }
+
     fun delete(profile: ChildProfile) = viewModelScope.launch {
         runCatching { repository.delete(profile) }
             .onFailure { _error.value = it.message ?: "Erro ao eliminar o perfil." }

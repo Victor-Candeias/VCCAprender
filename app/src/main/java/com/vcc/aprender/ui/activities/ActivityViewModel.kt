@@ -16,18 +16,20 @@ data class ActivityUiState(
     val index: Int = 0,
     val answer: String? = null,
     val correct: Boolean? = null,
-    val error: String? = null
+    val error: String? = null,
+    val readingMode: Boolean = false
 ) {
-    val questions: List<LearningQuestion> get() = ActivityContent.questions(topic)
+    val questions: List<LearningQuestion> get() = if (readingMode) ActivityContent.readingQuestions() else ActivityContent.questions(topic)
     val question: LearningQuestion get() = questions[index]
 }
 
 class ActivityViewModel(
     private val topic: LearningTopic,
     private val profileId: Long,
-    private val progressRepository: ProgressRepository
+    private val progressRepository: ProgressRepository,
+    private val readingMode: Boolean = false
 ) : ViewModel() {
-    private val _state = MutableStateFlow(ActivityUiState(topic))
+    private val _state = MutableStateFlow(ActivityUiState(topic, readingMode = readingMode))
     val state = _state.asStateFlow()
 
     fun answer(value: String) {
@@ -45,23 +47,24 @@ class ActivityViewModel(
 
     fun next() {
         val current = _state.value
-        _state.value = ActivityUiState(topic, (current.index + 1) % current.questions.size)
+        _state.value = ActivityUiState(topic, (current.index + 1) % current.questions.size, readingMode = readingMode)
     }
 
     fun previous() {
         val current = _state.value
-        _state.value = ActivityUiState(topic, (current.index + current.questions.size - 1) % current.questions.size)
+        _state.value = ActivityUiState(topic, (current.index + current.questions.size - 1) % current.questions.size, readingMode = readingMode)
     }
 }
 
 class ActivityViewModelFactory(
     private val topic: LearningTopic,
     private val profileId: Long,
-    private val progressRepository: ProgressRepository
+    private val progressRepository: ProgressRepository,
+    private val readingMode: Boolean = false
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass.isAssignableFrom(ActivityViewModel::class.java))
-        return ActivityViewModel(topic, profileId, progressRepository) as T
+        return ActivityViewModel(topic, profileId, progressRepository, readingMode) as T
     }
 }
