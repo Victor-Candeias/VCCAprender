@@ -47,6 +47,7 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { Text("Quem vai aprender?") }
+        item { Text("Privacidade: os perfis e resultados ficam neste dispositivo. Não é necessária conta nem ligação à Internet.") }
         items(profiles, key = { it.id }) { profile ->
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -104,7 +105,7 @@ fun ProfileScreen(
         AlertDialog(
             onDismissRequest = { pendingDelete = null },
             title = { Text("Eliminar perfil?") },
-            text = { Text("Eliminar o perfil de ${profile.name}?") },
+            text = { Text("Eliminar definitivamente o perfil de ${profile.name}, o progresso e todo o histórico de respostas desta criança? Esta ação não pode ser anulada.") },
             confirmButton = {
                 TextButton(onClick = { onDelete(profile); pendingDelete = null }) { Text("Eliminar") }
             },
