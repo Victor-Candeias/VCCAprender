@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.SessionBoundaryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:35:13" hostname="codespaces-82de8f" time="0.003">
+<testsuite name="com.vcc.aprender.SessionBoundaryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:37:32" hostname="codespaces-82de8f" time="0.003">
   <properties/>
-  <testcase name="progressingThroughDeckResetsAnswer" classname="com.vcc.aprender.SessionBoundaryTest" time="0.0"/>
-  <testcase name="singleCardCannotAdvanceAndResetClearsAnswer" classname="com.vcc.aprender.SessionBoundaryTest" time="0.001"/>
-  <testcase name="emptyDeckIsRejected" classname="com.vcc.aprender.SessionBoundaryTest" time="0.001"/>
+  <testcase name="progressingThroughDeckResetsAnswer" classname="com.vcc.aprender.SessionBoundaryTest" time="0.002"/>
+  <testcase name="singleCardCannotAdvanceAndResetClearsAnswer" classname="com.vcc.aprender.SessionBoundaryTest" time="0.0"/>
+  <testcase name="emptyDeckIsRejected" classname="com.vcc.aprender.SessionBoundaryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
