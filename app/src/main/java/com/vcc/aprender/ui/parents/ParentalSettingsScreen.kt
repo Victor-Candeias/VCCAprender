@@ -36,7 +36,7 @@ fun ParentalSettingsScreen(
                 "Personaliza a experiência de aprendizagem.", AprenderColors.Sky)
             FamilySection("Leitura por voz", "🔊", AprenderColors.Mint) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -48,7 +48,7 @@ fun ParentalSettingsScreen(
                     Switch(
                         checked = settings.audioEnabled,
                         onCheckedChange = onAudioChanged,
-                        modifier = Modifier.semantics { contentDescription = "Áudio" }
+                        modifier = Modifier.semantics { contentDescription = "Leitura por voz" }
                     )
                 }
                 Text("Velocidade da voz: ${(settings.speechRate * 100).toInt()}%")
