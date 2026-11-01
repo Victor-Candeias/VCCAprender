@@ -24,15 +24,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Configure Gradle
+      - name: Install Gradle 8.9
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
       - name: Build release
         env:
           APP_VERSION: ${{ inputs.app_version }}
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
-          chmod +x gradlew
-          ./gradlew :app:testDebugUnitTest :app:assembleRelease --no-daemon --max-workers=2 --no-parallel -PappVersion="$APP_VERSION" -PbuildNumber="$BUILD_NUMBER"
+          gradle :app:testDebugUnitTest :app:assembleRelease --no-daemon --max-workers=2 --no-parallel -PappVersion="$APP_VERSION" -PbuildNumber="$BUILD_NUMBER"
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
