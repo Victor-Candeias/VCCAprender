@@ -8,6 +8,12 @@
         android:minSdkVersion="26"
         android:targetSdkVersion="35" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
     <permission
         android:name="com.vcc.aprender.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
