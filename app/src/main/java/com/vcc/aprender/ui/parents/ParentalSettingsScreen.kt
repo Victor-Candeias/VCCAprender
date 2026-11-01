@@ -16,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.settings.ParentalSettings
 import com.vcc.aprender.ui.components.FamilyHeader
@@ -57,7 +59,11 @@ fun ParentalSettingsScreen(
                 verticalAlignment = Alignment.CenterVertically) {
                 Text(if (settings.animationsEnabled) "Animações ativadas" else "Animações desativadas",
                     style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-                Switch(checked = settings.animationsEnabled, onCheckedChange = onAnimationsChanged)
+                Switch(
+                    checked = settings.animationsEnabled,
+                    onCheckedChange = onAnimationsChanged,
+                    modifier = Modifier.semantics { contentDescription = "Animações" }
+                )
             }
             Text("Desativa os movimentos para uma experiência mais tranquila. As preferências de acessibilidade do Android também são respeitadas.")
         }
