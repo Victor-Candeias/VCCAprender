@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.CardDecksTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:15:32" hostname="codespaces-82de8f" time="0.004">
+<testsuite name="com.vcc.aprender.CardDecksTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:18:41" hostname="codespaces-82de8f" time="0.005">
   <properties/>
   <testcase name="difficultyFilterKeepsOnlyMatchingCards" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
   <testcase name="deckHasUniqueCardsAndStableId" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
