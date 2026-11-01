@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,6 +24,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.cards.CardDraft
 import com.vcc.aprender.data.cards.CustomCardEntity
@@ -59,34 +64,34 @@ fun ActivityEditorScreen(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text("Editor de atividades", style = MaterialTheme.typography.headlineMedium)
+        Text("Editor de atividades", modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.headlineMedium)
         Text("Cria cartões personalizados, guardados apenas neste dispositivo.")
-        Button(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain")) }) { Text("Importar JSON") }
-        Button(onClick = { exportLauncher.launch("vcc-aprender-atividades.json") }) { Text("Exportar JSON") }
-        Text("Categoria")
+        Button(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain")) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Importar JSON") }
+        Button(onClick = { exportLauncher.launch("vcc-aprender-atividades.json") }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Exportar JSON") }
+        Text("Categoria", modifier = Modifier.semantics { heading() })
         LearningTopic.entries.forEach { item ->
-            FilterChip(selected = topic == item, onClick = { topic = item }, label = { Text(item.title) })
+            FilterChip(selected = topic == item, onClick = { topic = item }, label = { Text(item.title) }, modifier = Modifier.heightIn(min = 48.dp))
         }
-        Text("Dificuldade")
+        Text("Dificuldade", modifier = Modifier.semantics { heading() })
         CardDifficulty.entries.forEach { level ->
-            FilterChip(selected = difficulty == level, onClick = { difficulty = level }, label = { Text(level.name) })
+            FilterChip(selected = difficulty == level, onClick = { difficulty = level }, label = { Text(level.name) }, modifier = Modifier.heightIn(min = 48.dp))
         }
         OutlinedTextField(question, { question = it.take(200) }, label = { Text("Pergunta") }, modifier = Modifier.fillMaxWidth())
         OutlinedTextField(first, { first = it.take(80) }, label = { Text("Resposta A") }, modifier = Modifier.fillMaxWidth())
         OutlinedTextField(second, { second = it.take(80) }, label = { Text("Resposta B") }, modifier = Modifier.fillMaxWidth())
         OutlinedTextField(third, { third = it.take(80) }, label = { Text("Resposta C") }, modifier = Modifier.fillMaxWidth())
-        Text("Resposta correta")
+        Text("Resposta correta", modifier = Modifier.semantics { heading() })
         listOf("A", "B", "C").forEachIndexed { index, label ->
-            FilterChip(selected = correct == index, onClick = { correct = index }, label = { Text(label) })
+            FilterChip(selected = correct == index, onClick = { correct = index }, label = { Text(label) }, modifier = Modifier.heightIn(min = 48.dp))
         }
         Button(onClick = {
             onSave(CardDraft(topic, difficulty, question, listOf(first, second, third), correct), editingId)
-        }) { Text(if (editingId == 0L) "Criar atividade" else "Guardar alterações") }
+        }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(if (editingId == 0L) "Criar atividade" else "Guardar alterações") }
         OutlinedButton(onClick = {
             editingId = 0; question = ""; first = ""; second = ""; third = ""; correct = 0
-        }) { Text("Novo cartão") }
-        message?.let { Text(it) }
-        Text("Atividades personalizadas: ${cards.size}", style = MaterialTheme.typography.titleMedium)
+        }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text("Novo cartão") }
+        message?.let { Text(it, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
+        Text("Atividades personalizadas: ${cards.size}", modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.titleMedium)
         cards.forEach { item ->
             Text(item.question)
             OutlinedButton(onClick = {
@@ -96,9 +101,9 @@ fun ActivityEditorScreen(
                 difficulty = CardDifficulty.entries.firstOrNull { it.name == item.difficulty } ?: CardDifficulty.EASY
                 first = item.firstOption; second = item.secondOption; third = item.thirdOption
                 correct = item.correctIndex
-            }) { Text("Editar cartão ${item.id}") }
-            OutlinedButton(onClick = { onDelete(item.id) }) { Text("Eliminar cartão ${item.id}") }
+            }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text("Editar cartão ${item.id}") }
+            OutlinedButton(onClick = { onDelete(item.id) }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text("Eliminar cartão ${item.id}") }
         }
-        Button(onClick = onBack) { Text("Voltar ao início") }
+        Button(onClick = onBack, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Voltar ao início") }
     }
 }
