@@ -22,6 +22,10 @@ import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.domain.progress.ProgressSummaryCalculator
 import java.text.DateFormat
 import java.util.Date
+import com.vcc.aprender.ui.components.FamilyHeader
+import com.vcc.aprender.ui.components.FamilySection
+import com.vcc.aprender.ui.components.FamilyProgress
+import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
 fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory> = emptyList(), onBack: () -> Unit) {
@@ -32,21 +36,17 @@ fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            Text("Evolução da criança", style = MaterialTheme.typography.headlineMedium)
+            FamilyHeader("📊", "Evolução da criança", "Descobre tudo o que já aprendeste!", AprenderColors.Lavender)
             Button(onClick = onBack) { Text("Voltar ao início") }
         }
         item {
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Resumo geral", style = MaterialTheme.typography.titleLarge)
+            FamilySection("Resumo geral", "🏆", AprenderColors.Sunshine) {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Temas praticados: ${summary.activeTopics}")
                     Text("Atividades concluídas: ${summary.completedActivities}")
                     Text("Respostas certas: ${summary.correctAnswers} de ${summary.totalAnswers}")
                     Text("Taxa de acerto: ${summary.accuracyPercent}%")
-                    LinearProgressIndicator(
-                        progress = { summary.accuracyPercent / 100f },
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    FamilyProgress(summary.accuracyPercent, "Taxa de acerto")
                 }
             }
         }
@@ -58,12 +58,11 @@ fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory
         }
         items(report.competencies, key = { "competency-${it.topicId}" }) { item ->
             val name = LearningTopic.entries.firstOrNull { it.name == item.topicId }?.title ?: item.topicId
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(name, style = MaterialTheme.typography.titleMedium)
+            FamilySection(name, "🎯", AprenderColors.Mint) {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("Respostas certas: ${item.correct} de ${item.total}")
                     Text("Taxa de acerto: ${item.accuracy}%")
-                    LinearProgressIndicator(progress = { item.accuracy / 100f }, modifier = Modifier.fillMaxWidth())
+                    FamilyProgress(item.accuracy, "Taxa de acerto")
                 }
             }
         }
@@ -74,14 +73,18 @@ fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory
         items(report.dailyHistory, key = { "day-${it.dayStartUtc}" }) { day ->
             val date = DateFormat.getDateInstance(DateFormat.MEDIUM, java.util.Locale.forLanguageTag("pt-PT"))
                 .format(Date(day.dayStartUtc))
-            Text("$date: ${day.correct} respostas certas em ${day.total}")
+            FamilySection(date, "📅", AprenderColors.Sky) {
+                Text("${day.correct} respostas certas em ${day.total}")
+            }
         }
         item { Text("Últimas respostas", style = MaterialTheme.typography.titleLarge) }
         items(report.recentAnswers, key = { "answer-${it.id}" }) { answer ->
             val name = LearningTopic.entries.firstOrNull { it.name == answer.topicId }?.title ?: answer.topicId
-            Text("$name · ${if (answer.correct) "Certa" else "Incorreta"} · " +
-                DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, java.util.Locale.forLanguageTag("pt-PT"))
-                    .format(Date(answer.answeredAt)))
+            FamilySection(name, if (answer.correct) "⭐" else "💪", if (answer.correct) AprenderColors.Mint else AprenderColors.Coral) {
+                Text("${if (answer.correct) "Certa" else "Incorreta"} · " +
+                    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, java.util.Locale.forLanguageTag("pt-PT"))
+                        .format(Date(answer.answeredAt)))
+            }
         }
         if (summary.topics.isEmpty()) {
             item { Text("Ainda não existem resultados. Experimenta uma atividade para começar!") }
@@ -89,15 +92,11 @@ fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory
             item { Text("Resultados por tema", style = MaterialTheme.typography.titleLarge) }
             items(summary.topics, key = { it.topicId }) { topic ->
                 val name = LearningTopic.entries.firstOrNull { it.name == topic.topicId }?.title ?: topic.topicId
-                Card(modifier = Modifier.fillMaxWidth()) {
-                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(name, style = MaterialTheme.typography.titleMedium)
+                FamilySection(name, "📚", AprenderColors.Sky) {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("Respostas certas: ${topic.correctAnswers} de ${topic.totalAnswers}")
                         Text("Taxa de acerto: ${topic.accuracyPercent}%")
-                        LinearProgressIndicator(
-                            progress = { topic.accuracyPercent / 100f },
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                        FamilyProgress(topic.accuracyPercent, "Taxa de acerto")
                         Text("Atividades concluídas: ${topic.completedActivities}")
                         if (topic.lastActivityAt > 0) {
                             Text("Última atividade: ${DateFormat.getDateInstance(DateFormat.MEDIUM, java.util.Locale.forLanguageTag("pt-PT")).format(Date(topic.lastActivityAt))}")
