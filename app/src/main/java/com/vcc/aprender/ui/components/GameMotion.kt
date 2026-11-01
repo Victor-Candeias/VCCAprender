@@ -62,14 +62,14 @@ fun GameMotionProvider(parentalEnabled: Boolean, content: @Composable () -> Unit
 
 /** AnimatedContent targets the actual question index so old and new questions keep distinct keys. */
 @Composable
-fun GameQuestionTransition(
-    index: Int,
+fun <T> GameQuestionTransition(
+    target: T,
     modifier: Modifier = Modifier,
-    content: @Composable (Int) -> Unit
+    content: @Composable (T) -> Unit
 ) {
     val animate = LocalGameAnimationsEnabled.current
     AnimatedContent(
-        targetState = index,
+        targetState = target,
         modifier = modifier,
         transitionSpec = {
             if (animate) {
@@ -80,7 +80,7 @@ fun GameQuestionTransition(
             }
         },
         label = "Mudança de pergunta"
-    ) { visibleIndex ->
-        content(visibleIndex)
+    ) { visibleTarget ->
+        content(visibleTarget)
     }
 }
