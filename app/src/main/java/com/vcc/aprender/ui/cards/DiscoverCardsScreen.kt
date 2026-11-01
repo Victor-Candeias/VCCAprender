@@ -64,9 +64,12 @@ fun DiscoverCardsScreen(
                         Text("Descobre a Resposta", style = MaterialTheme.typography.headlineMedium)
                         GameProgress(state.index + 1, state.total, label = "Cartão")
                         SpeechControls(
-                            visibleCard.question + ". " + visibleCard.options.mapIndexed { index, option ->
+                            textToRead = visibleCard.question + ". " + visibleCard.options.mapIndexed { index, option ->
                                 "${'A' + index}: ${option.label}"
-                            }.joinToString(". ")
+                            }.joinToString(". "),
+                            feedbackText = if (current) state.answer?.let { answer ->
+                                AnswerFeedbackFactory.from(visibleCard, answer).let { "${it.title} ${it.message}" }
+                            } else null
                         )
                         Card(modifier = Modifier.fillMaxWidth()) {
                             Column(
