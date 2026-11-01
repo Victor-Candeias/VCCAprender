@@ -33,18 +33,6 @@ import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.ui.theme.AprenderColors
 import com.vcc.aprender.ui.components.TopicIllustration
 
-private data class TopicArtwork(val symbol: String, val background: Color)
-
-private fun artworkFor(topic: LearningTopic): TopicArtwork = when (topic) {
-    LearningTopic.LETTERS -> TopicArtwork("🔤", AprenderColors.Sky)
-    LearningTopic.NUMBERS -> TopicArtwork("🔢", AprenderColors.Sunshine)
-    LearningTopic.COLORS -> TopicArtwork("🎨", AprenderColors.Coral)
-    LearningTopic.SHAPES -> TopicArtwork("🔷", AprenderColors.Lavender)
-    LearningTopic.ANIMALS -> TopicArtwork("🐻", AprenderColors.Mint)
-    LearningTopic.SOUNDS -> TopicArtwork("🎵", AprenderColors.Sunshine)
-    LearningTopic.WORDS -> TopicArtwork("📖", AprenderColors.Lavender)
-}
-
 @Composable
 fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningTopic) -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
