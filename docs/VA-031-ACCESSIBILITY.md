@@ -28,7 +28,7 @@ Tornar a experiência educativa utilizável por crianças com diferentes capacid
 | Revelação A/B/C | `RevealTilesGrid.kt`: quadrados ocultos têm nome, papel de botão, estado `Por revelar`, foco visível e ação clicável por tecnologias assistivas |
 | Editor | `ActivityEditorScreen.kt`: cabeçalhos de secções, filtros com altura mínima de 48dp, ações largas e feedback com região viva |
 | Área parental | `ParentalSettingsScreen.kt`: controlos rotulados, espaço para texto ampliado e etiqueta explícita `Leitura por voz` |
-| CI | `.github/workflows/android-ui-ci.yml` atualizado para compilar e executar testes unitários também em pushes para a VA-031 |
+| CI | `.github/workflows/android-ui-ci.yml` atualizado para compilar testes unitários **e testes instrumentados** (sem emulador) e executar testes unitários também em pushes para a VA-031 |
 
 ### Semântica e ordem de foco
 
@@ -78,7 +78,8 @@ git switch feature/VA-031-accessibility
 git pull --ff-only origin feature/VA-031-accessibility
 
 gradle :app:compileDebugKotlin :app:compileReleaseKotlin \
-  :app:testDebugUnitTest :app:assembleDebug :app:assembleRelease \
+  :app:compileDebugAndroidTestKotlin :app:testDebugUnitTest \
+  :app:assembleDebug :app:assembleRelease \
   --console=plain --no-daemon --max-workers=2
 
 # Necessita de emulador/dispositivo Android:
@@ -86,7 +87,7 @@ gradle :app:connectedDebugAndroidTest \
   --console=plain --no-daemon --max-workers=2
 ```
 
-O workflow `Android UI CI` foi estendido a esta branch. Consultar também o estado do GitHub Actions: a presença do workflow **não confirma sucesso de build**.
+O workflow `Android UI CI` foi estendido a esta branch e compila também os testes AndroidTest (sem os executar). Consultar também o estado do GitHub Actions: a presença do workflow **não confirma sucesso de build**.
 
 ## Checklist de QA manual
 
