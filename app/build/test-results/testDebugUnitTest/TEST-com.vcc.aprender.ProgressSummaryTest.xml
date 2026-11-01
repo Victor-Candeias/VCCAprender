@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ProgressSummaryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:37:32" hostname="codespaces-82de8f" time="0.006">
+<testsuite name="com.vcc.aprender.ProgressSummaryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:47:04" hostname="codespaces-82de8f" time="0.004">
   <properties/>
   <testcase name="percentageHandlesZeroAndInvalidCounts" classname="com.vcc.aprender.ProgressSummaryTest" time="0.0"/>
   <testcase name="emptyProgressHasZeroTotals" classname="com.vcc.aprender.ProgressSummaryTest" time="0.003"/>

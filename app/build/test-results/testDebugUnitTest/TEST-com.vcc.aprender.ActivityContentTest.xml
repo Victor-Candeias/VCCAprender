@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ActivityContentTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:37:32" hostname="codespaces-82de8f" time="0.091">
+<testsuite name="com.vcc.aprender.ActivityContentTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:47:03" hostname="codespaces-82de8f" time="0.204">
   <properties/>
-  <testcase name="numbersCoverOneToTen" classname="com.vcc.aprender.ActivityContentTest" time="0.09"/>
-  <testcase name="everyQuestionHasThreeDistinctAnswersAndIncludesCorrectOne" classname="com.vcc.aprender.ActivityContentTest" time="0.0"/>
-  <testcase name="lettersUseDedicatedAlphabetModule" classname="com.vcc.aprender.ActivityContentTest" time="0.0"/>
+  <testcase name="numbersCoverOneToTen" classname="com.vcc.aprender.ActivityContentTest" time="0.199"/>
+  <testcase name="everyQuestionHasThreeDistinctAnswersAndIncludesCorrectOne" classname="com.vcc.aprender.ActivityContentTest" time="0.002"/>
+  <testcase name="lettersUseDedicatedAlphabetModule" classname="com.vcc.aprender.ActivityContentTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
