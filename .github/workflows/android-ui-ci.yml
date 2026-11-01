@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   validate:
-    name: Kotlin, unit tests and APK builds
+    name: Kotlin, instrumentation compilation, unit tests and APK builds
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
@@ -36,7 +36,8 @@ jobs:
       - name: Compile, test and assemble
         run: |
           gradle :app:compileDebugKotlin :app:compileReleaseKotlin \
-            :app:testDebugUnitTest :app:assembleDebug :app:assembleRelease \
+            :app:compileDebugAndroidTestKotlin :app:testDebugUnitTest \
+            :app:assembleDebug :app:assembleRelease \
             --no-daemon --max-workers=2 --console=plain
 
       - name: Upload unit-test results
