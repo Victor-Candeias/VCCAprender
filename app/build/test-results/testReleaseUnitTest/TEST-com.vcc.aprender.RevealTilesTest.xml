@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.RevealTilesTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:15:12" hostname="codespaces-82de8f" time="0.005">
+<testsuite name="com.vcc.aprender.RevealTilesTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:22:55" hostname="codespaces-82de8f" time="0.0">
   <properties/>
-  <testcase name="newGridStartsHidden" classname="com.vcc.aprender.RevealTilesTest" time="0.002"/>
+  <testcase name="newGridStartsHidden" classname="com.vcc.aprender.RevealTilesTest" time="0.0"/>
   <testcase name="invalidTileIsRejected" classname="com.vcc.aprender.RevealTilesTest" time="0.0"/>
-  <testcase name="revealAllAndReset" classname="com.vcc.aprender.RevealTilesTest" time="0.002"/>
+  <testcase name="revealAllAndReset" classname="com.vcc.aprender.RevealTilesTest" time="0.0"/>
   <testcase name="repeatedTouchDoesNotCountTwice" classname="com.vcc.aprender.RevealTilesTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
