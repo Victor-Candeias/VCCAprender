@@ -3,6 +3,7 @@ package com.vcc.aprender
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.vcc.aprender.domain.model.LearningTopic
@@ -27,7 +28,7 @@ class HomeScreenUiTest {
             )
         }
         composeRule.onNodeWithText("🌈  VCCAprender").assertIsDisplayed()
-        composeRule.onNodeWithText(LearningTopic.ANIMALS.title).performClick()
+        composeRule.onNodeWithText(LearningTopic.ANIMALS.title).performScrollTo().performClick()
         composeRule.runOnIdle { assertEquals(LearningTopic.ANIMALS, selected) }
     }
 

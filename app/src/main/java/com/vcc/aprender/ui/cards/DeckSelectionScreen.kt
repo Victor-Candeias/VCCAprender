@@ -52,17 +52,17 @@ fun DeckSelectionScreen(
             Text("Categoria", style = MaterialTheme.typography.titleMedium)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                FilterChip(selected = topic == null, onClick = { topic = null },
+                FilterChip(modifier = Modifier.heightIn(min = 48.dp), selected = topic == null, onClick = { topic = null },
                     label = { Text("Todas") })
                 LearningTopic.entries.forEach { item ->
-                    FilterChip(selected = topic == item, onClick = { topic = item },
+                    FilterChip(modifier = Modifier.heightIn(min = 48.dp), selected = topic == item, onClick = { topic = item },
                         label = { Text(item.title) })
                 }
             }
             Text("Nível", style = MaterialTheme.typography.titleMedium)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                FilterChip(selected = difficulty == null, onClick = { difficulty = null },
+                FilterChip(modifier = Modifier.heightIn(min = 48.dp), selected = difficulty == null, onClick = { difficulty = null },
                     label = { Text("Todos") })
                 CardDifficulty.entries.forEach { level ->
                     val label = when (level) {
@@ -70,7 +70,7 @@ fun DeckSelectionScreen(
                         CardDifficulty.MEDIUM -> "Médio"
                         CardDifficulty.HARD -> "Difícil"
                     }
-                    FilterChip(selected = difficulty == level, onClick = { difficulty = level },
+                    FilterChip(modifier = Modifier.heightIn(min = 48.dp), selected = difficulty == level, onClick = { difficulty = level },
                         label = { Text(label) })
                 }
             }

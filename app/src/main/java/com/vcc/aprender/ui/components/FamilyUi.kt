@@ -15,7 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.theme.AprenderColors
@@ -26,8 +29,8 @@ fun FamilyHeader(icon: String, title: String, subtitle: String, background: Colo
         modifier = Modifier.fillMaxWidth().background(background, RoundedCornerShape(24.dp)).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        BrandArtwork(familySymbol(icon), description = title)
-        Text(title, style = MaterialTheme.typography.headlineMedium, color = AprenderColors.Ink)
+        BrandArtwork(familySymbol(icon), description = null)
+        Text(title, modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.headlineMedium, color = AprenderColors.Ink)
         Text(subtitle, style = MaterialTheme.typography.bodyLarge, color = AprenderColors.Ink)
     }
 }
@@ -41,7 +44,7 @@ fun FamilySection(title: String, icon: String, background: Color = AprenderColor
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 BrandArtwork(familySymbol(icon), description = title)
-                Text(title, style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
+                Text(title, modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
             }
             content()
         }
@@ -52,10 +55,10 @@ fun FamilySection(title: String, icon: String, background: Color = AprenderColor
 fun FamilyProgress(value: Int, label: String) {
     val percent = value.coerceIn(0, 100)
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text("$label: $percent%", style = MaterialTheme.typography.bodyLarge)
+        Text("$label: $percent%", modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, style = MaterialTheme.typography.bodyLarge)
         LinearProgressIndicator(
             progress = { percent / 100f },
-            modifier = Modifier.fillMaxWidth().semantics { contentDescription = "$label: $percent por cento" },
+            modifier = Modifier.fillMaxWidth().clearAndSetSemantics { },
             color = AprenderColors.Blue,
             trackColor = AprenderColors.Sky
         )

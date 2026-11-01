@@ -5,6 +5,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import org.junit.Assert.assertFalse
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.vcc.aprender.data.settings.ParentalSettings
@@ -46,7 +47,7 @@ class ParentalSettingsUiTest {
         }
         composeRule.onNodeWithText("Área parental").assertIsDisplayed()
         composeRule.onNodeWithText("Áudio desativado").assertIsDisplayed()
-        composeRule.onNodeWithText("Voltar ao início").performClick()
+        composeRule.onNodeWithText("Voltar ao início").performScrollTo().performClick()
         composeRule.runOnIdle { assertTrue(back) }
     }
 }

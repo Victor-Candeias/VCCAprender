@@ -55,11 +55,16 @@ fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
             ) {
                 BrandArtwork(
                     if (positive) BrandSymbol.Success else BrandSymbol.Encourage,
-                    description = feedback.title
+                    description = null
+                )
+                Text(
+                    if (positive) "Resposta correta" else "Resposta incorreta",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = AprenderColors.Ink
                 )
                 if (positive) GameCelebration()
-                Text(feedback.title, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurface)
-                Text(feedback.message, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurface)
+                Text(feedback.title, style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
+                Text(feedback.message, textAlign = TextAlign.Center, color = AprenderColors.Ink)
             }
         }
     }
