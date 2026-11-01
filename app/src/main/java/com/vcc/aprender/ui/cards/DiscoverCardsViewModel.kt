@@ -34,6 +34,10 @@ class DiscoverCardsViewModel(
     private val customCardRepository: CustomCardRepository? = null
 ) : ViewModel() {
     private var session = DiscoverCardSession(OfflineCardCatalog.cards)
+    private var tiles = RevealTiles()
+    private val _state = MutableStateFlow(snapshot().copy(loading = true))
+    val state = _state.asStateFlow()
+
     init {
         viewModelScope.launch {
             runCatching {
@@ -52,9 +56,7 @@ class DiscoverCardsViewModel(
             }
         }
     }
-    private var tiles = RevealTiles()
-    private val _state = MutableStateFlow(snapshot().copy(loading = true))
-    val state = _state.asStateFlow()
+
 
     private fun snapshot(finished: Boolean = false, error: String? = null) = DiscoverCardsUiState(
         card = session.current, index = session.index, total = session.size,
