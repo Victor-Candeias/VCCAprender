@@ -55,9 +55,15 @@ class ActivityEditorViewModel(private val repository: CustomCardRepository) : Vi
             runCatching {
                 withContext(Dispatchers.IO) {
                     val json = context.contentResolver.openInputStream(uri)?.use { stream ->
-                        val bytes = stream.readNBytes(com.vcc.aprender.data.cards.CardJsonCodec.MAX_BYTES + 1)
-                        require(bytes.size <= com.vcc.aprender.data.cards.CardJsonCodec.MAX_BYTES) { "Ficheiro demasiado grande." }
-                        String(bytes, Charsets.UTF_8)
+                        val output = java.io.ByteArrayOutputStream()
+                        val buffer = ByteArray(8192)
+                        while (true) {
+                            val read = stream.read(buffer)
+                            if (read < 0) break
+                            output.write(buffer, 0, read)
+                            require(output.size() <= com.vcc.aprender.data.cards.CardJsonCodec.MAX_BYTES) { "Ficheiro demasiado grande." }
+                        }
+                        output.toString("UTF-8")
                     } ?: error("Não foi possível ler o ficheiro.")
                     repository.importJson(json)
                 }
