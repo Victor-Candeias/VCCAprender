@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
+import androidx.room.RoomDatabaseKt;
 import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
@@ -84,6 +85,12 @@ public final class CustomCardDao_Impl implements CustomCardDao {
         }
       }
     }, $completion);
+  }
+
+  @Override
+  public Object importAll(final List<CustomCardEntity> cards,
+      final Continuation<? super Unit> $completion) {
+    return RoomDatabaseKt.withTransaction(__db, (__cont) -> CustomCardDao.DefaultImpls.importAll(CustomCardDao_Impl.this, cards, __cont), $completion);
   }
 
   @Override

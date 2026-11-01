@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.FeedbackBoundaryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:20:35" hostname="codespaces-82de8f" time="0.008">
+<testsuite name="com.vcc.aprender.FeedbackBoundaryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:24:27" hostname="codespaces-82de8f" time="0.008">
   <properties/>
-  <testcase name="feedbackRejectsInconsistentCorrectFlag" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.007"/>
+  <testcase name="feedbackRejectsInconsistentCorrectFlag" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.0"/>
   <testcase name="correctAnswerProducesPositiveFeedback" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.0"/>
-  <testcase name="incorrectAnswerIncludesCorrectOption" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.001"/>
+  <testcase name="incorrectAnswerIncludesCorrectOption" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.007"/>
   <testcase name="feedbackRejectsDifferentCard" classname="com.vcc.aprender.FeedbackBoundaryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
