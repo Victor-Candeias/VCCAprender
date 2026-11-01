@@ -27,10 +27,10 @@ class ProfileScreenUiTest {
             )
         }
         composeRule.onNodeWithText("Quem vai aprender?").assertIsDisplayed()
-        composeRule.onNodeWithText("Adicionar criança").performClick()
+        composeRule.onNodeWithText("➕ Adicionar criança").performClick()
         composeRule.onNodeWithText("Novo perfil").assertIsDisplayed()
         composeRule.onNodeWithText("Cancelar").performClick()
-        composeRule.onNodeWithText("Adicionar criança").assertIsDisplayed()
+        composeRule.onNodeWithText("➕ Adicionar criança").assertIsDisplayed()
     }
 
     @Test fun errorDialogCanBeDismissed() {

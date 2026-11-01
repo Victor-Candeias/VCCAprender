@@ -3,6 +3,8 @@ package com.vcc.aprender.ui.profiles
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -48,8 +50,9 @@ fun ProfileScreen(
     var pendingDelete by remember { mutableStateOf<ChildProfile?>(null) }
     var confirmDeleteAll by remember { mutableStateOf(false) }
 
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { FamilyHeader("👧 🧒", "Quem vai aprender?", "Escolhe o teu perfil para começar a aventura!", AprenderColors.Lavender) }
@@ -58,13 +61,13 @@ fun ProfileScreen(
             FamilySection(profile.name, profile.avatar, AprenderColors.Sky) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("${profile.age} anos", style = MaterialTheme.typography.bodyLarge)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = { onSelect(profile.id) }) { Text("Entrar") }
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = { onSelect(profile.id) }, modifier = Modifier.fillMaxWidth()) { Text("Entrar") }
                         OutlinedButton(onClick = {
                             id = profile.id; name = profile.name
                             age = profile.age; avatar = profile.avatar; editing = true
-                        }) { Text("Editar") }
-                        TextButton(onClick = { pendingDelete = profile }) { Text("Eliminar") }
+                        }, modifier = Modifier.fillMaxWidth()) { Text("Editar") }
+                        TextButton(onClick = { pendingDelete = profile }, modifier = Modifier.fillMaxWidth()) { Text("Eliminar") }
                     }
                 }
             }
@@ -77,6 +80,7 @@ fun ProfileScreen(
         if (profiles.isNotEmpty()) {
             item { TextButton(onClick = { confirmDeleteAll = true }) { Text("Eliminar todos os perfis e resultados") } }
         }
+    }
     }
 
     if (confirmDeleteAll) {

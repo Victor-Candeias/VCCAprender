@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -44,8 +46,9 @@ private fun artworkFor(topic: LearningTopic): TopicArtwork = when (topic) {
 
 @Composable
 fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningTopic) -> Unit) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth(),
         contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
@@ -105,5 +108,6 @@ fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningT
                 }
             }
         }
+    }
     }
 }

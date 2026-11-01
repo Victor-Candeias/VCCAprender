@@ -2,6 +2,8 @@ package com.vcc.aprender.ui.progress
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,8 +33,9 @@ import com.vcc.aprender.ui.theme.AprenderColors
 fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory> = emptyList(), onBack: () -> Unit) {
     val report = CompetencyReportCalculator.calculate(history)
     val summary = ProgressSummaryCalculator.calculate(progress)
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
@@ -105,5 +108,6 @@ fun ProgressScreen(progress: List<LearningProgress>, history: List<AnswerHistory
                 }
             }
         }
+    }
     }
 }

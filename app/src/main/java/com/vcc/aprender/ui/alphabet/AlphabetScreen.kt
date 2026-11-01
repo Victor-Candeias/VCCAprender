@@ -3,6 +3,9 @@ package com.vcc.aprender.ui.alphabet
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -31,8 +34,9 @@ fun AlphabetScreen(
     onAnswer: (Char) -> Unit,
     onBack: () -> Unit
 ) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -61,5 +65,6 @@ fun AlphabetScreen(
         )
         if (state.error != null) Text(state.error, color = MaterialTheme.colorScheme.error)
         GameNavigation(onPrevious = onPrevious, onNext = onNext, nextLabel = "Próxima letra")
+    }
     }
 }

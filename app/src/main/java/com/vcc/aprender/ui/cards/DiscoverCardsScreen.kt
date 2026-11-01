@@ -3,6 +3,9 @@ package com.vcc.aprender.ui.cards
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,8 +38,9 @@ fun DiscoverCardsScreen(
     onRestart: () -> Unit,
     onBack: () -> Unit
 ) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth().verticalScroll(rememberScrollState()).padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -92,5 +96,6 @@ fun DiscoverCardsScreen(
             Button(onClick = onNext) { Text(if (state.index == state.total - 1) "Terminar" else "Próximo cartão") }
         }
         state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+    }
     }
 }
