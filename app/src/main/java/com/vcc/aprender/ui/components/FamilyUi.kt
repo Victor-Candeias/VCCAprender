@@ -3,6 +3,8 @@ package com.vcc.aprender.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,7 +26,7 @@ fun FamilyHeader(icon: String, title: String, subtitle: String, background: Colo
         modifier = Modifier.fillMaxWidth().background(background, RoundedCornerShape(24.dp)).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(icon, style = MaterialTheme.typography.displayMedium)
+        BrandArtwork(familySymbol(icon), description = title)
         Text(title, style = MaterialTheme.typography.headlineMedium, color = AprenderColors.Ink)
         Text(subtitle, style = MaterialTheme.typography.bodyLarge, color = AprenderColors.Ink)
     }
@@ -37,7 +39,10 @@ fun FamilySection(title: String, icon: String, background: Color = AprenderColor
             modifier = Modifier.fillMaxWidth().background(background).padding(18.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text("$icon  $title", style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                BrandArtwork(familySymbol(icon), description = title)
+                Text(title, style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
+            }
             content()
         }
     }
@@ -55,4 +60,20 @@ fun FamilyProgress(value: Int, label: String) {
             trackColor = AprenderColors.Sky
         )
     }
+}
+
+private fun familySymbol(icon: String): BrandSymbol = when {
+    icon.contains("🐻") -> BrandSymbol.Bear
+    icon.contains("🦊") -> BrandSymbol.Fox
+    icon.contains("🐼") -> BrandSymbol.Panda
+    icon.contains("👧") || icon.contains("🧒") -> BrandSymbol.Person
+    icon.contains("🛡") || icon.contains("🔒") -> BrandSymbol.Shield
+    icon.contains("🔊") || icon.contains("🎵") -> BrandSymbol.Sound
+    icon.contains("🏆") || icon.contains("⭐") || icon.contains("🌟") -> BrandSymbol.Trophy
+    icon.contains("📊") -> BrandSymbol.Chart
+    icon.contains("📅") -> BrandSymbol.Calendar
+    icon.contains("📚") || icon.contains("📖") -> BrandSymbol.Book
+    icon.contains("🎯") -> BrandSymbol.Target
+    icon.contains("💪") -> BrandSymbol.Encourage
+    else -> BrandSymbol.Star
 }
