@@ -39,6 +39,14 @@ fun DiscoverCardsScreen(
     ) {
         OutlinedButton(onClick = onBack) { Text("Voltar ao início") }
         Text("Descobre a Resposta", style = MaterialTheme.typography.headlineMedium)
+        if (state.loading) {
+            Text("A carregar cartões…")
+            return@Column
+        }
+        if (state.error != null && state.total == 0) {
+            Text(state.error)
+            return@Column
+        }
         if (state.finished) {
             Text("Parabéns! Terminaste os cartões! 🎉", style = MaterialTheme.typography.titleLarge)
             Button(onClick = onRestart) { Text("Jogar novamente") }
