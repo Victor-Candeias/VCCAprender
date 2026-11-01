@@ -134,6 +134,7 @@ fun AprenderNavHost(container: AppContainer) {
             ActivityEditorScreen(
                 cards = cards, message = message,
                 onSave = model::save, onDelete = model::delete,
+                onImport = model::importFrom, onExport = model::exportTo,
                 onBack = { navController.popBackStack() }
             )
         }

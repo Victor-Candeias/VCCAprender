@@ -1,5 +1,8 @@
 package com.vcc.aprender.ui.editor
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,8 +35,17 @@ fun ActivityEditorScreen(
     message: String?,
     onSave: (CardDraft, Long) -> Unit,
     onDelete: (Long) -> Unit,
+    onImport: (android.content.Context, android.net.Uri) -> Unit,
+    onExport: (android.content.Context, android.net.Uri) -> Unit,
     onBack: () -> Unit
 ) {
+    val context = LocalContext.current
+    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) onImport(context, uri)
+    }
+    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        if (uri != null) onExport(context, uri)
+    }
     var editingId by remember { mutableStateOf(0L) }
     var question by remember { mutableStateOf("") }
     var topic by remember { mutableStateOf(LearningTopic.LETTERS) }
@@ -49,6 +61,8 @@ fun ActivityEditorScreen(
     ) {
         Text("Editor de atividades", style = MaterialTheme.typography.headlineMedium)
         Text("Cria cartões personalizados, guardados apenas neste dispositivo.")
+        Button(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain")) }) { Text("Importar JSON") }
+        Button(onClick = { exportLauncher.launch("vcc-aprender-atividades.json") }) { Text("Exportar JSON") }
         Text("Categoria")
         LearningTopic.entries.forEach { item ->
             FilterChip(selected = topic == item, onClick = { topic = item }, label = { Text(item.title) })

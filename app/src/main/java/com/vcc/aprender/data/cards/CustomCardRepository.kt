@@ -35,6 +35,24 @@ class CustomCardRepository(private val dao: CustomCardDao) {
         ))
     }
 
+    suspend fun exportJson(): String = CardJsonCodec.encode(dao.getAll())
+
+    suspend fun importJson(json: String): Int {
+        val drafts = CardJsonCodec.decode(json)
+        val existing = dao.getAll().map { listOf(it.topic, it.difficulty, it.question, it.firstOption, it.secondOption, it.thirdOption, it.correctIndex.toString()) }.toHashSet()
+        val unique = drafts.filter { draft ->
+            existing.add(listOf(draft.topic.name, draft.difficulty.name, draft.question,
+                draft.options[0], draft.options[1], draft.options[2], draft.correctIndex.toString()))
+        }
+        dao.importAll(unique.map { draft ->
+            CustomCardEntity(topic = draft.topic.name, difficulty = draft.difficulty.name,
+                question = draft.question, firstOption = draft.options[0],
+                secondOption = draft.options[1], thirdOption = draft.options[2],
+                correctIndex = draft.correctIndex)
+        })
+        return unique.size
+    }
+
     suspend fun delete(id: Long) { require(id > 0); dao.delete(id) }
 
     suspend fun gameCards(): List<DiscoverCard> = dao.getAll().mapNotNull { it.toDiscoverCard() }
