@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.cards.AnswerFeedbackFactory
@@ -59,11 +60,12 @@ fun DiscoverCardsScreen(
             GameQuestionTransition(target = state.card, modifier = Modifier.fillMaxSize()) { visibleCard ->
                 val current = visibleCard.id == state.card.id
                 AdaptiveTwoPaneScreen(
+                    modifier = if (current) Modifier else Modifier.clearAndSetSemantics { },
                     primary = {
-                        OutlinedButton(onClick = onBack) { Text("Voltar ao início") }
+                        if (current) OutlinedButton(onClick = onBack) { Text("Voltar ao início") }
                         Text("Descobre a Resposta", style = MaterialTheme.typography.headlineMedium)
                         GameProgress(state.index + 1, state.total, label = "Cartão")
-                        SpeechControls(
+                        if (current) SpeechControls(
                             textToRead = visibleCard.question + ". " + visibleCard.options.mapIndexed { index, option ->
                                 "${'A' + index}: ${option.label}"
                             }.joinToString(". "),
