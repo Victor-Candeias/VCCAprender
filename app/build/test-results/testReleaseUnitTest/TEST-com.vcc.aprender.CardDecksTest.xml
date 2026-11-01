@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.CardDecksTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:46:26" hostname="codespaces-82de8f" time="0.006">
+<testsuite name="com.vcc.aprender.CardDecksTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:26:42" hostname="codespaces-82de8f" time="0.008">
   <properties/>
-  <testcase name="difficultyFilterKeepsOnlyMatchingCards" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
+  <testcase name="difficultyFilterKeepsOnlyMatchingCards" classname="com.vcc.aprender.CardDecksTest" time="0.003"/>
   <testcase name="deckHasUniqueCardsAndStableId" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
-  <testcase name="emptyCombinationReturnsNoDeck" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
+  <testcase name="emptyCombinationReturnsNoDeck" classname="com.vcc.aprender.CardDecksTest" time="0.003"/>
   <testcase name="allFilterKeepsEntireCatalog" classname="com.vcc.aprender.CardDecksTest" time="0.001"/>
   <testcase name="topicFilterKeepsOnlyMatchingCards" classname="com.vcc.aprender.CardDecksTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
