@@ -26,7 +26,7 @@ class HomeScreenUiTest {
                 onTopicClick = { selected = it }
             )
         }
-        composeRule.onNodeWithText("VCC Aprender").assertIsDisplayed()
+        composeRule.onNodeWithText("🌈  VCCAprender").assertIsDisplayed()
         composeRule.onNodeWithText(LearningTopic.ANIMALS.title).performClick()
         composeRule.runOnIdle { assertEquals(LearningTopic.ANIMALS, selected) }
     }
