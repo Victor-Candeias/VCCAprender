@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.AnswerFeedbackTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:51:27" hostname="codespaces-82de8f" time="0.013">
+<testsuite name="com.vcc.aprender.AnswerFeedbackTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T18:56:52" hostname="codespaces-82de8f" time="0.016">
   <properties/>
-  <testcase name="wrongAnswerExplainsCorrectChoice" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.01"/>
+  <testcase name="wrongAnswerExplainsCorrectChoice" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.013"/>
   <testcase name="correctAnswerShowsPositiveFeedback" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.0"/>
-  <testcase name="unknownOptionIsRejected" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.0"/>
+  <testcase name="unknownOptionIsRejected" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.001"/>
   <testcase name="duplicateAnswersDoNotReplaceFirstAnswer" classname="com.vcc.aprender.AnswerFeedbackTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
