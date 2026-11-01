@@ -31,6 +31,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.ui.theme.AprenderColors
+import com.vcc.aprender.ui.components.TopicIllustration
 
 private data class TopicArtwork(val symbol: String, val background: Color)
 
@@ -80,7 +81,6 @@ fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningT
                 }
             }
             is HomeUiState.Success -> items(state.topics, key = { it.name }) { topic ->
-                val art = artworkFor(topic)
                 ElevatedCard(
                     onClick = { onTopicClick(topic) },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 108.dp).semantics {
@@ -93,12 +93,7 @@ fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningT
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Box(
-                            modifier = Modifier.size(70.dp).background(art.background, CircleShape),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(art.symbol, style = MaterialTheme.typography.headlineLarge)
-                        }
+                        TopicIllustration(topic, modifier = Modifier.size(76.dp))
                         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(topic.title, style = MaterialTheme.typography.titleMedium)
                             Text(topic.description, style = MaterialTheme.typography.bodyLarge)
