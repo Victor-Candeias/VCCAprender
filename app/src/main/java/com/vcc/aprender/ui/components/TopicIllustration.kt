@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -19,7 +20,7 @@ import com.vcc.aprender.ui.theme.AprenderColors
 
 /** Original, offline vector artwork drawn with Compose Canvas (no emoji font dependency). */
 @Composable
-fun TopicIllustration(topic: LearningTopic, modifier: Modifier = Modifier) {
+fun TopicIllustration(topic: LearningTopic, modifier: Modifier = Modifier, decorative: Boolean = false) {
     val background = when (topic) {
         LearningTopic.LETTERS -> AprenderColors.Sky
         LearningTopic.NUMBERS -> AprenderColors.Sunshine
@@ -29,9 +30,11 @@ fun TopicIllustration(topic: LearningTopic, modifier: Modifier = Modifier) {
         LearningTopic.SOUNDS -> AprenderColors.Sunshine
         LearningTopic.WORDS -> AprenderColors.Lavender
     }
+    val accessibilityModifier = if (decorative) Modifier.clearAndSetSemantics { }
+        else Modifier.semantics { contentDescription = "Ilustração de ${topic.title}" }
     Canvas(
         modifier = modifier.size(76.dp).background(background, CircleShape)
-            .semantics { contentDescription = "Ilustração de ${topic.title}" }
+            .then(accessibilityModifier)
     ) {
         val unit = size.minDimension / 100f
         fun dot(x: Float, y: Float, radius: Float, color: Color) =
