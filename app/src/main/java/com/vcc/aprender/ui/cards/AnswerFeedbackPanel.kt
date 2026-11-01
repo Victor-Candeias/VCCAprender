@@ -20,6 +20,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.cards.AnswerFeedback
+import com.vcc.aprender.ui.components.BrandArtwork
+import com.vcc.aprender.ui.components.BrandSymbol
 
 @Composable
 fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
@@ -30,7 +32,8 @@ fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(feedback.emoji, style = MaterialTheme.typography.displayMedium)
+            BrandArtwork(if (feedback.emoji.contains("🥳")) BrandSymbol.Success else BrandSymbol.Encourage,
+                description = feedback.title)
             Text(feedback.title, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurface)
             Text(feedback.message, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurface)
         }
