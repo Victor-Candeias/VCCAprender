@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.alphabet.AlphabetContent
@@ -39,6 +40,7 @@ fun AlphabetScreen(
             val card = AlphabetContent.cards[visibleIndex]
             val current = visibleIndex == state.index
             AdaptiveTwoPaneScreen(
+                modifier = if (current) Modifier else Modifier.clearAndSetSemantics { },
                 primary = {
                     OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
                     Text("Descobre o alfabeto", style = MaterialTheme.typography.headlineMedium)
@@ -53,7 +55,7 @@ fun AlphabetScreen(
                         TopicIllustration(LearningTopic.LETTERS)
                         Text(card.word, style = MaterialTheme.typography.headlineMedium)
                     }
-                    SpeechControls(
+                    if (current) SpeechControls(
                         textToRead = "Letra ${card.letter}. ${card.word}. Qual é a primeira letra de ${card.word}?",
                         feedbackText = if (current && state.selected != null)
                             if (state.correct == true) "Resposta correta. Muito bem! Acertaste!"
@@ -88,7 +90,7 @@ fun AlphabetScreen(
                         }
                         state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                     }
-                    GameNavigation(
+                    if (current) GameNavigation(
                         onPrevious = onPrevious, onNext = onNext,
                         nextLabel = if (visibleIndex == lastLetter) "Recomeçar" else "Próxima letra"
                     )
