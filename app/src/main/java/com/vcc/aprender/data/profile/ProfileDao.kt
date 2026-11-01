@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,4 +21,7 @@ interface ProfileDao {
 
     @Delete
     suspend fun delete(profile: ChildProfile)
+
+    @Query("DELETE FROM child_profiles")
+    suspend fun deleteAllProfiles()
 }
