@@ -25,6 +25,7 @@ import com.vcc.aprender.data.progress.LearningProgress
 import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.domain.progress.CompetencyReportCalculator
 import com.vcc.aprender.domain.progress.ProgressSummaryCalculator
+import com.vcc.aprender.ui.components.BrandSymbol
 import com.vcc.aprender.ui.components.FamilyHeader
 import com.vcc.aprender.ui.components.FamilyProgress
 import com.vcc.aprender.ui.components.FamilySection
@@ -52,7 +53,7 @@ fun ProgressScreen(
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    FamilyHeader("📊", "Evolução da criança",
+                    FamilyHeader(BrandSymbol.Chart, "Evolução da criança",
                         "Descobre tudo o que já aprendeste!", AprenderColors.Lavender)
                     Button(onClick = onBack, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                         Text("Voltar ao início")
@@ -60,7 +61,7 @@ fun ProgressScreen(
                 }
             }
             item(span = { GridItemSpan(maxLineSpan) }) {
-                FamilySection("Resumo geral", "🏆", AprenderColors.Sunshine) {
+                FamilySection("Resumo geral", BrandSymbol.Trophy, AprenderColors.Sunshine) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Temas praticados: ${summary.activeTopics}")
                         Text("Atividades concluídas: ${summary.completedActivities}")
@@ -85,7 +86,7 @@ fun ProgressScreen(
             }
             items(report.competencies, key = { "competency-${it.topicId}" }) { item ->
                 val name = LearningTopic.entries.firstOrNull { it.name == item.topicId }?.title ?: item.topicId
-                FamilySection(name, "🎯", AprenderColors.Mint) {
+                FamilySection(name, BrandSymbol.Target, AprenderColors.Mint) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("Respostas certas: ${item.correct} de ${item.total}")
                         Text("Taxa de acerto: ${item.accuracy}%")
@@ -104,7 +105,7 @@ fun ProgressScreen(
             items(report.dailyHistory, key = { "day-${it.dayStartUtc}" }) { day ->
                 val date = DateFormat.getDateInstance(DateFormat.MEDIUM, portuguese)
                     .format(Date(day.dayStartUtc))
-                FamilySection(date, "📅", AprenderColors.Sky) {
+                FamilySection(date, BrandSymbol.Calendar, AprenderColors.Sky) {
                     Text("${day.correct} respostas certas em ${day.total}")
                 }
             }
@@ -116,7 +117,7 @@ fun ProgressScreen(
                     ?: answer.topicId
                 FamilySection(
                     name,
-                    if (answer.correct) "⭐" else "💪",
+                    if (answer.correct) BrandSymbol.Star else BrandSymbol.Encourage,
                     if (answer.correct) AprenderColors.Mint else AprenderColors.Coral
                 ) {
                     Text("${if (answer.correct) "Certa" else "Incorreta"} · " +
@@ -132,7 +133,7 @@ fun ProgressScreen(
                 items(summary.topics, key = { "topic-${it.topicId}" }) { topic ->
                     val name = LearningTopic.entries.firstOrNull { it.name == topic.topicId }?.title
                         ?: topic.topicId
-                    FamilySection(name, "📚", AprenderColors.Sky) {
+                    FamilySection(name, BrandSymbol.Book, AprenderColors.Sky) {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text("Respostas certas: ${topic.correctAnswers} de ${topic.totalAnswers}")
                             Text("Taxa de acerto: ${topic.accuracyPercent}%")

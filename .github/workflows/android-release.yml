@@ -28,12 +28,35 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+      - name: Prepare release keystore
+        env:
+          VCC_RELEASE_KEYSTORE_BASE64: ${{ secrets.VCC_RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          python3 - <<'PY'
+          import base64
+          import os
+          from pathlib import Path
+          encoded = os.environ.get("VCC_RELEASE_KEYSTORE_BASE64", "")
+          if not encoded:
+              raise SystemExit("Configura o secret VCC_RELEASE_KEYSTORE_BASE64 com o keystore VCCProjects.jks.")
+          target = Path(os.environ["RUNNER_TEMP"]) / "VCCProjects.jks"
+          target.write_bytes(base64.b64decode("".join(encoded.split()), validate=True))
+          target.chmod(0o600)
+          PY
       - name: Build release
         env:
           APP_VERSION: ${{ inputs.app_version }}
           BUILD_NUMBER: ${{ github.run_number }}
+          VCC_RELEASE_STORE_FILE: ${{ runner.temp }}/VCCProjects.jks
+          VCC_RELEASE_STORE_PASSWORD: ${{ secrets.VCC_RELEASE_STORE_PASSWORD }}
+          VCC_RELEASE_KEY_ALIAS: ${{ secrets.VCC_RELEASE_KEY_ALIAS || 'vccprojects' }}
+          VCC_RELEASE_KEY_PASSWORD: ${{ secrets.VCC_RELEASE_KEY_PASSWORD }}
         run: |
           gradle :app:testDebugUnitTest :app:assembleRelease --no-daemon --max-workers=2 --no-parallel -PappVersion="$APP_VERSION" -PbuildNumber="$BUILD_NUMBER"
+      - name: Verify APK signature
+        run: |
+          apksigner=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -n 1)
+          "$apksigner" verify --verbose app/build/outputs/apk/release/*.apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:

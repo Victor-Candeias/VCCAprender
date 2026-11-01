@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Normal post-splash activity theme; Compose Material3 provides the screen UI. -->
-    <style name="Theme.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
+    <style name="Base.Theme.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
         <item name="android:windowActionModeOverlay">true</item>
         <item name="android:statusBarColor">@color/brand_blue</item>
-        <item name="android:navigationBarColor">@color/brand_cream</item>
+        <item name="android:navigationBarColor">@color/brand_blue</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowBackground">@color/brand_cream</item>
     </style>
+    <style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender" />
 
     <!-- AndroidX backports the platform splash behavior to Android 8–11. -->
     <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen">

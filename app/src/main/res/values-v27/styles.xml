@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark navigation icons became available in Android 8.1. Android 8.0
+         keeps white navigation icons on the blue background from the base theme. -->
+    <style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender">
+        <item name="android:navigationBarColor">@color/brand_cream</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
