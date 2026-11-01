@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vcc.aprender.app-mergeReleaseResources-53:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.vcc.aprender.app-mergeReleaseResources-54:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "/home/codespace/.gradle/caches/8.9/transforms/1b5f938fdcf7511299cff6e006cace3a/transformed/ui-release/res/values-en-rIN/values-en-rIN.xml",

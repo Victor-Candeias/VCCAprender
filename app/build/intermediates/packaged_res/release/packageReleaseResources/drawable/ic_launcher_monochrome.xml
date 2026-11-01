@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Opaque monochrome silhouette, recolored automatically by Android 13+ themed icons. -->
+    <path android:fillColor="#FF000000"
+        android:pathData="M54,16 L59,26 L70,28 L62,36 L64,47 L54,41 L44,47 L46,36 L38,28 L49,26 Z"/>
+    <path android:fillColor="#FF000000"
+        android:pathData="M23,49 C35,44 43,45 54,50 C65,45 73,44 85,49 L85,80 C74,76 66,77 54,83 C42,77 34,76 23,80 Z"/>
+</vector>

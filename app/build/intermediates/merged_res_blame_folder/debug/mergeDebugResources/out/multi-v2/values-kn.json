@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vcc.aprender.app-mergeDebugResources-57:/values-kn/values-kn.xml",
+            "outputFile": "com.vcc.aprender.app-mergeDebugResources-58:/values-kn/values-kn.xml",
             "map": [
                 {
                     "source": "/home/codespace/.gradle/caches/8.9/transforms/af19c7e1dff59c494b00b46e212ebbae/transformed/core-1.13.1/res/values-kn/values-kn.xml",

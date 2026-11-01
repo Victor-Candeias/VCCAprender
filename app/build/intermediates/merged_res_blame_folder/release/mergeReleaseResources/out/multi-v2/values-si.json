@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vcc.aprender.app-mergeReleaseResources-53:/values-si/values-si.xml",
+            "outputFile": "com.vcc.aprender.app-mergeReleaseResources-54:/values-si/values-si.xml",
             "map": [
                 {
                     "source": "/home/codespace/.gradle/caches/8.9/transforms/4c51139b68c6225026a1259c84c57a1a/transformed/foundation-release/res/values-si/values-si.xml",

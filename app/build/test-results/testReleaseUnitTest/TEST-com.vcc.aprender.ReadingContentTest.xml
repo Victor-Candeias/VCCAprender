@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ReadingContentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:04:07" hostname="codespaces-82de8f" time="0.001">
+<testsuite name="com.vcc.aprender.ReadingContentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:10:09" hostname="codespaces-82de8f" time="0.0">
   <properties/>
-  <testcase name="readingWordsAreUnique" classname="com.vcc.aprender.ReadingContentTest" time="0.001"/>
+  <testcase name="readingWordsAreUnique" classname="com.vcc.aprender.ReadingContentTest" time="0.0"/>
   <testcase name="readingHasTwentyValidQuestions" classname="com.vcc.aprender.ReadingContentTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
