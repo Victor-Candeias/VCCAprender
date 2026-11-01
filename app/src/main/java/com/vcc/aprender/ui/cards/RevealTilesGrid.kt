@@ -62,15 +62,15 @@ fun RevealTilesGrid(
                                         .onFocusChanged { hasFocus = it.hasFocus }
                                         .border(if (hasFocus) 3.dp else 1.dp,
                                             if (hasFocus) AprenderColors.Blue else AprenderColors.Navy)
+                                        .semantics {
+                                            contentDescription = "Revelar quadrado ${index + 1} de ${tiles.total}"
+                                            stateDescription = "Por revelar"
+                                        }
                                         .clickable(
                                             enabled = enabled,
                                             role = Role.Button,
                                             onClick = { onReveal(index) }
                                         )
-                                        .semantics {
-                                            contentDescription = "Revelar quadrado ${index + 1} de ${tiles.total}"
-                                            stateDescription = "Por revelar"
-                                        }
                                     else Modifier.clearAndSetSemantics { }
                                 ),
                             contentAlignment = Alignment.Center
