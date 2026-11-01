@@ -78,19 +78,14 @@ fun DiscoverCardsScreen(
         }
         state.card.options.forEachIndexed { index, option ->
             val letter = ('A' + index)
-            Button(
-                modifier = Modifier.fillMaxWidth().semantics {
-                    contentDescription = "Opção $letter: ${option.label}"
-                },
+            GameAnswerButton(
+                text = listOfNotNull(option.illustration, option.label).joinToString("  "),
+                prefix = "$letter)",
                 onClick = { onChoose(option.id) },
-                enabled = state.answer == null
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Text("$letter)")
-                    option.illustration?.let { Text(it) }
-                    Text(option.label)
-                }
-            }
+                enabled = state.answer == null,
+                selected = state.answer?.selectedOptionId == option.id,
+                correct = state.answer != null && state.card.correctOptionId == option.id
+            )
         }
         state.answer?.let { answer ->
             AnswerFeedbackPanel(AnswerFeedbackFactory.from(state.card, answer))
