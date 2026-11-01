@@ -27,6 +27,7 @@ fun ParentalSettingsScreen(
     settings: ParentalSettings,
     onAudioChanged: (Boolean) -> Unit,
     onSpeechRateChanged: (Float) -> Unit,
+    onAnimationsChanged: (Boolean) -> Unit = {},
     onBack: () -> Unit
 ) {
     Column(
@@ -50,6 +51,15 @@ fun ParentalSettingsScreen(
                 steps = 9,
                 enabled = settings.audioEnabled
             )
+        }
+        FamilySection("Movimento e animações", "⭐", AprenderColors.Lavender) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+                Text(if (settings.animationsEnabled) "Animações ativadas" else "Animações desativadas",
+                    style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                Switch(checked = settings.animationsEnabled, onCheckedChange = onAnimationsChanged)
+            }
+            Text("Desativa os movimentos para uma experiência mais tranquila. As preferências de acessibilidade do Android também são respeitadas.")
         }
         FamilySection("Privacidade", "🔒", AprenderColors.Sunshine) {
             Text("As preferências ficam guardadas neste dispositivo. Não é necessária ligação à Internet.")
