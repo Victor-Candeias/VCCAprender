@@ -15,6 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 
 /**
@@ -53,15 +56,18 @@ fun AdaptiveTwoPaneScreen(
         if (twoPanes) {
             Row(
                 modifier = Modifier.widthIn(max = 1200.dp).fillMaxWidth().fillMaxHeight().padding(20.dp)
-                    .testTag("va030-two-pane"),
+                    .testTag("va030-two-pane")
+                    .semantics { isTraversalGroup = true },
                 horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Column(
-                    modifier = Modifier.weight(1f).fillMaxHeight().verticalScroll(rememberScrollState()),
+                    modifier = Modifier.weight(1f).fillMaxHeight().verticalScroll(rememberScrollState())
+                        .semantics { isTraversalGroup = true; traversalIndex = 0f },
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) { primary() }
                 Column(
-                    modifier = Modifier.weight(1f).fillMaxHeight().verticalScroll(rememberScrollState()),
+                    modifier = Modifier.weight(1f).fillMaxHeight().verticalScroll(rememberScrollState())
+                        .semantics { isTraversalGroup = true; traversalIndex = 1f },
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) { secondary() }
             }
@@ -69,7 +75,8 @@ fun AdaptiveTwoPaneScreen(
             Column(
                 modifier = Modifier.widthIn(max = 680.dp).fillMaxWidth().fillMaxHeight()
                     .verticalScroll(rememberScrollState()).padding(20.dp)
-                    .testTag("va030-stacked"),
+                    .testTag("va030-stacked")
+                    .semantics { isTraversalGroup = true },
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
