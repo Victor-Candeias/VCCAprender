@@ -3,6 +3,8 @@ package com.vcc.aprender.ui.profiles
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -48,8 +50,9 @@ fun ProfileScreen(
     var pendingDelete by remember { mutableStateOf<ChildProfile?>(null) }
     var confirmDeleteAll by remember { mutableStateOf(false) }
 
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
+        modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { FamilyHeader("👧 🧒", "Quem vai aprender?", "Escolhe o teu perfil para começar a aventura!", AprenderColors.Lavender) }
@@ -77,6 +80,7 @@ fun ProfileScreen(
         if (profiles.isNotEmpty()) {
             item { TextButton(onClick = { confirmDeleteAll = true }) { Text("Eliminar todos os perfis e resultados") } }
         }
+    }
     }
 
     if (confirmDeleteAll) {
