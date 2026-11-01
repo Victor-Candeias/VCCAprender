@@ -1,9 +1,21 @@
+import com.android.build.api.variant.impl.VariantOutputImpl
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.devtools.ksp")
 }
+val appVersion = providers.gradleProperty("appVersion").orElse("0.1.0").get()
+val buildNumber = providers.gradleProperty("buildNumber")
+    .orElse(providers.environmentVariable("GITHUB_RUN_NUMBER"))
+    .orElse("1").get().toInt()
+require(buildNumber in 1..2100000000) { "buildNumber tem de estar entre 1 e 2100000000." }
+require(Regex("[0-9]+\\.[0-9]+\\.[0-9]+").matches(appVersion)) {
+    "appVersion deve usar o formato MAJOR.MINOR.PATCH."
+}
+
+
 android {
     namespace = "com.vcc.aprender"
     compileSdk = 35
@@ -11,8 +23,8 @@ android {
         applicationId = "com.vcc.aprender"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = buildNumber
+        versionName = appVersion
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -44,4 +56,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+androidComponents {
+    onVariants(selector().withBuildType("release")) { variant ->
+        variant.outputs.forEach { output ->
+            (output as VariantOutputImpl).outputFileName =
+                "VCCAprender-v${appVersion}-build${buildNumber}-release.apk"
+        }
+    }
 }
