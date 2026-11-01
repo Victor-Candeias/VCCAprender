@@ -5,6 +5,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.vcc.aprender.data.cards.CustomCardRepository
 import com.vcc.aprender.data.settings.ParentalSettingsRepository
 import com.vcc.aprender.data.profile.ProfileDatabase
 import com.vcc.aprender.data.profile.ProfileRepository
@@ -32,13 +33,29 @@ private val MIGRATION_1_2 = object : Migration(1, 2) {
     }
 }
 
+private val MIGRATION_2_3 = object : Migration(2, 3) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("""CREATE TABLE IF NOT EXISTS custom_cards (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            topic TEXT NOT NULL,
+            difficulty TEXT NOT NULL,
+            question TEXT NOT NULL,
+            firstOption TEXT NOT NULL,
+            secondOption TEXT NOT NULL,
+            thirdOption TEXT NOT NULL,
+            correctIndex INTEGER NOT NULL
+        )""")
+    }
+}
+
 class AppContainer(context: Context) {
     private val learningRepository: LearningRepository = OfflineLearningRepository()
     val getLearningTopics = GetLearningTopicsUseCase(learningRepository)
     val parentalSettingsRepository = ParentalSettingsRepository(context)
     private val database = Room.databaseBuilder(
         context.applicationContext, ProfileDatabase::class.java, "vcc_profiles.db"
-    ).addMigrations(MIGRATION_1_2).build()
+    ).addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
     val profileRepository = ProfileRepository(database.profileDao(), context.applicationContext.profileDataStore)
     val progressRepository = ProgressRepository(database)
+    val customCardRepository = CustomCardRepository(database.customCardDao())
 }
