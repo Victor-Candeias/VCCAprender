@@ -61,13 +61,13 @@ fun ProfileScreen(
             FamilySection(profile.name, profile.avatar, AprenderColors.Sky) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("${profile.age} anos", style = MaterialTheme.typography.bodyLarge)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = { onSelect(profile.id) }) { Text("Entrar") }
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = { onSelect(profile.id) }, modifier = Modifier.fillMaxWidth()) { Text("Entrar") }
                         OutlinedButton(onClick = {
                             id = profile.id; name = profile.name
                             age = profile.age; avatar = profile.avatar; editing = true
-                        }) { Text("Editar") }
-                        TextButton(onClick = { pendingDelete = profile }) { Text("Eliminar") }
+                        }, modifier = Modifier.fillMaxWidth()) { Text("Editar") }
+                        TextButton(onClick = { pendingDelete = profile }, modifier = Modifier.fillMaxWidth()) { Text("Eliminar") }
                     }
                 }
             }
