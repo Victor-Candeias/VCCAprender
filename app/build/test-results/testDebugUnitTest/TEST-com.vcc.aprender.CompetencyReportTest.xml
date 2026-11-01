@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.CompetencyReportTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:40:45" hostname="codespaces-82de8f" time="0.021">
+<testsuite name="com.vcc.aprender.CompetencyReportTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:46:25" hostname="codespaces-82de8f" time="0.015">
   <properties/>
-  <testcase name="groupsByCompetencyAndDay" classname="com.vcc.aprender.CompetencyReportTest" time="0.013"/>
-  <testcase name="recentHistoryIsLimitedToThirty" classname="com.vcc.aprender.CompetencyReportTest" time="0.006"/>
+  <testcase name="groupsByCompetencyAndDay" classname="com.vcc.aprender.CompetencyReportTest" time="0.009"/>
+  <testcase name="recentHistoryIsLimitedToThirty" classname="com.vcc.aprender.CompetencyReportTest" time="0.002"/>
   <testcase name="emptyHistoryProducesEmptyReport" classname="com.vcc.aprender.CompetencyReportTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
