@@ -8,6 +8,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.vcc.aprender.data.settings.ParentalSettings
+import com.vcc.aprender.ui.components.GameMotionProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.LaunchedEffect
 import com.vcc.aprender.ui.profiles.ProfileScreen
@@ -67,6 +69,10 @@ private const val CARDS_FILTERED = "discover-cards/{topic}/{level}"
 @Composable
 fun AprenderNavHost(container: AppContainer) {
     val navController = rememberNavController()
+    // Delay animations until DataStore has emitted the saved preference.
+    val motionSettings by container.parentalSettingsRepository.settings.collectAsStateWithLifecycle(
+        initialValue = ParentalSettings(animationsEnabled = false)
+    )
     val profileModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(container.profileRepository))
     val profiles by profileModel.profiles.collectAsStateWithLifecycle()
     val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
@@ -90,6 +96,7 @@ fun AprenderNavHost(container: AppContainer) {
         }
     }
 
+    GameMotionProvider(parentalEnabled = motionSettings.animationsEnabled) {
     NavHost(navController = navController, startDestination = PROFILES) {
         composable(PROFILES) {
             ProfileScreen(
@@ -246,6 +253,7 @@ fun AprenderNavHost(container: AppContainer) {
                 settings = settings,
                 onAudioChanged = model::setAudioEnabled,
                 onSpeechRateChanged = model::setSpeechRate,
+                onAnimationsChanged = model::setAnimationsEnabled,
                 onBack = { navController.popBackStack() }
             )
         }
@@ -278,6 +286,7 @@ fun AprenderNavHost(container: AppContainer) {
                 TopicScreen(topic = topic, onBack = { navController.popBackStack() })
             }
         }
+    }
     }
 }
 
