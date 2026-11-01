@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +27,8 @@ fun RevealTilesGrid(
     enabled: Boolean,
     onReveal: (Int) -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    // Avoid oversized square tile grids inside tablet panes; retain the same touch targets.
+    Box(modifier = Modifier.widthIn(max = 360.dp).fillMaxWidth(), contentAlignment = Alignment.Center) {
         Text(
             illustration,
             modifier = Modifier.fillMaxWidth().padding(18.dp),

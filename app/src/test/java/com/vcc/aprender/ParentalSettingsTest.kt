@@ -9,10 +9,17 @@ class ParentalSettingsTest {
         val settings = ParentalSettings()
         assertTrue(settings.audioEnabled)
         assertEquals(0.85f, settings.speechRate, 0.001f)
+        assertTrue(settings.animationsEnabled)
     }
 
     @Test fun audioCanBeDisabled() {
         assertFalse(ParentalSettings(audioEnabled = false).audioEnabled)
+    }
+
+    @Test fun animationsCanBeDisabledWithoutAffectingAudio() {
+        val settings = ParentalSettings(animationsEnabled = false)
+        assertFalse(settings.animationsEnabled)
+        assertTrue(settings.audioEnabled)
     }
 
     @Test(expected = IllegalArgumentException::class)

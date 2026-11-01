@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -18,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.audio.SpeechControls
+import com.vcc.aprender.ui.components.AdaptiveTwoPaneScreen
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameCompletionBanner
 import com.vcc.aprender.ui.components.GameFeedback
@@ -36,38 +33,37 @@ fun ActivityScreen(
 ) {
     val lastQuestion = state.questions.lastIndex
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-        Column(
-            modifier = Modifier.widthIn(max = 720.dp).fillMaxWidth()
-                .verticalScroll(rememberScrollState()).padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
-            Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
-            GameProgress(state.index + 1, state.questions.size)
-            GameQuestionTransition(index = state.index, modifier = Modifier.fillMaxWidth()) { visibleIndex ->
-                val question = state.questions[visibleIndex]
-                val isCurrent = visibleIndex == state.index
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    TopicIllustration(state.topic)
-                    Text(question.prompt, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
-                    SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
-                    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        question.options.forEach { option ->
-                            GameAnswerButton(
-                                text = option,
-                                onClick = { onAnswer(option) },
-                                enabled = isCurrent && state.answer == null,
-                                selected = isCurrent && state.answer == option,
-                                correct = isCurrent && state.answer != null && option == question.correctAnswer
-                            )
-                        }
+        GameQuestionTransition(target = state.index, modifier = Modifier.fillMaxSize()) { visibleIndex ->
+            val question = state.questions[visibleIndex]
+            val current = visibleIndex == state.index
+            AdaptiveTwoPaneScreen(
+                primary = {
+                    OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
+                    Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
+                    GameProgress(visibleIndex + 1, state.questions.size)
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        TopicIllustration(state.topic)
+                        Text(question.prompt, style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center)
                     }
-                    if (isCurrent) {
+                    SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
+                },
+                secondary = {
+                    Text("Escolhe a tua resposta", style = MaterialTheme.typography.titleMedium)
+                    question.options.forEach { option ->
+                        GameAnswerButton(
+                            text = option,
+                            onClick = { onAnswer(option) },
+                            enabled = current && state.answer == null,
+                            selected = current && state.answer == option,
+                            correct = current && state.answer != null && option == question.correctAnswer
+                        )
+                    }
+                    if (current) {
                         GameFeedback(
                             message = if (state.answer == null) null
                                 else if (state.correct == true) "Muito bem! Acertaste!"
@@ -77,13 +73,13 @@ fun ActivityScreen(
                         if (state.answer != null && visibleIndex == lastQuestion) {
                             GameCompletionBanner()
                         }
+                        state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                     }
+                    GameNavigation(
+                        onPrevious = onPrevious, onNext = onNext,
+                        nextLabel = if (visibleIndex == lastQuestion) "Recomeçar" else "Próximo"
+                    )
                 }
-            }
-            state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-            GameNavigation(
-                onPrevious = onPrevious, onNext = onNext,
-                nextLabel = if (state.index == lastQuestion) "Recomeçar" else "Próximo"
             )
         }
     }
