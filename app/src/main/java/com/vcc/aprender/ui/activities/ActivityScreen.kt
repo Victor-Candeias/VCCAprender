@@ -45,7 +45,7 @@ fun ActivityScreen(
             OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
             Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
             GameProgress(state.index + 1, state.questions.size)
-            GameQuestionTransition(index = state.index, modifier = Modifier.fillMaxWidth()) { visibleIndex ->
+            GameQuestionTransition(target = state.index, modifier = Modifier.fillMaxWidth()) { visibleIndex ->
                 val question = state.questions[visibleIndex]
                 val isCurrent = visibleIndex == state.index
                 Column(
