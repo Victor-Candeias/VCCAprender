@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ParentalSettingsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:10:07" hostname="codespaces-82de8f" time="0.008">
+<testsuite name="com.vcc.aprender.ParentalSettingsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:15:11" hostname="codespaces-82de8f" time="0.006">
   <properties/>
-  <testcase name="rateBelowMinimumIsRejected" classname="com.vcc.aprender.ParentalSettingsTest" time="0.004"/>
+  <testcase name="rateBelowMinimumIsRejected" classname="com.vcc.aprender.ParentalSettingsTest" time="0.0"/>
   <testcase name="defaultSettingsEnableAudioAtChildFriendlyRate" classname="com.vcc.aprender.ParentalSettingsTest" time="0.0"/>
-  <testcase name="audioCanBeDisabled" classname="com.vcc.aprender.ParentalSettingsTest" time="0.0"/>
-  <testcase name="rateAboveMaximumIsRejected" classname="com.vcc.aprender.ParentalSettingsTest" time="0.004"/>
+  <testcase name="audioCanBeDisabled" classname="com.vcc.aprender.ParentalSettingsTest" time="0.005"/>
+  <testcase name="rateAboveMaximumIsRejected" classname="com.vcc.aprender.ParentalSettingsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
