@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Shared Android launcher / splash branding. Compose theme remains the UI theme. -->
+    <color name="brand_blue">#2156B5</color>
+    <color name="brand_cream">#FFFBF2</color>
+    <color name="brand_star">#FFC44D</color>
+</resources>
