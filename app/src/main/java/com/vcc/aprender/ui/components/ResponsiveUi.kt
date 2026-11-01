@@ -52,7 +52,7 @@ fun AdaptiveTwoPaneScreen(
         val twoPanes = ResponsiveRules.useTwoPanes(maxWidth.value, maxHeight.value, minimumWidthDp)
         if (twoPanes) {
             Row(
-                modifier = Modifier.fillMaxSize().widthIn(max = 1200.dp).padding(20.dp)
+                modifier = Modifier.widthIn(max = 1200.dp).fillMaxWidth().fillMaxHeight().padding(20.dp)
                     .testTag("va030-two-pane"),
                 horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
