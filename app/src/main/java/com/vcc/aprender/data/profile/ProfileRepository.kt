@@ -28,6 +28,7 @@ class ProfileRepository(
         preferences.edit { it[selectedKey] = id }
     }
 
+    /** Deletes the child and all related progress/history through Room CASCADE. */
     suspend fun delete(profile: ChildProfile) {
         dao.delete(profile)
         preferences.edit { if (it[selectedKey] == profile.id) it.remove(selectedKey) }
