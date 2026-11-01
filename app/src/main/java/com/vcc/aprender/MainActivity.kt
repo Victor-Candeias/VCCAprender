@@ -3,6 +3,7 @@ package com.vcc.aprender
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.ui.navigation.AprenderNavHost
 import com.vcc.aprender.ui.theme.AprenderTheme
@@ -11,6 +12,8 @@ class MainActivity : ComponentActivity() {
     private val container by lazy { AppContainer(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Must run before super.onCreate; splash exits naturally on first Compose draw.
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             AprenderTheme {
