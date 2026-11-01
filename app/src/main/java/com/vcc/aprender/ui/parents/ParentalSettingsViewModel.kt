@@ -14,6 +14,10 @@ class ParentalSettingsViewModel(private val repository: ParentalSettingsReposito
         viewModelScope, SharingStarted.WhileSubscribed(5_000), ParentalSettings()
     )
 
+    fun setAnimationsEnabled(enabled: Boolean) {
+        viewModelScope.launch { repository.setAnimationsEnabled(enabled) }
+    }
+
     fun setAudioEnabled(enabled: Boolean) {
         viewModelScope.launch { repository.setAudioEnabled(enabled) }
     }
