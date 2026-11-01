@@ -125,22 +125,22 @@ fun AprenderNavHost(container: AppContainer) {
                         .padding(horizontal = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PROFILES) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(PROFILES) }) {
                         Text("Mudar de perfil")
                     }
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PROGRESS) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(PROGRESS) }) {
                         Text("Ver progresso")
                     }
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(PARENTS) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(PARENTS) }) {
                         Text("Área parental e preferências")
                     }
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(READING) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(READING) }) {
                         Text("Leitura e reconhecimento de palavras")
                     }
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(DECKS) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(DECKS) }) {
                         Text("Descobre a Resposta A/B/C")
                     }
-                    androidx.compose.material3.TextButton(onClick = { navController.navigate(EDITOR) }) {
+                    androidx.compose.material3.TextButton(modifier = Modifier.heightIn(min = 48.dp), onClick = { navController.navigate(EDITOR) }) {
                         Text("Editor de atividades")
                     }
                 }
