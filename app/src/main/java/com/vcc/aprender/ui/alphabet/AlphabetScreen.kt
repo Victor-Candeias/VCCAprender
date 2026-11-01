@@ -17,6 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.audio.SpeechControls
+import com.vcc.aprender.ui.components.GameProgress
+import com.vcc.aprender.ui.components.GameAnswerButton
+import com.vcc.aprender.ui.components.GameFeedback
+import com.vcc.aprender.ui.components.GameNavigation
+import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
 fun AlphabetScreen(
@@ -33,26 +38,28 @@ fun AlphabetScreen(
     ) {
         OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
         Text("Descobre o alfabeto", style = MaterialTheme.typography.headlineMedium)
-        Text("Letra ${state.index + 1} de 26")
+        GameProgress(state.index + 1, 26, label = "Letra")
         Text("${state.card.letter}  ${state.card.letter.lowercaseChar()}", style = MaterialTheme.typography.displayLarge)
         Text(state.card.emoji, style = MaterialTheme.typography.displayLarge)
         Text(state.card.word, style = MaterialTheme.typography.headlineMedium)
         SpeechControls("Letra ${state.card.letter}. ${state.card.word}. Qual é a primeira letra de ${state.card.word}?")
         Text("Qual é a primeira letra de ${state.card.word}?", textAlign = TextAlign.Center)
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             state.options.forEach { option ->
-                Button(onClick = { onAnswer(option) }, enabled = state.selected == null) {
-                    Text(option.toString())
-                }
+                GameAnswerButton(
+                    text = option.toString(),
+                    onClick = { onAnswer(option) },
+                    enabled = state.selected == null,
+                    selected = state.selected == option,
+                    correct = state.selected != null && option == state.card.letter
+                )
             }
         }
-        if (state.selected != null) {
-            Text(if (state.correct == true) "Muito bem! Acertaste! ⭐" else "Boa tentativa! A resposta é ${state.card.letter}.")
-        }
+        GameFeedback(
+            message = if (state.selected == null) null else if (state.correct == true) "Muito bem! Acertaste!" else "Boa tentativa! A resposta é ${state.card.letter}.",
+            positive = state.correct == true
+        )
         if (state.error != null) Text(state.error, color = MaterialTheme.colorScheme.error)
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            OutlinedButton(onClick = onPrevious) { Text("Anterior") }
-            Button(onClick = onNext) { Text("Próxima letra") }
-        }
+        GameNavigation(onPrevious = onPrevious, onNext = onNext, nextLabel = "Próxima letra")
     }
 }

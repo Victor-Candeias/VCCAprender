@@ -17,6 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.audio.SpeechControls
+import com.vcc.aprender.ui.components.GameProgress
+import com.vcc.aprender.ui.components.GameAnswerButton
+import com.vcc.aprender.ui.components.GameFeedback
+import com.vcc.aprender.ui.components.GameNavigation
 
 @Composable
 fun ActivityScreen(
@@ -34,24 +38,26 @@ fun ActivityScreen(
     ) {
         OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
         Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
-        Text("Exercício ${state.index + 1} de ${state.questions.size}")
+        GameProgress(state.index + 1, state.questions.size)
         Text(question.illustration, style = MaterialTheme.typography.displayLarge, textAlign = TextAlign.Center)
         Text(question.prompt, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
         SpeechControls(question.prompt + ". " + question.options.joinToString(". "))
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             question.options.forEach { option ->
-                Button(onClick = { onAnswer(option) }, enabled = state.answer == null) {
-                    Text(option)
-                }
+                GameAnswerButton(
+                    text = option,
+                    onClick = { onAnswer(option) },
+                    enabled = state.answer == null,
+                    selected = state.answer == option,
+                    correct = state.answer != null && option == question.correctAnswer
+                )
             }
         }
-        if (state.answer != null) {
-            Text(if (state.correct == true) "Muito bem! ⭐" else "Boa tentativa! A resposta é ${question.correctAnswer}.")
-        }
+        GameFeedback(
+            message = if (state.answer == null) null else if (state.correct == true) "Muito bem! Acertaste!" else "Boa tentativa! A resposta é ${question.correctAnswer}.",
+            positive = state.correct == true
+        )
         state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            OutlinedButton(onClick = onPrevious) { Text("Anterior") }
-            Button(onClick = onNext) { Text("Próximo") }
-        }
+        GameNavigation(onPrevious = onPrevious, onNext = onNext)
     }
 }

@@ -1,5 +1,9 @@
 package com.vcc.aprender.ui.cards
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
+import com.vcc.aprender.ui.theme.AprenderColors
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,9 +23,10 @@ import com.vcc.aprender.domain.cards.AnswerFeedback
 
 @Composable
 fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
-    Card(modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }) {
+    AnimatedVisibility(visible = true) {
+    Card(modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }, shape = RoundedCornerShape(24.dp)) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().background(if (feedback.emoji.contains("🥳")) AprenderColors.Mint else AprenderColors.Sunshine).padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -29,5 +34,6 @@ fun AnswerFeedbackPanel(feedback: AnswerFeedback) {
             Text(feedback.title, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurface)
             Text(feedback.message, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurface)
         }
+    }
     }
 }
