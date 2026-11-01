@@ -50,6 +50,7 @@ class GameMotionUiTest {
             }
         }
         composeRule.onNodeWithText("Boa tentativa!").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Continua a tentar").assertExists()
+        // The pictogram is now decorative; TalkBack receives a readable result label.
+        composeRule.onNodeWithText("Boa tentativa").assertExists()
     }
 }
