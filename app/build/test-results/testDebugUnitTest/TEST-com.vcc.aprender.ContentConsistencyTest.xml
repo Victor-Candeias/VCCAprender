@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ContentConsistencyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:18:40" hostname="codespaces-82de8f" time="0.005">
+<testsuite name="com.vcc.aprender.ContentConsistencyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:20:35" hostname="codespaces-82de8f" time="0.005">
   <properties/>
   <testcase name="eachAvailableTopicHasValidContent" classname="com.vcc.aprender.ContentConsistencyTest" time="0.001"/>
-  <testcase name="alphabetHasAllLettersInOrder" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
-  <testcase name="alphabetChoicesAreDistinctAndContainCorrectLetter" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
-  <testcase name="allCardsHaveUniqueIdsAndValidOptions" classname="com.vcc.aprender.ContentConsistencyTest" time="0.001"/>
+  <testcase name="alphabetHasAllLettersInOrder" classname="com.vcc.aprender.ContentConsistencyTest" time="0.001"/>
+  <testcase name="alphabetChoicesAreDistinctAndContainCorrectLetter" classname="com.vcc.aprender.ContentConsistencyTest" time="0.003"/>
+  <testcase name="allCardsHaveUniqueIdsAndValidOptions" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

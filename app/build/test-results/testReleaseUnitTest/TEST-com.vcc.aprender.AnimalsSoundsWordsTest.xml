@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.AnimalsSoundsWordsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:18:41" hostname="codespaces-82de8f" time="0.005">
+<testsuite name="com.vcc.aprender.AnimalsSoundsWordsTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:20:36" hostname="codespaces-82de8f" time="0.004">
   <properties/>
   <testcase name="allNewTopicsHaveValidOfflineQuestions" classname="com.vcc.aprender.AnimalsSoundsWordsTest" time="0.003"/>
   <testcase name="soundQuestionsDoNotRevealAnswerAsAnimalEmoji" classname="com.vcc.aprender.AnimalsSoundsWordsTest" time="0.0"/>
-  <testcase name="wordsAndAnimalsHaveMultipleExamples" classname="com.vcc.aprender.AnimalsSoundsWordsTest" time="0.001"/>
+  <testcase name="wordsAndAnimalsHaveMultipleExamples" classname="com.vcc.aprender.AnimalsSoundsWordsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
