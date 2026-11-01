@@ -21,6 +21,7 @@ import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameFeedback
 import com.vcc.aprender.ui.components.GameNavigation
+import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
 fun ActivityScreen(
