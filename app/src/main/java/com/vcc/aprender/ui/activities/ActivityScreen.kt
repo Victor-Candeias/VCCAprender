@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.audio.SpeechControls
@@ -37,6 +38,7 @@ fun ActivityScreen(
             val question = state.questions[visibleIndex]
             val current = visibleIndex == state.index
             AdaptiveTwoPaneScreen(
+                modifier = if (current) Modifier else Modifier.clearAndSetSemantics { },
                 primary = {
                     OutlinedButton(onClick = onBack) { Text("Voltar às atividades") }
                     Text(state.topic.title, style = MaterialTheme.typography.headlineMedium)
@@ -50,7 +52,7 @@ fun ActivityScreen(
                         Text(question.prompt, style = MaterialTheme.typography.titleLarge,
                             textAlign = TextAlign.Center)
                     }
-                    SpeechControls(
+                    if (current) SpeechControls(
                         textToRead = question.prompt + ". " + question.options.joinToString(". "),
                         feedbackText = if (current && state.answer != null)
                             if (state.correct == true) "Resposta correta. Muito bem! Acertaste!"
@@ -81,7 +83,7 @@ fun ActivityScreen(
                         }
                         state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                     }
-                    GameNavigation(
+                    if (current) GameNavigation(
                         onPrevious = onPrevious, onNext = onNext,
                         nextLabel = if (visibleIndex == lastQuestion) "Recomeçar" else "Próximo"
                     )
