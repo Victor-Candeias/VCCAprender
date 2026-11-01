@@ -76,7 +76,8 @@ fun GameAnswerButton(
     enabled: Boolean,
     selected: Boolean = false,
     correct: Boolean = false,
-    prefix: String? = null
+    prefix: String? = null,
+    modifier: Modifier = Modifier
 ) {
     val motion = LocalGameAnimationsEnabled.current
     val tint = when {
@@ -105,7 +106,7 @@ fun GameAnswerButton(
     Card(
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp)
+        modifier = modifier.fillMaxWidth().heightIn(min = 64.dp)
             .onFocusChanged { focused = it.hasFocus }
             .border(width = if (focused) 3.dp else if (selected || correct) 2.dp else 0.dp,
                 color = outline, shape = RoundedCornerShape(20.dp))
