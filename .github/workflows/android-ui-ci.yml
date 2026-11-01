@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/VA-030-responsive-tablet-layouts
+      - feature/VA-031-accessibility
   pull_request:
     branches:
       - main
