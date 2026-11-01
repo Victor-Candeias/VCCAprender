@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.DomainValidationTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:30:04" hostname="codespaces-82de8f" time="0.003">
+<testsuite name="com.vcc.aprender.DomainValidationTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:35:29" hostname="codespaces-82de8f" time="0.007">
   <properties/>
-  <testcase name="evaluationRejectsUnknownOption" classname="com.vcc.aprender.DomainValidationTest" time="0.001"/>
+  <testcase name="evaluationRejectsUnknownOption" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <testcase name="evaluationReturnsCardIdAndSelectedOption" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <testcase name="optionRejectsBlankId" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <testcase name="cardRejectsBlankQuestion" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <testcase name="cardRejectsSingleOption" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <testcase name="cardRejectsMoreThanFourOptions" classname="com.vcc.aprender.DomainValidationTest" time="0.001"/>
   <testcase name="cardRejectsDuplicateOptionIds" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
-  <testcase name="optionRejectsBlankLabel" classname="com.vcc.aprender.DomainValidationTest" time="0.001"/>
+  <testcase name="optionRejectsBlankLabel" classname="com.vcc.aprender.DomainValidationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

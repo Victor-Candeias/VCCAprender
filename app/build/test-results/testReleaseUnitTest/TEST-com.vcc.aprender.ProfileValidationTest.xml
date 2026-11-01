@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ProfileValidationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:30:06" hostname="codespaces-82de8f" time="0.006">
+<testsuite name="com.vcc.aprender.ProfileValidationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:35:36" hostname="codespaces-82de8f" time="0.003">
   <properties/>
-  <testcase name="ageLimits" classname="com.vcc.aprender.ProfileValidationTest" time="0.006"/>
+  <testcase name="ageLimits" classname="com.vcc.aprender.ProfileValidationTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
