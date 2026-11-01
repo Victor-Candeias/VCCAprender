@@ -71,8 +71,6 @@ fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningT
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Text("O que vamos descobrir hoje?", style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.semantics { heading() }.padding(top = 10.dp, bottom = 4.dp))
-                // marker for heading
-                    modifier = Modifier.padding(top = 10.dp, bottom = 4.dp))
             }
             when (state) {
                 HomeUiState.Loading -> item(span = { GridItemSpan(maxLineSpan) }) {
