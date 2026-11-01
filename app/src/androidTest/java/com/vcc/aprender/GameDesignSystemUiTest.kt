@@ -1,6 +1,8 @@
 package com.vcc.aprender
 
 import androidx.compose.ui.test.assertExists
+import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -25,7 +27,7 @@ class GameDesignSystemUiTest {
         composeRule.setContent {
             GameAnswerButton(text = "Gato", prefix = "A)", enabled = true, onClick = { clicks++ })
         }
-        composeRule.onNodeWithText("Gato").performClick()
+        composeRule.onNodeWithContentDescription("A) Gato").performClick()
         composeRule.runOnIdle { assertEquals(1, clicks) }
     }
 
@@ -34,7 +36,7 @@ class GameDesignSystemUiTest {
         composeRule.setContent {
             GameAnswerButton(text = "Cão", enabled = false, onClick = { clicks++ })
         }
-        composeRule.onNodeWithText("Cão").assertExists()
+        composeRule.onNodeWithContentDescription("Cão").assertIsNotEnabled()
         composeRule.runOnIdle { assertEquals(0, clicks) }
     }
 
