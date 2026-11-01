@@ -97,7 +97,8 @@ fun AprenderNavHost(container: AppContainer) {
                 onClearError = profileModel::clearError,
                 onSave = profileModel::save,
                 onSelect = profileModel::select,
-                onDelete = profileModel::delete
+                onDelete = profileModel::delete,
+                onDeleteAll = profileModel::deleteAll
             )
         }
         composable(HOME) {
