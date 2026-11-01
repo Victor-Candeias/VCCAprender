@@ -12,7 +12,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,17 +29,25 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.theme.AprenderColors
+import com.vcc.aprender.ui.accessibility.AnswerAccessibility
 
 @Composable
 fun GameProgress(current: Int, total: Int, label: String = "Exercício") {
@@ -49,12 +59,10 @@ fun GameProgress(current: Int, total: Int, label: String = "Exercício") {
         label = "Progresso do jogo"
     )
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-        Text("$label $current de $total", style = MaterialTheme.typography.titleMedium)
+        Text("$label $current de $total", modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, style = MaterialTheme.typography.titleMedium)
         LinearProgressIndicator(
             progress = { animated },
-            modifier = Modifier.fillMaxWidth().semantics {
-                contentDescription = "$label $current de $total"
-            },
+            modifier = Modifier.fillMaxWidth().clearAndSetSemantics { },
             color = AprenderColors.Blue,
             trackColor = AprenderColors.Sky
         )
@@ -86,12 +94,26 @@ fun GameAnswerButton(
         animationSpec = if (motion) tween(durationMillis = 170) else snap(),
         label = "Seleção da resposta"
     )
+    var focused by remember { mutableStateOf(false) }
+    val outline = when {
+        focused -> AprenderColors.Blue
+        selected -> AprenderColors.Navy
+        correct -> AprenderColors.Blue
+        else -> Color.Transparent
+    }
+    val status = AnswerAccessibility.state(selected, correct)
     Card(
         onClick = onClick,
         enabled = enabled,
         modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp)
+            .onFocusChanged { focused = it.hasFocus }
+            .border(width = if (focused) 3.dp else if (selected || correct) 2.dp else 0.dp,
+                color = outline, shape = RoundedCornerShape(20.dp))
             .graphicsLayer(scaleX = scale, scaleY = scale)
-            .semantics { contentDescription = listOfNotNull(prefix, text).joinToString(" ") },
+            .semantics {
+                contentDescription = listOfNotNull(prefix, text).joinToString(" ")
+                if (status != null) stateDescription = status
+            },
         shape = RoundedCornerShape(20.dp)
     ) {
         Row(
@@ -99,7 +121,15 @@ fun GameAnswerButton(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             if (prefix != null) Text(prefix, style = MaterialTheme.typography.titleMedium)
-            Text(text, style = MaterialTheme.typography.titleMedium)
+            Text(text, modifier = Modifier.weight(1f, fill = false),
+                style = MaterialTheme.typography.titleMedium)
+            // Shape and label accompany colour; do not rely on colour alone.
+            if (selected || correct) Text(
+                text = if (correct) "✓" else "•",
+                style = MaterialTheme.typography.titleMedium,
+                color = AprenderColors.Ink,
+                modifier = Modifier.clearAndSetSemantics { }
+            )
         }
     }
 }
@@ -124,9 +154,14 @@ fun GameFeedback(message: String?, positive: Boolean) {
             ) {
                 BrandArtwork(
                     if (positive) BrandSymbol.Success else BrandSymbol.Encourage,
-                    description = if (positive) "Resposta correta" else "Continua a tentar"
+                    description = null
                 )
                 if (positive) GameCelebration()
+                Text(
+                    text = if (positive) "Resposta correta" else "Boa tentativa",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = AprenderColors.Ink
+                )
                 Text(
                     text = message ?: "",
                     modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -141,14 +176,32 @@ fun GameFeedback(message: String?, positive: Boolean) {
 
 @Composable
 fun GameNavigation(onPrevious: (() -> Unit)?, onNext: () -> Unit, nextLabel: String = "Próximo") {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        if (onPrevious != null) {
-            OutlinedButton(onClick = onPrevious, modifier = Modifier.weight(1f).heightIn(min = 52.dp)) {
-                Text("Anterior")
+    // Stacking avoids clipped labels at 200% font size and on narrow windows.
+    val enlargeText = LocalDensity.current.fontScale >= 1.5f
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+        val stacked = maxWidth < 410.dp || enlargeText
+        if (stacked) {
+            Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (onPrevious != null) {
+                    OutlinedButton(onClick = onPrevious, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
+                        Text("Anterior")
+                    }
+                }
+                Button(onClick = onNext, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
+                    Text(nextLabel)
+                }
             }
-        }
-        Button(onClick = onNext, modifier = Modifier.weight(1f).heightIn(min = 52.dp)) {
-            Text(nextLabel)
+        } else {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                if (onPrevious != null) {
+                    OutlinedButton(onClick = onPrevious, modifier = Modifier.weight(1f).heightIn(min = 52.dp)) {
+                        Text("Anterior")
+                    }
+                }
+                Button(onClick = onNext, modifier = Modifier.weight(1f).heightIn(min = 52.dp)) {
+                    Text(nextLabel)
+                }
+            }
         }
     }
 }
