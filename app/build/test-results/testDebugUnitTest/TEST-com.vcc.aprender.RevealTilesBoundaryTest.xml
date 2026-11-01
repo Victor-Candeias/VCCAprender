@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.RevealTilesBoundaryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:11:38" hostname="codespaces-82de8f" time="0.019">
+<testsuite name="com.vcc.aprender.RevealTilesBoundaryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-01T09:15:31" hostname="codespaces-82de8f" time="0.016">
   <properties/>
-  <testcase name="outOfBoundsTileIsRejected" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.006"/>
-  <testcase name="revealingSameTileTwiceIsIdempotent" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.008"/>
-  <testcase name="invalidGridSizeIsRejected" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.001"/>
+  <testcase name="outOfBoundsTileIsRejected" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.007"/>
+  <testcase name="revealingSameTileTwiceIsIdempotent" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.007"/>
+  <testcase name="invalidGridSizeIsRejected" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.0"/>
   <testcase name="invalidInitialRevealedTileIsRejected" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.0"/>
   <testcase name="revealAllWorksOnCustomGrid" classname="com.vcc.aprender.RevealTilesBoundaryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
