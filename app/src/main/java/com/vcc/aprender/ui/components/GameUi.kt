@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -84,15 +85,18 @@ fun GameFeedback(message: String?, positive: Boolean) {
             modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite },
             shape = RoundedCornerShape(22.dp)
         ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth().background(if (positive) AprenderColors.Mint else AprenderColors.Sunshine).padding(16.dp)) {
+            BrandArtwork(if (positive) BrandSymbol.Success else BrandSymbol.Encourage,
+                description = if (positive) "Resposta correta" else "Continua a tentar")
             Text(
-                text = (if (positive) "🌟  " else "💪  ") + (message ?: ""),
-                modifier = Modifier.fillMaxWidth()
-                    .background(if (positive) AprenderColors.Mint else AprenderColors.Sunshine)
-                    .padding(20.dp),
+                text = message ?: "",
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
                 color = AprenderColors.Ink
             )
+            }
         }
     }
 }
