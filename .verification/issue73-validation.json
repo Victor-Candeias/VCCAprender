@@ -1,0 +1,25 @@
+{
+  "issue": "https://github.com/Victor-Candeias/VCCAprender/issues/73",
+  "reveal_milliseconds": 2000,
+  "wrong_visible_milliseconds_after_release": 3000,
+  "correct_smile": "Remains visible until the next question",
+  "build": {
+    "debug": "passed",
+    "release": "passed"
+  },
+  "unit": {
+    "errors": 0,
+    "failures": 0,
+    "tests": 88
+  },
+  "instrumented_android_15": {
+    "errors": 0,
+    "failures": 0,
+    "tests": 7
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 20
+  },
+  "debug_apk": ".verification/VCCAprender-issue73-debug.apk"
+}

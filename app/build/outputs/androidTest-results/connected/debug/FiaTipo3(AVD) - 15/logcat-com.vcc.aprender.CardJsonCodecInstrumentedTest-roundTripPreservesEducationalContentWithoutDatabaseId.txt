@@ -1,0 +1,2 @@
+11-01 21:35:52.874  7110  7125 I TestRunner: started: roundTripPreservesEducationalContentWithoutDatabaseId(com.vcc.aprender.CardJsonCodecInstrumentedTest)
+11-01 21:35:52.880  7110  7125 I TestRunner: finished: roundTripPreservesEducationalContentWithoutDatabaseId(com.vcc.aprender.CardJsonCodecInstrumentedTest)

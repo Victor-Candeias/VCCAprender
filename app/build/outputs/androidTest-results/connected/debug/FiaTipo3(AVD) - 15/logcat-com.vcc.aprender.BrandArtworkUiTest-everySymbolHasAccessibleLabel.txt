@@ -1,0 +1,343 @@
+11-01 21:35:40.793  7110  7125 I TestRunner: started: everySymbolHasAccessibleLabel(com.vcc.aprender.BrandArtworkUiTest)
+11-01 21:35:41.030  1167  1677 D EGL_emulation: app_time_stats: avg=996.36ms min=989.40ms max=1003.31ms count=2
+11-01 21:35:41.407  7110  7125 W FileTestStorage: Output properties is not supported.
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: enableTracing failed. You may need to upgrade your androidx.tracing:tracing version
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: java.lang.NoSuchMethodError: No static method forceEnableAppTracing()V in class Landroidx/tracing/Trace; or its super classes (declaration of 'androidx.tracing.Trace' appears in /data/app/~~6y-TiwKbNiL3p7eyTWdNgg==/com.vcc.aprender-HBYR6b0cJXIc9FeQL7tqxg==/base.apk!classes14.dex)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.platform.tracing.AndroidXTracer.enableTracing(AndroidXTracer.java:57)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.platform.tracing.Tracing.<init>(Tracing.java:53)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.platform.tracing.Tracing.<clinit>(Tracing.java:49)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.BaseLayerModule.providesTracing(BaseLayerModule.java:190)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.BaseLayerModule_ProvidesTracingFactory.providesTracing(BaseLayerModule_ProvidesTracingFactory.java:37)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.BaseLayerModule_ProvidesTracingFactory.get(BaseLayerModule_ProvidesTracingFactory.java:29)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.BaseLayerModule_ProvidesTracingFactory.get(BaseLayerModule_ProvidesTracingFactory.java:11)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.core.internal.deps.dagger.internal.DoubleCheck.get(DoubleCheck.java:47)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.IdlingResourceRegistry_Factory.get(IdlingResourceRegistry_Factory.java:34)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.base.IdlingResourceRegistry_Factory.get(IdlingResourceRegistry_Factory.java:12)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.core.internal.deps.dagger.internal.DoubleCheck.get(DoubleCheck.java:47)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.DaggerBaseLayerComponent$BaseLayerComponentImpl.idlingResourceRegistry(DaggerBaseLayerComponent.java:275)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.espresso.Espresso.<clinit>(Espresso.java:64)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.compose.ui.test.EspressoLink_androidKt.runEspressoOnIdle(EspressoLink.android.kt:92)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.compose.ui.test.EspressoLink.runUntilIdle(EspressoLink.android.kt:79)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.runTest(ComposeUiTest.android.kt:326)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1.evaluate(AndroidComposeTestRule.android.kt:271)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.ext.junit.runners.AndroidJUnit4.run(AndroidJUnit4.java:162)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.Suite.runChild(Suite.java:128)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.Suite.runChild(Suite.java:27)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:68)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:463)
+11-01 21:35:41.417  7110  7125 E AndroidXTracer: 	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+11-01 21:35:41.418  7110  7125 I Tracing : Tracer added: class androidx.test.platform.tracing.AndroidXTracer
+11-01 21:35:41.494  7110  7110 D EventInjectionStrategy: Creating injection strategy with input manager.
+11-01 21:35:41.495  7110  7110 W om.vcc.aprender: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (unsupported, reflection, allowed)
+11-01 21:35:41.498  7110  7110 W om.vcc.aprender: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (unsupported, reflection, allowed)
+11-01 21:35:41.499  7110  7110 W om.vcc.aprender: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (unsupported, reflection, allowed)
+11-01 21:35:41.540  7110  7110 W om.vcc.aprender: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (unsupported, reflection, allowed)
+11-01 21:35:41.541  7110  7110 W om.vcc.aprender: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (unsupported, reflection, allowed)
+11-01 21:35:41.541  7110  7110 W om.vcc.aprender: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (unsupported, reflection, allowed)
+11-01 21:35:41.549  7110  7125 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@5932e84]
+11-01 21:35:41.738  7110  7125 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-01 21:35:41.777   638   662 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10215, packageName = null, attributionTag = null, token = android.os.Binder@3094298, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-01 21:35:41.826  4687  4721 D ShellDesktopMode: DesktopTaskRepo: visibleTaskCount= 0
+11-01 21:35:41.837   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:41.837  1167  1167 W SplitSelectStateCtor: Missing session instanceIds
+11-01 21:35:41.837  1167  1167 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+11-01 21:35:41.849  4687  4753 D SplashScreenView: Build android.window.SplashScreenView{6000396 V.E...... ......ID 0,0-0,0}
+11-01 21:35:41.849  4687  4753 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-01 21:35:41.849  4687  4753 D SplashScreenView: Branding: view: android.view.View{b1d6b17 G.ED..... ......I. 0,0-0,0 #1020503 android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-01 21:35:41.870   398   456 I netd    : tetherGetStats() -> {[]} <4.85ms>
+11-01 21:35:41.904  1167  1167 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=75, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.vcc.aprender/androidx.activity.ComponentActivity }
+11-01 21:35:42.078  1167  1677 D EGL_emulation: app_time_stats: avg=1046.64ms min=1046.64ms max=1046.64ms count=1
+11-01 21:35:42.251  1167  1677 D EGL_emulation: app_time_stats: avg=668037.31ms min=668037.31ms max=668037.31ms count=1
+11-01 21:35:42.316  1167  1167 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-01 21:35:42.339  1167  1167 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+11-01 21:35:42.374  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: PRE_ON_CREATE
+11-01 21:35:42.378  7110  7110 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-01 21:35:42.403   472   484 W TransactionTracing: Could not find layer id 457
+11-01 21:35:42.486  7110  7110 D CompatChangeReporter: Compat change id reported: 309578419; UID 10215; state: ENABLED
+11-01 21:35:42.626  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: CREATED
+11-01 21:35:42.627  7110  7110 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@5af1723
+11-01 21:35:42.632  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: STARTED
+11-01 21:35:42.633  7110  7110 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@5af1723
+11-01 21:35:42.643  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: RESUMED
+11-01 21:35:42.644  7110  7110 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@5af1723
+11-01 21:35:42.673  7110  7110 W HWUI    : Unknown dataspace 0
+11-01 21:35:42.780   472   536 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10215 pid=0
+11-01 21:35:42.780   472   536 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10215 => denied (6660 us)
+11-01 21:35:42.780   472   481 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10215 pid=7110
+11-01 21:35:42.781   472   481 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10215 => denied (568 us)
+11-01 21:35:42.782   472   536 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10215 pid=0
+11-01 21:35:42.782   472   536 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10215 => denied (1866 us)
+11-01 21:35:42.783   472   481 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10215 pid=7110
+11-01 21:35:42.783   472   481 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10215 => denied (1452 us)
+11-01 21:35:42.783   472   536 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10215 pid=0
+11-01 21:35:42.784   472   536 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10215 => denied (1216 us)
+11-01 21:35:42.787   472   481 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10215 pid=7110
+11-01 21:35:42.787   472   481 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10215 => denied (3390 us)
+11-01 21:35:42.795  2073  6909 I NearbyMediums: No BLE Fast/GATT advertisements found in the latest cycle.
+11-01 21:35:42.797  7110  7127 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-01 21:35:42.803  7110  7127 I EGL_emulation: Opening libGLESv2_emulation.so
+11-01 21:35:42.830  7110  7127 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-01 21:35:42.881   190   190 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-01 21:35:42.882  7110  7127 I Gralloc4: mapper 4.x is not supported
+11-01 21:35:43.081   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10215 pid=0
+11-01 21:35:43.081   638  2544 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10215 => denied (569 us)
+11-01 21:35:43.082   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10215 pid=0
+11-01 21:35:43.085   638  2544 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10215 => denied (3701 us)
+11-01 21:35:43.086  1167  1167 D BaseDepthController: setSurface:
+11-01 21:35:43.086  1167  1167 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+11-01 21:35:43.086  1167  1167 D BaseDepthController: 	mSurface: null
+11-01 21:35:43.086  1167  1167 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+11-01 21:35:43.087  1167  1167 I ActivityThread: Schedule relaunch activity: com.google.android.apps.nexuslauncher.NexusLauncherActivity
+11-01 21:35:43.087  1167  1167 I ActivityThread: Schedule relaunch activity: com.google.android.apps.nexuslauncher.NexusLauncherActivity
+11-01 21:35:43.088  1167  1167 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+11-01 21:35:43.088  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:4)
+11-01 21:35:43.088  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:1)
+11-01 21:35:43.088  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:34)
+11-01 21:35:43.097  1167  1167 D StatsLog: LAUNCHER_ONSTOP
+11-01 21:35:43.102   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10215 pid=0
+11-01 21:35:43.103   638  2544 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10215 => denied (903 us)
+11-01 21:35:43.103  1167  1791 D OneSearchSuggestProvider: Shut down the binder channel
+11-01 21:35:43.110  1167  1167 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+11-01 21:35:43.116   638   673 W ziparchive: Unable to open '/data/app/~~6y-TiwKbNiL3p7eyTWdNgg==/com.vcc.aprender-HBYR6b0cJXIc9FeQL7tqxg==/base.dm': No such file or directory
+11-01 21:35:43.158  1167  1167 D CannedAnimCoordinator: Wrong controller access from i2.i@c71ef8e, actual provider null
+11-01 21:35:43.180   638   673 I ActivityTaskManager: Displayed com.vcc.aprender/androidx.activity.ComponentActivity for user 0: +1s345ms
+11-01 21:35:43.193  4687  4752 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@de516e9
+11-01 21:35:43.200   398   456 I netd    : tetherGetStats() -> {[]} <0.80ms>
+11-01 21:35:43.204   638  2545 W InputManager-JNI: Input channel object '866d8e3 Splash Screen com.vcc.aprender (client)' was disposed without first being removed with the input manager!
+11-01 21:35:43.215  1167  1167 D b/254119092: unregistering activity lifecycle callbacks from onActivityDestroyed.
+11-01 21:35:43.225  1167  1167 D b/254119092: clearActivity
+11-01 21:35:43.225  1167  1167 D b/254119092: mActivity and mContext device profiles have different values, add more logs.
+11-01 21:35:43.225  1167  1167 D b/254119092: 	mActivity logs:
+11-01 21:35:43.225  1167  1167 D b/254119092: 		mActivity=null
+11-01 21:35:43.225  1167  1167 D b/254119092: 	mContext logs:
+11-01 21:35:43.225  1167  1167 D b/254119092: 		mContext=android.window.WindowContext@845eebd
+11-01 21:35:43.225  1167  1167 D b/254119092: 		mContext.getResources().getConfiguration()={1.0 ?mcc0mnc [en_US] ldltr sw800dp w1280dp h800dp 160dpi xlrg land finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 1280, 800) mAppBounds=Rect(0, 0 - 1280, 800) mMaxBounds=Rect(0, 0 - 1280, 800) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.6 fontWeightAdjustment=0}
+11-01 21:35:43.225  1167  1167 D b/254119092: 		LauncherAppState.getIDP().getDeviceProfile(mContext).isTaskbarPresent=true
+11-01 21:35:43.272  1167  1167 D RecentsView: reset - mEnableDrawingLiveTile: false, mRecentsAnimationController: null
+11-01 21:35:43.302   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:43.311  1167  1167 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=com.android.launcher3.uioverrides.QuickstepLauncher$2@8ba75c
+11-01 21:35:43.363  2073  2185 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-01 21:35:43.364  2073  2185 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-01 21:35:43.369  2073  2185 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-01 21:35:43.436  2073  2896 I FontLog : Pulling font file for id = 14, cache size = 6 [CONTEXT service_id=132 ]
+11-01 21:35:43.458  2073  2896 I FontLog : Pulling font file for id = 14, cache size = 6 [CONTEXT service_id=132 ]
+11-01 21:35:43.587  1167  1167 D AutofillManager: Fill dialog is enabled:false, hints=[password, passwordAuto, creditCardNumber, creditCardSecurityCode, creditCardExpirationDate]
+11-01 21:35:43.596  1167  1167 D DeviceSearchAlg: search timeout = %d200
+11-01 21:35:43.607  1167  1167 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+11-01 21:35:43.608  1167  1167 W BcSmartspaceView: Current card is not present in the Adapter; cannot log.
+11-01 21:35:43.623  1167  1167 I OverviewComponentObserver: updateOverviewTargets: mIsHomeDisabled=false, isDefaultHomeNull=false, mIsDefaultHome=true
+11-01 21:35:43.624  1167  1167 D OverviewActionsView: updateActionButtonsVisibility() called: showSingleTaskActions = [true], showGroupActions = [false]
+11-01 21:35:43.672  1167  1167 D ModelCallbacks: startBinding: hotseat layout was vertical: false and is setting to false
+11-01 21:35:43.698  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 0 and y = 0
+11-01 21:35:43.699  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 1 and y = 0
+11-01 21:35:43.700  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 2 and y = 0
+11-01 21:35:43.701  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 3 and y = 0
+11-01 21:35:43.713  1167  1167 I LauncherAppWidgetHostView: App widget created with id: 2
+11-01 21:35:43.713  1167  1167 I LauncherAppWidgetHostView: App widget with id: 2 loaded
+11-01 21:35:43.723  1167  1167 I LauncherAppWidgetHostView: App widget created with id: 3
+11-01 21:35:43.724  1167  1167 I LauncherAppWidgetHostView: App widget with id: 3 loaded
+11-01 21:35:43.731  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 4 and y = 0
+11-01 21:35:43.736  1167  1167 D Launcher.Workspace: addInScreenFromBind: hotseat inflation with x = 5 and y = 0
+11-01 21:35:43.770  1466  1466 I AiAiEcho: SearchContextManagerImpl::setSearchContext resultTypes=[141151] extras=[Bundle[{launcher.maxInlineIcons=3, dynamic_ranking_m3_enabled=true, qs_tiles_asi_enabled=true, allowlist_enabled=false, one_search_enabled=true, system_clock=true, version_code=12, gms_play_query_lower_bound=2, gms_play_query_upper_bound=20, recent_search_block_enabled=true, gms_play_feature_supported=true, launcher.gridSize=6, showhiddentargets_enabled=false, ose_info=1}]] sessionId=[com.google.android.apps.nexuslauncher:574cb5f3-fd66-4a81-96ed-1691ce569e4b,0]
+11-01 21:35:43.780  1167  1276 D SearchTargetUtil: query= size=1
+11-01 21:35:43.785  1167  1276 D SearchTargetUtil: layoutType=icon_row resultType=4096 packageName= extras=Bundle{aiai_settings_enabled=true,icon_container_enabled=true,zero_state_query_ready=true,zero_state_all_apps_web_suggest_count=3,rank=1.0,toast_settings_toggle_values=16777476,key_ipc_start=1207467,hide_subtitle=true,enable_launch_animations=true,zero_state_qsb_web_suggest_count=10,}ParentID: null targetID: SESSION_INFO:0::zero_state_flags
+11-01 21:35:43.788  1167  1276 D b/267448330: provider: ComponentInfo{com.google.android.deskclock/com.android.alarmclock.AnalogAppWidgetProvider}, paddedSizes: [220.0x308.0, 220.0x308.0, 304.0x232.0, 304.0x232.0], getMinMaxSizes: Rect(220, 232 - 304, 308)
+11-01 21:35:43.794  1167  1276 D b/267448330: provider: ComponentInfo{com.google.android.calendar/com.android.calendar.widget.CalendarAppWidgetProvider}, paddedSizes: [220.0x308.0, 220.0x308.0, 304.0x232.0, 304.0x232.0], getMinMaxSizes: Rect(220, 232 - 304, 308)
+11-01 21:35:43.797  1167  1167 D OverviewActionsView: updateActionButtonsVisibility() called: showSingleTaskActions = [true], showGroupActions = [false]
+11-01 21:35:43.812  1167  1276 D InputMonitorCompat: Input monitor (minus-one-disp0) created
+11-01 21:35:43.812  1167  1167 W SplitSelectStateCtor: Missing session instanceIds
+11-01 21:35:43.812  1167  1167 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+11-01 21:35:43.826  1167  1276 D InputMonitorCompat: Input event receiver for monitor (minus-one-disp0) created
+11-01 21:35:43.865  1167  1167 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+11-01 21:35:43.865  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:4)
+11-01 21:35:43.865  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:1)
+11-01 21:35:43.865  1167  1167 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:34)
+11-01 21:35:43.880  1167  1167 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+11-01 21:35:43.894  1167  1167 I Choreographer: Skipped 46 frames!  The application may be doing too much work on its main thread.
+11-01 21:35:43.905  1167  1167 D OverviewActionsView: updateActionButtonsVisibility() called: showSingleTaskActions = [true], showGroupActions = [false]
+11-01 21:35:43.921  1167  1167 I SsCardPagerAdapter: [rmv] Rendering flag - enabled: false
+11-01 21:35:43.927   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-01 21:35:43.932  1167  1167 I SsCardPagerAdapter: Use UI template for the feature: 1
+11-01 21:35:43.945   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-01 21:35:43.946   638   843 D InetDiagMessage: Destroyed live tcp sockets for uids={10097} in 21ms
+11-01 21:35:43.954  1167  1276 D b/267448330: provider: ComponentInfo{com.google.android.deskclock/com.android.alarmclock.AnalogAppWidgetProvider}, paddedSizes: [220.0x308.0, 220.0x308.0, 304.0x232.0, 304.0x232.0], getMinMaxSizes: Rect(220, 232 - 304, 308)
+11-01 21:35:43.975  1167  1167 D SsBaseTemplateCard: No text view can be set up
+11-01 21:35:43.983  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:43.984  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:43.984  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:43.985  1167  1167 I SsBaseTemplateCard: Secondary card pane is null
+11-01 21:35:43.987  1167  1276 D b/267448330: provider: ComponentInfo{com.google.android.calendar/com.android.calendar.widget.CalendarAppWidgetProvider}, paddedSizes: [220.0x308.0, 220.0x308.0, 304.0x232.0, 304.0x232.0], getMinMaxSizes: Rect(220, 232 - 304, 308)
+11-01 21:35:44.107  1167  1167 D InputMonitorCompat: Input event receiver for monitor (minus-one-disp0) disposed
+11-01 21:35:44.107  1167  1167 D InputMonitorCompat: Input monitor (minus-one-disp0) disposed
+11-01 21:35:44.112   638  2544 W InputManager-JNI: Input channel object '[Gesture Monitor] minus-one (client)' was disposed without first being removed with the input manager!
+11-01 21:35:44.115  1167  1167 D TISBindHelper: TIS service connected
+11-01 21:35:44.115  1167  1167 D b/254119092: Set mActivity=com.google.android.apps.nexuslauncher.NexusLauncherActivity@4437f0d
+11-01 21:35:44.115  1167  1167 D b/254119092: mActivity and mContext agree taskbarIsPresent=true
+11-01 21:35:44.118  1167  1167 D b/254119092: registering activity lifecycle callbacks from setActivity().
+11-01 21:35:44.319   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:44.420   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:44.464   398   456 I netd    : tetherGetStats() -> {[]} <1.08ms>
+11-01 21:35:44.873   399   399 I Zygote  : Process 2404 exited due to signal 9 (Killed)
+11-01 21:35:44.880   638   694 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10153/pid_2404
+11-01 21:35:45.212  7110  7114 I om.vcc.aprender: Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+11-01 21:35:45.566  7110  7110 I Choreographer: Skipped 126 frames!  The application may be doing too much work on its main thread.
+11-01 21:35:45.655  2073  2246 W AuthContentService: Unable to retrieve self-device ID: registrationNotComplete
+11-01 21:35:45.830   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-01 21:35:45.834   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-01 21:35:45.837   638   843 D InetDiagMessage: Destroyed live tcp sockets for uids={99000} in 8ms
+11-01 21:35:46.025  7110  7145 D ProfileInstaller: Installing profile for com.vcc.aprender
+11-01 21:35:46.216   638  2540 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10216, packageName = null, attributionTag = null, token = android.os.Binder@3094298, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-01 21:35:46.269  4687  4721 D ShellDesktopMode: DesktopTaskRepo: visibleTaskCount= 0
+11-01 21:35:46.281  1167  1167 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=76, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.vcc.aprender.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity }
+11-01 21:35:46.281   638   676 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10216, packageName = null, attributionTag = null, token = android.os.Binder@3094298, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-01 21:35:46.286  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: PAUSED
+11-01 21:35:46.287   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:46.287  7110  7110 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=androidx.activity.ComponentActivity@5af1723
+11-01 21:35:46.304  4687  4753 D SplashScreenView: Build android.window.SplashScreenView{a6c1bc4 V.E...... ......ID 0,0-0,0}
+11-01 21:35:46.304  4687  4753 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-01 21:35:46.304  4687  4753 D SplashScreenView: Branding: view: android.view.View{e15baad G.ED..... ......I. 0,0-0,0 #1020503 android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-01 21:35:46.340   398   456 I netd    : tetherGetStats() -> {[]} <0.86ms>
+11-01 21:35:46.380   399   399 D Zygote  : Forked child process 7146
+11-01 21:35:46.442  7146  7146 I c.aprender.test: Late-enabling -Xcheck:jni
+11-01 21:35:46.522  7146  7146 I c.aprender.test: Using CollectorTypeCMC GC.
+11-01 21:35:46.524  7146  7146 W c.aprender.test: Unexpected CPU variant for x86: x86_64.
+11-01 21:35:46.524  7146  7146 W c.aprender.test: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, default
+11-01 21:35:46.548   483   499 I adbd    : jdwp connection from 7146
+11-01 21:35:46.568  7146  7146 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-01 21:35:46.699  7110  7110 D VRI[ComponentActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-01 21:35:46.771  7146  7146 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-01 21:35:46.779  7146  7146 D nativeloader: Configuring clns-7 for other apk /system/framework/android.test.mock.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.vcc.aprender.test
+11-01 21:35:46.783  7146  7146 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-01 21:35:46.789  7146  7146 D nativeloader: Configuring clns-8 for other apk /system/framework/android.test.runner.jar. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.vcc.aprender.test
+11-01 21:35:46.797  7146  7146 W ziparchive: Unable to open '/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/base.dm': No such file or directory
+11-01 21:35:46.797  7146  7146 W ziparchive: Unable to open '/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/base.dm': No such file or directory
+11-01 21:35:46.874  7146  7146 D nativeloader: Configuring clns-9 for other apk /data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.vcc.aprender.test
+11-01 21:35:46.879  7146  7146 D CompatChangeReporter: Compat change id reported: 202956589; UID 10216; state: ENABLED
+11-01 21:35:46.912  7146  7146 V GraphicsEnvironment: Currently set values for:
+11-01 21:35:46.912  7146  7146 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-01 21:35:46.916  7146  7146 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-01 21:35:46.917  7146  7146 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+11-01 21:35:46.918  7146  7146 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-01 21:35:47.105   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-01 21:35:47.138   638   843 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-01 21:35:47.139   638   843 D InetDiagMessage: Destroyed live tcp sockets for uids={10087} in 35ms
+11-01 21:35:47.265  7146  7146 D CompatChangeReporter: Compat change id reported: 279646685; UID 10216; state: ENABLED
+11-01 21:35:47.294  7146  7146 D CompatChangeReporter: Compat change id reported: 309578419; UID 10216; state: ENABLED
+11-01 21:35:47.414  7146  7146 W HWUI    : Unknown dataspace 0
+11-01 21:35:47.507   472   668 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10216 pid=0
+11-01 21:35:47.508   472   668 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10216 => denied (1405 us)
+11-01 21:35:47.514   472   668 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10216 pid=0
+11-01 21:35:47.515   472   668 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10216 => denied (5944 us)
+11-01 21:35:47.518   472   668 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10216 pid=0
+11-01 21:35:47.519   472   668 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10216 => denied (2888 us)
+11-01 21:35:47.524  7146  7161 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-01 21:35:47.525  7146  7161 I EGL_emulation: Opening libGLESv2_emulation.so
+11-01 21:35:47.573  7146  7161 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-01 21:35:47.642   190   190 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-01 21:35:47.651  7146  7161 I Gralloc4: mapper 4.x is not supported
+11-01 21:35:47.660  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: STOPPED
+11-01 21:35:47.669  7110  7110 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=androidx.activity.ComponentActivity@5af1723
+11-01 21:35:47.675  7110  7115 I om.vcc.aprender: Background concurrent mark compact GC freed 5201KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 4225KB/8450KB, paused 2.717ms,8.997ms total 86.821ms
+11-01 21:35:47.687   398   456 I netd    : tetherGetStats() -> {[]} <1.97ms>
+11-01 21:35:47.740  7110  7110 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@5af1723 in: DESTROYED
+11-01 21:35:47.805  7110  7110 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-01 21:35:47.808  7110  7110 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@4dcff44
+11-01 21:35:47.871   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10216 pid=0
+11-01 21:35:47.875   638  2544 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10216 => denied (981 us)
+11-01 21:35:47.875   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10216 pid=0
+11-01 21:35:47.876   638  2544 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10216 => denied (532 us)
+11-01 21:35:47.877   638  2544 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10216 pid=0
+11-01 21:35:47.878   638  2544 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10216 => denied (722 us)
+11-01 21:35:47.902   472   472 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:47.903  1167  1167 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=9, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.google.android.apps.nexuslauncher/.NexusLauncherActivity }
+11-01 21:35:47.917   638   673 W ziparchive: Unable to open '/data/app/~~-EEmnJ10sCYLZordHMvI3g==/com.vcc.aprender.test-TsNgv58iYxKz4nQrdC7H7A==/base.dm': No such file or directory
+11-01 21:35:47.922   638   673 I ActivityTaskManager: Displayed com.vcc.aprender.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +1s710ms
+11-01 21:35:47.970  1167  1167 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=6}
+11-01 21:35:48.000   638  1571 W AppSearchIcing: icing-search-engine.cc:321: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: AppSearch 0-state cache not available, fallback to AGA
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: java.util.concurrent.CompletionException: java.util.NoSuchElementException: No value present
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:308)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:323)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:684)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:486)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2138)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at com.google.android.apps.nexuslauncher.allapps.E0.onResult(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:67)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1.lambda$onResult$0(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:144)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1.$r8$lambda$CEk3q8sDAQVhU3rQwVueB8FAj_M(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:1)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.app.appsearch.SearchSessionUtil$1$$ExternalSyntheticLambda0.run(go/retraceme 64eee9e9f568ff45978879ad2ff83146f2618ee8a88278736fbdf5fae931976e:22)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.os.Handler.handleCallback(Handler.java:959)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.os.Handler.dispatchMessage(Handler.java:100)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.os.Looper.loopOnce(Looper.java:232)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.os.Looper.loop(Looper.java:317)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: Caused by: java.util.NoSuchElementException: No value present
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at java.util.Optional.get(Optional.java:143)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	at com.google.android.apps.nexuslauncher.allapps.E0.onResult(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:28)
+11-01 21:35:48.011  1167  1791 D OneSearchSuggestProvider: 	... 8 more
+11-01 21:35:48.039  1167  1791 D OneSearchSuggestProvider: Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=i1{delegate=f{logId=81, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=m2.Z@37a7488
+11-01 21:35:48.053  1167  1167 D BaseDepthController: setSurface:
+11-01 21:35:48.053  1167  1167 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+11-01 21:35:48.053  1167  1167 D BaseDepthController: 	mSurface: Surface(name=com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity)/@0xc46dd5
+11-01 21:35:48.084   638   745 W InputManager-JNI: Input channel object 'e2b972f com.vcc.aprender/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-01 21:35:48.110  1466  1674 I AiAiEcho: Predicting[8]: { Feature:1, creation:2026-11-01T21:22:00Z, expiry:2026-11-01T22:00:00Z, isExpired: false}, { Feature:1, creation:2026-11-01T22:00:00Z, expiry:2026-11-01T22:00:00Z, isExpired: true}, { Feature:1, creation:2026-11-01T23:00:00Z, expiry:2026-11-01T23:00:00Z, isExpired: true}, { Feature:1, creation:2026-11-02T00:00:00Z, expiry:2026-11-02T00:00:00Z, isExpired: true}, { Feature:1, creation:2026-11-02T01:00:00Z, expiry:2026-11-02T01:00:00Z, isExpired: true}, { Feature:1, creation:2026-11-02T02:00:00Z, expiry:2026-11-02T02:00:00Z, isExpired: true}, { Feature:1, creation:2026-11-02T03:00:00Z, expiry:2026-11-02T03:00:00Z, isExpired: true}, { Feature:61, creation:2026-11-01T21:21:57.091Z, expiry:2026-11-01T23:59:59.999Z, isExpired: false} [CONTEXT sampling_count=5 ]
+11-01 21:35:48.142  1466  1674 I AiAiEcho: EchoTargets: Feature:1, Feature:61
+11-01 21:35:48.142  1466  1674 I AiAiEcho: Filtered by AiAi flag check:
+11-01 21:35:48.142  1466  1674 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+11-01 21:35:48.185  1167  1167 D StatsLog: LAUNCHER_ALLAPPS_COUNT
+11-01 21:35:48.199  1466  1674 I AiAiEcho: Ranked targets strategy: SORT, count: 2, ranking metadata: { cardId: WEATHER-569377242, card type: 1, update time: 2026-11-01T21:22:00Z, expiration time: 2026-11-01T22:00:00Z, ranking metadata: RankingMetaData(urgency=0.0, priority=0.0, recency=0.0, rankScore=0.0, importantTimePoints=# vjl@7bca4) }, { cardId: WEATHER_TOMORROW_FORECAST-20759, card type: 61, update time: 2026-11-01T21:21:57.091Z, expiration time: 2026-11-01T23:59:59.999Z, ranking metadata: RankingMetaData(urgency=0.0, priority=0.0, recency=0.0, rankScore=0.0, importantTimePoints=# vjl@7bca4) } [CONTEXT ratelimit_period="10 SECONDS" ]
+11-01 21:35:48.228  1466  1674 I AiAiEcho: #tapActionTwiddler: keeps UiSurface.ALL TapAction for: PrimaryItem in the surface: home for the cardId: WEATHER_TOMORROW_FORECAST-20759
+11-01 21:35:48.243  1466  1674 I AiAiEcho: #weatherTwiddler: Weather removes SubtitleSupplementalItem in surface: home [CONTEXT ratelimit_period="10 SECONDS" ]
+11-01 21:35:48.287   472   536 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:48.311   638   692 W system_server: Long monitor contention with owner binder:638_1E (2544) at int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, long, java.lang.String, boolean, int, java.lang.String, android.app.IApplicationThread, java.lang.String, int)(ActivityManagerService.java:14231) waiters=0 in boolean com.android.server.am.BroadcastQueueModernImpl.lambda$new$0(android.os.Message) for 245ms
+11-01 21:35:48.332  1167  1677 D EGL_emulation: app_time_stats: avg=6072.85ms min=6072.85ms max=6072.85ms count=1
+11-01 21:35:48.360  1466  1674 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+11-01 21:35:48.380  1167  1167 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+11-01 21:35:48.380  1167  1167 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.prepareToAnimate(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:22)
+11-01 21:35:48.380  1167  1167 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.<init>(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:11)
+11-01 21:35:48.380  1167  1167 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:735)
+11-01 21:35:48.403   638   745 W system_server: Long monitor contention with owner android.anim (677) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in void com.android.server.wm.Session.setWallpaperZoomOut(android.os.IBinder, float) for 146ms
+11-01 21:35:48.411   638   676 W system_server: Long monitor contention with owner binder:638_1E (2544) at int com.android.server.am.ActivityManagerService.bindServiceInstance(android.app.IApplicationThread, android.os.IBinder, android.content.Intent, java.lang.String, android.app.IServiceConnection, long, java.lang.String, boolean, int, java.lang.String, android.app.IApplicationThread, java.lang.String, int)(ActivityManagerService.java:14231) waiters=1 in void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean) for 210ms
+11-01 21:35:48.419   638   662 W system_server: Long monitor contention with owner android.anim (677) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getRootTaskInfo(int, int) for 273ms
+11-01 21:35:48.430  1167  1167 I TopTaskTracker: onTaskRemoved: taskId=75
+11-01 21:35:48.439  1167  1167 I TopTaskTracker: onTaskRemoved: taskId=75
+11-01 21:35:48.458  1466  1674 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 2 (types=[1, 61])
+11-01 21:35:48.532  1167  1167 I SsCardPagerAdapter: [rmv] Rendering flag - enabled: false
+11-01 21:35:48.532  1167  1167 I SsCardPagerAdapter: Use UI template for the feature: 1
+11-01 21:35:48.572  1167  1167 D SsBaseTemplateCard: No text view can be set up
+11-01 21:35:48.574  1167  1167 I SsBaseTemplateCard: setFormattedContentDescription: text=65°F, iconDescription=Clear, contentDescription=Clear, 65°F
+11-01 21:35:48.574  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:48.583  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:48.584  1167  1167 I SsBaseTemplateCard: Secondary card pane is null
+11-01 21:35:48.586  1167  1167 I SsCardPagerAdapter: [rmv] Rendering flag - enabled: false
+11-01 21:35:48.586  1167  1167 I SsCardPagerAdapter: Use UI template for the feature: 61
+11-01 21:35:48.608  1167  1167 I SsBaseTemplateCard: setFormattedContentDescription: text=Sunny, iconDescription=Sunny, contentDescription=Sunny, Sunny
+11-01 21:35:48.615  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:48.619  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:48.625  1167  1167 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=SmartspaceTarget{mSmartspaceTargetId='WEATHER-569377242', mHeaderAction=SmartspaceAction{mId='WEATHER', mIcon=Icon(typ=BITMAP size=192x192), mTitle=65°F, mSubtitle=65°F, mContentDescription=Clear, mPendingIntent=null, mIntent=Intent { act=android.intent.action.VIEW flg=0x18000000 cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.verticals.ambient.smartspace.trampolineactivity.ExportedSmartspaceTrampolineActivity (has extras) }, mUserHandle=UserHandle{0}, mExtras=Bundle[mParcelledData.dataSize=1876]}, mBaseAction=SmartspaceAction{mId='', mIcon=null, mTitle=, mSubtitle=, mContentDescription=, mPendingIntent=null, mIntent=null, mUserHandle=UserHandle{0}, mExtras=Bundle[{feedback_intent=null, explanation_intent=Supplier{VAL_PARCELABLE@88+1736}, is_gaia_linked_data=true}]}, mCreationTimeMillis=1793568120000, mExpiryTimeMillis=1793570400000, mScore=0.0, mActionChips=[], mIconGrid=[], mFeatureType=1, mSensitive=false, mShouldShowExpanded=false, mSourceNotificationKey='', mComponentName=ComponentInfo{package_name/class_name}, mUserHandle=UserHandle{0}, mAssociatedSmartspaceTargetId='null', mSliceUri=null, mWidget=null, mTemplateData=BaseTemplateData{mTemplateType=1, mPrimaryItem=null, mSubtitleItem=SubItemInfo{mText=Text{mText=65°F, mTruncateAtType=END, mMaxLines=1}, mIcon=SmartspaceIcon{mIcon=Icon(typ=BITMAP size=192x192), mContentDescription=Clear, mShouldTint=false}, mTapAction=SmartspaceTapAction{mId=mIntent=Intent { act=android.intent.action.VIEW flg=0x18000000 cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.verticals.ambient.smartspace.trampolineactivity.ExportedSmartspaceTrampolineActivity (has extras) }, mPendingIntent=null, mUserHandle=null, mExtras=null, mShouldShowOnLockscreen=false}, mLoggingInfo=SubItemLoggingInfo{mInstanceId=2044, mFeatureType=1, mPackageName=}}, mSubtitleSupplementalItem=null, mSupplementalLineItem=null, mSupplementalAlarmItem=null, mLayoutWeight=1}, mRemoteViews=null}, mSmartspaceActionId='', mEventType=8}
+11-01 21:35:48.639  1167  1167 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=SmartspaceTarget{mSmartspaceTargetId='WEATHER_TOMORROW_FORECAST-20759', mHeaderAction=SmartspaceAction{mId='WEATHER_TOMORROW_FORECAST', mIcon=null, mTitle=, mSubtitle=, mContentDescription=, mPendingIntent=null, mIntent=Intent { act=android.intent.action.VIEW dat= }, mUserHandle=UserHandle{0}, mExtras=Bundle[mParcelledData.dataSize=1876]}, mBaseAction=SmartspaceAction{mId='', mIcon=null, mTitle=, mSubtitle=, mContentDescription=, mPendingIntent=null, mIntent=null, mUserHandle=UserHandle{0}, mExtras=Bundle[{feedback_intent=null, explanation_intent=Supplier{VAL_PARCELABLE@88+1736}, is_gaia_linked_data=true}]}, mCreationTimeMillis=1793568117091, mExpiryTimeMillis=1793577599999, mScore=0.0, mActionChips=[], mIconGrid=[], mFeatureType=61, mSensitive=false, mShouldShowExpanded=false, mSourceNotificationKey='', mComponentName=ComponentInfo{package_name/class_name}, mUserHandle=UserHandle{0}, mAssociatedSmartspaceTargetId='null', mSliceUri=null, mWidget=null, mTemplateData=BaseTemplateData{mTemplateType=1, mPrimaryItem=SubItemInfo{mText=Text{mText=Tomorrow 76° / 56°, mTruncateAtType=END, mMaxLines=1}, mIcon=null, mTapAction=SmartspaceTapAction{mId=mIntent=Intent { act=android.intent.action.VIEW flg=0x18000000 cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.verticals.ambient.smartspace.trampolineactivity.ExportedSmartspaceTrampolineActivity (has extras) }, mPendingIntent=null, mUserHandle=null, mExtras=null, mShouldShowOnLockscreen=false}, mLoggingInfo=SubItemLoggingInfo{mInstanceId=1242, mFeatureType=61, mPackageName=}}, mSubtitleItem=SubItemInfo{mText=Text{mText=Sunny, mTruncateAtType=END, mMaxLines=1}, mIcon=SmartspaceIcon{mIcon=Icon(typ=BITMAP size=192x192), mContentDescription=Sunny, mShouldTint=false}, mTapAction=SmartspaceTapAction{mId=mIntent=Intent { act=android.intent.action.VIEW flg=0x18000000 cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.verticals.ambient.smartspace.trampolineactivity.ExportedSmartspaceTrampolineActivity (has extras) }, mPendingIntent=null, mUserHandle=null, mExtras=null, mShouldShowOnLockscreen=false}, mLoggingInfo=null}, mSubtitleSupplementalItem=null, mSupplementalLineItem=null, mSupplementalAlarmItem=null, mLayoutWeight=1}, mRemoteViews=null}, mSmartspaceActionId='', mEventType=8}
+11-01 21:35:48.647  1721  1721 I A       : (REDACTED) Created gRPC endpoint for service %s
+11-01 21:35:48.733  7146  7146 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-01 21:35:48.815  7110  7125 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@5932e84]
+11-01 21:35:48.842  7110  7125 I TestRunner: finished: everySymbolHasAccessibleLabel(com.vcc.aprender.BrandArtworkUiTest)

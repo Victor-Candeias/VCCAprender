@@ -59,6 +59,9 @@ import com.vcc.aprender.ui.parents.ParentalSettingsViewModelFactory
 import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeViewModel
 import com.vcc.aprender.ui.home.HomeViewModelFactory
+import com.vcc.aprender.ui.magic.FingerMagicScreen
+import com.vcc.aprender.ui.magic.FingerMagicViewModel
+import com.vcc.aprender.ui.magic.FingerMagicViewModelFactory
 
 private const val PROFILES = "profiles"
 private const val HOME = "home"
@@ -70,6 +73,7 @@ private const val ALPHABET = "alphabet"
 private const val CARDS = "discover-cards"
 private const val DECKS = "discover-decks"
 private const val EDITOR = "activity-editor"
+private const val FINGER_MAGIC = "finger-magic"
 private const val CARDS_FILTERED = "discover-cards/{topic}/{level}"
 
 @Composable
@@ -149,6 +153,7 @@ fun AprenderNavHost(container: AppContainer) {
                     HomeScreen(
                         state = state,
                         onRetry = model::refresh,
+                        onFingerMagicClick = { navController.navigate(FINGER_MAGIC) },
                         onTopicClick = { topic ->
                             navController.navigate(
                                 if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}"
@@ -156,6 +161,26 @@ fun AprenderNavHost(container: AppContainer) {
                         }
                     )
                 }
+            }
+        }
+        composable(FINGER_MAGIC) {
+            val childId = selectedId
+            if (childId != null && profiles.any { it.id == childId }) {
+                val model: FingerMagicViewModel = viewModel(
+                    key = "finger-magic-$childId",
+                    factory = FingerMagicViewModelFactory(childId, container.progressRepository)
+                )
+                val magicState by model.state.collectAsStateWithLifecycle()
+                FingerMagicScreen(
+                    state = magicState,
+                    onPress = { model.press(it) },
+                    onRelease = model::releaseTouch,
+                    onAccessibleReveal = { model.press(it, accessible = true) },
+                    onCancelTouch = model::cancelTouch,
+                    onNext = model::next,
+                    onRestart = model::restart,
+                    onBack = { navController.popBackStack() }
+                )
             }
         }
         composable(EDITOR) {

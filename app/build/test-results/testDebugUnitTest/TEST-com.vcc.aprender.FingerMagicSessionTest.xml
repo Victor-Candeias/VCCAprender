@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.vcc.aprender.FingerMagicSessionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:42:47" hostname="C0979902-2" time="0.071">
+  <properties/>
+  <testcase name="twentyQuestionsHaveThreeDistinctImagesAndOneCorrectAnswer" classname="com.vcc.aprender.FingerMagicSessionTest" time="0.061"/>
+  <testcase name="allTwentyQuestionsMustBeSolvedBeforeFinishing" classname="com.vcc.aprender.FingerMagicSessionTest" time="0.007"/>
+  <testcase name="correctAnswerStaysVisibleAndOnlyExplicitNextChangesQuestion" classname="com.vcc.aprender.FingerMagicSessionTest" time="0.0"/>
+  <testcase name="wrongAnswerCanHideAndBeTriedAgainWithoutLosingAttempts" classname="com.vcc.aprender.FingerMagicSessionTest" time="0.001"/>
+  <testcase name="invalidAnswersNeverChangeTheSession" classname="com.vcc.aprender.FingerMagicSessionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

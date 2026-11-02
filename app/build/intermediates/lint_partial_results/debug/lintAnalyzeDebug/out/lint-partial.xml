@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="partial_results">
+    <map id="UnsafeIntentLaunch">
+            <map id="unprotected">
+                <entry
+                    name="com.vcc.aprender.MainActivity"
+                    boolean="true"/>
+            </map>
+    </map>
+    <map id="UnusedResources">
+        <location id="R.color.brand_star"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
+            line="6"
+            column="12"
+            startOffset="245"
+            endLine="6"
+            endColumn="29"
+            endOffset="262"/>
+        <location id="R.drawable.ic_launcher_legacy"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_launcher_legacy.xml"
+            line="2"
+            column="1"
+            startOffset="39"
+            endLine="15"
+            endColumn="10"
+            endOffset="1002"/>
+        <entry
+            name="model"
+            string="color[brand_blue(U),brand_cream(U),brand_star(D)],drawable[ic_launcher_foreground(U),ic_launcher_legacy(D),ic_launcher_monochrome(U)],mipmap[ic_launcher(U),ic_launcher_round(U)],string[app_name(U)],style[Theme_VCCAprender(U),Theme_VCCAprender_Splash(U),Base_VCCAprender(U),Theme_SplashScreen(R)];6^0^3^5,7^0^3^5,9^b^1,a^c^0^3^9,b^0^1;;;"/>
+    </map>
+
+</incidents>

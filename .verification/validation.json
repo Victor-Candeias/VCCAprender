@@ -1,0 +1,15 @@
+{
+  "unit": {
+    "tests": 87,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "instrumented_android_15": {
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "vectors": 61
+}

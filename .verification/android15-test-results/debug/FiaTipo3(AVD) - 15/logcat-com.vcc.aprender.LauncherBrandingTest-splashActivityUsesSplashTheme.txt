@@ -1,0 +1,2 @@
+11-01 21:36:18.992  7110  7125 I TestRunner: started: splashActivityUsesSplashTheme(com.vcc.aprender.LauncherBrandingTest)
+11-01 21:36:19.062  7110  7125 I TestRunner: finished: splashActivityUsesSplashTheme(com.vcc.aprender.LauncherBrandingTest)

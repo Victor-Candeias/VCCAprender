@@ -10,6 +10,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.xmlpull.v1.XmlPullParser
 
 /** Device tests: minSdk 26 guarantees adaptive icon support. */
 @RunWith(AndroidJUnit4::class)
@@ -18,8 +19,20 @@ class LauncherBrandingTest {
 
     @Test fun launcherAndRoundIconsAreAdaptive() {
         val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
-        assertEquals(R.mipmap.ic_launcher, appInfo.icon)
-        assertEquals(R.mipmap.ic_launcher_round, appInfo.roundIcon)
+        // Android may select the round resource as the application icon.
+        assertTrue(appInfo.icon in listOf(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round))
+        // ApplicationInfo does not expose roundIcon in the public Android SDK.
+        var roundIcon = 0
+        context.assets.openXmlResourceParser("AndroidManifest.xml").use { manifest ->
+            while (manifest.eventType != XmlPullParser.END_DOCUMENT) {
+                if (manifest.eventType == XmlPullParser.START_TAG && manifest.name == "application") {
+                    roundIcon = manifest.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "roundIcon", 0)
+                    break
+                }
+                manifest.next()
+            }
+        }
+        assertEquals(R.mipmap.ic_launcher_round, roundIcon)
         assertTrue(context.getDrawable(R.mipmap.ic_launcher) is AdaptiveIconDrawable)
         assertTrue(context.getDrawable(R.mipmap.ic_launcher_round) is AdaptiveIconDrawable)
     }

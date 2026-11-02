@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.vcc.aprender.BrandArtworkUiTest" tests="36" failures="0" errors="0" skipped="0" time="103.763" timestamp="2026-11-01T21:37:23" hostname="localhost">
+  <properties>
+    <property name="device" value="FiaTipo3(AVD) - 15" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="everySymbolHasAccessibleLabel" classname="com.vcc.aprender.BrandArtworkUiTest" time="8.051" />
+  <testcase name="savedEmojiAvatarsRemainCompatible" classname="com.vcc.aprender.BrandArtworkUiTest" time="3.187" />
+  <testcase name="rejectsDuplicateAnswers" classname="com.vcc.aprender.CardJsonCodecInstrumentedTest" time="0.215" />
+  <testcase name="rejectsUnsupportedVersion" classname="com.vcc.aprender.CardJsonCodecInstrumentedTest" time="0.02" />
+  <testcase name="roundTripPreservesEducationalContentWithoutDatabaseId" classname="com.vcc.aprender.CardJsonCodecInstrumentedTest" time="0.013" />
+  <testcase name="rejectsInvalidTopic" classname="com.vcc.aprender.CardJsonCodecInstrumentedTest" time="0.037" />
+  <testcase name="disabledGameAnswerCardDoesNotInvokeCallback" classname="com.vcc.aprender.GameDesignSystemUiTest" time="3.553" />
+  <testcase name="familyHeaderDisplaysTitleAndSubtitle" classname="com.vcc.aprender.GameDesignSystemUiTest" time="2.734" />
+  <testcase name="progressAndFeedbackShowReadableInformation" classname="com.vcc.aprender.GameDesignSystemUiTest" time="2.729" />
+  <testcase name="gameAnswerCardInvokesCallback" classname="com.vcc.aprender.GameDesignSystemUiTest" time="3.362" />
+  <testcase name="incorrectAnswerShowsGentleTextWithoutCelebration" classname="com.vcc.aprender.GameMotionUiTest" time="2.636" />
+  <testcase name="reducedMotionRetainsAccessibleAnswerFeedbackProgressAndCelebration" classname="com.vcc.aprender.GameMotionUiTest" time="3.041" />
+  <testcase name="topicsAreVisibleAndClickable" classname="com.vcc.aprender.HomeScreenUiTest" time="3.514" />
+  <testcase name="errorOffersRetry" classname="com.vcc.aprender.HomeScreenUiTest" time="4.14" />
+  <testcase name="launcherAndRoundIconsAreAdaptive" classname="com.vcc.aprender.LauncherBrandingTest" time="0.117" />
+  <testcase name="splashActivityUsesSplashTheme" classname="com.vcc.aprender.LauncherBrandingTest" time="0.113" />
+  <testcase name="customTextIllustrationsStillRender" classname="com.vcc.aprender.LearningArtworkUiTest" time="2.621" />
+  <testcase name="activitiesDisplayTheActualAnimalAndStillAcceptAnswers" classname="com.vcc.aprender.LearningArtworkUiTest" time="4.667" />
+  <testcase name="everyVectorLoadsOnAndroid" classname="com.vcc.aprender.LearningArtworkUiTest" time="2.591" />
+  <testcase name="coveredPictureIsNotAnnouncedBeforeItIsRevealed" classname="com.vcc.aprender.LearningArtworkUiTest" time="4.347" />
+  <testcase name="countingPictureChangesWithTheQuestion" classname="com.vcc.aprender.LearningArtworkUiTest" time="4.061" />
+  <testcase name="appDoesNotRequestInternetOrSensitiveRuntimePermissions" classname="com.vcc.aprender.OfflinePrivacyInstrumentedTest" time="0.026" />
+  <testcase name="privateBackupIsDisabled" classname="com.vcc.aprender.OfflinePrivacyInstrumentedTest" time="0.19" />
+  <testcase name="settingsScreenDisplaysCurrentValuesAndBackWorks" classname="com.vcc.aprender.ParentalSettingsUiTest" time="4.147" />
+  <testcase name="animationSwitchInvokesParentalCallback" classname="com.vcc.aprender.ParentalSettingsUiTest" time="3.701" />
+  <testcase name="addProfileOpensDialogAndCancelReturnsToList" classname="com.vcc.aprender.ProfileScreenUiTest" time="4.922" />
+  <testcase name="errorDialogCanBeDismissed" classname="com.vcc.aprender.ProfileScreenUiTest" time="3.685" />
+  <testcase name="emptyProgressShowsHelpfulMessage" classname="com.vcc.aprender.ProgressScreenUiTest" time="3.787" />
+  <testcase name="progressShowsSummaryAndBackNavigation" classname="com.vcc.aprender.ProgressScreenUiTest" time="3.731" />
+  <testcase name="shortLandscapeViewportKeepsSingleScrollableColumn" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="2.927" />
+  <testcase name="parentalControlsRemainPresentOnTablet" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="3.272" />
+  <testcase name="tabletProfilesAreLaidOutInTwoColumns" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="3.508" />
+  <testcase name="phonePortraitRendersStackedQuestionAndAnswer" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="2.527" />
+  <testcase name="enlargedFontsKeepParentalSwitchAndReturnActionInTree" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="2.934" />
+  <testcase name="landscapeTabletRendersTwoIndependentPanes" classname="com.vcc.aprender.ResponsiveLayoutsUiTest" time="2.011" />
+  <testcase name="allTopicIllustrationsExposeAccessibleDescriptions" classname="com.vcc.aprender.TopicIllustrationUiTest" time="1.926" />
+</testsuite>

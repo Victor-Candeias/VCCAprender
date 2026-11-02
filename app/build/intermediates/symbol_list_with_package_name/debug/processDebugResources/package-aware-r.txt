@@ -304,6 +304,7 @@ string tooltip_label
 style Base_Theme_SplashScreen
 style Base_Theme_SplashScreen_DayNight
 style Base_Theme_SplashScreen_Light
+style Base_VCCAprender
 style Base_v21_Theme_SplashScreen
 style Base_v21_Theme_SplashScreen_Light
 style Base_v27_Theme_SplashScreen

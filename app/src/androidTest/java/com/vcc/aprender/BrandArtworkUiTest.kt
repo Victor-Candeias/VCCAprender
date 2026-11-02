@@ -1,7 +1,6 @@
 package com.vcc.aprender
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.test.ext.junit.runners.AndroidJUnit4

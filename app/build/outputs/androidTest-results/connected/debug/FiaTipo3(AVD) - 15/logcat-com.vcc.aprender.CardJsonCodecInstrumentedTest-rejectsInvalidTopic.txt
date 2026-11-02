@@ -1,0 +1,2 @@
+11-01 21:35:52.893  7110  7125 I TestRunner: started: rejectsInvalidTopic(com.vcc.aprender.CardJsonCodecInstrumentedTest)
+11-01 21:35:52.936  7110  7125 I TestRunner: finished: rejectsInvalidTopic(com.vcc.aprender.CardJsonCodecInstrumentedTest)

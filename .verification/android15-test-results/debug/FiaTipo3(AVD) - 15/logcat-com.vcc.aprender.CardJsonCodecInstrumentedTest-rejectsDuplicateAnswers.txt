@@ -1,0 +1,10 @@
+11-01 21:35:52.235  7110  7125 I TestRunner: started: rejectsDuplicateAnswers(com.vcc.aprender.CardJsonCodecInstrumentedTest)
+11-01 21:35:52.270  1167  1277 D QuickstepModelDelegate: notifyAppTargetEvent action=1 launchLocation=workspace/0/[-1,-1]/[1,1]
+11-01 21:35:52.297  1167  1677 D EGL_emulation: app_time_stats: avg=1791.61ms min=1791.61ms max=1791.61ms count=1
+11-01 21:35:52.336  1721  1721 I A       : (REDACTED) Created gRPC endpoint for service %s
+11-01 21:35:52.377   472   668 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+11-01 21:35:52.430  1167  1167 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+11-01 21:35:52.430  1167  1167 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.prepareToAnimate(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:22)
+11-01 21:35:52.430  1167  1167 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.<init>(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:11)
+11-01 21:35:52.430  1167  1167 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(go/retraceme 6422cbaa18704413bfb3e93ebb8478614d3644845132061bc54b1fae066de31d:735)
+11-01 21:35:52.452  7110  7125 I TestRunner: finished: rejectsDuplicateAnswers(com.vcc.aprender.CardJsonCodecInstrumentedTest)

@@ -210,6 +210,13 @@
     <style name="Base.Theme.SplashScreen" parent="Base.v21.Theme.SplashScreen"/>
     <style name="Base.Theme.SplashScreen.DayNight" parent="Base.Theme.SplashScreen.Light"/>
     <style name="Base.Theme.SplashScreen.Light" parent="Base.v21.Theme.SplashScreen.Light"/>
+    <style name="Base.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:statusBarColor">@color/brand_blue</item>
+        <item name="android:navigationBarColor">@color/brand_blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/brand_cream</item>
+    </style>
     <style name="Base.v21.Theme.SplashScreen" parent="android:Theme.DeviceDefault.NoActionBar">
     </style>
     <style name="Base.v21.Theme.SplashScreen.Light" parent="android:Theme.DeviceDefault.Light.NoActionBar">
@@ -274,14 +281,7 @@
         <item name="android:windowBackground">@drawable/compat_splash_screen</item>
         <item name="splashScreenIconSize">@dimen/splashscreen_icon_size_with_background</item>
     </style>
-    <style name="Theme.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:statusBarColor">@color/brand_blue</item>
-        <item name="android:navigationBarColor">@color/brand_cream</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:windowBackground">@color/brand_cream</item>
-    </style>
+    <style name="Theme.VCCAprender" parent="Base.VCCAprender"/>
     <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/brand_blue</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>

@@ -1,0 +1,9 @@
+11-01 21:35:52.832  7110  7125 I TestRunner: started: rejectsUnsupportedVersion(com.vcc.aprender.CardJsonCodecInstrumentedTest)
+11-01 21:35:52.837  1167  1167 I SsBaseTemplateCard: setFormattedContentDescription: text=65°F, iconDescription=Clear, contentDescription=Clear, 65°F
+11-01 21:35:52.838  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:52.838  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:52.838  1167  1167 I SsBaseTemplateCard: Secondary card pane is null
+11-01 21:35:52.839  1167  1167 I SsBaseTemplateCard: setFormattedContentDescription: text=Sunny, iconDescription=Sunny, contentDescription=Sunny, Sunny
+11-01 21:35:52.839  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:52.841  1167  1167 D SsBaseTemplateCard: Passed-in item info is null
+11-01 21:35:52.858  7110  7125 I TestRunner: finished: rejectsUnsupportedVersion(com.vcc.aprender.CardJsonCodecInstrumentedTest)

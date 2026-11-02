@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.CustomCardValidationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-01T19:22:54" hostname="codespaces-82de8f" time="0.022">
+<testsuite name="com.vcc.aprender.CustomCardValidationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:42:46" hostname="C0979902-2" time="0.061">
   <properties/>
   <testcase name="duplicateOptionsAreRejected" classname="com.vcc.aprender.CustomCardValidationTest" time="0.001"/>
-  <testcase name="invalidCorrectIndexIsRejected" classname="com.vcc.aprender.CustomCardValidationTest" time="0.0"/>
-  <testcase name="invalidStoredTopicIsSkipped" classname="com.vcc.aprender.CustomCardValidationTest" time="0.004"/>
-  <testcase name="storedEntityConvertsToGameCard" classname="com.vcc.aprender.CustomCardValidationTest" time="0.016"/>
-  <testcase name="validDraftNormalizesWhitespace" classname="com.vcc.aprender.CustomCardValidationTest" time="0.0"/>
+  <testcase name="invalidCorrectIndexIsRejected" classname="com.vcc.aprender.CustomCardValidationTest" time="0.001"/>
+  <testcase name="invalidStoredTopicIsSkipped" classname="com.vcc.aprender.CustomCardValidationTest" time="0.022"/>
+  <testcase name="storedEntityConvertsToGameCard" classname="com.vcc.aprender.CustomCardValidationTest" time="0.031"/>
+  <testcase name="validDraftNormalizesWhitespace" classname="com.vcc.aprender.CustomCardValidationTest" time="0.001"/>
   <testcase name="blankQuestionIsRejected" classname="com.vcc.aprender.CustomCardValidationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

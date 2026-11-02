@@ -1,0 +1,23 @@
+{
+  "feature": "Magia na ponta do dedo",
+  "questions": 20,
+  "build": {
+    "debug": "passed",
+    "release": "passed"
+  },
+  "unit": {
+    "errors": 0,
+    "tests": 88,
+    "failures": 0
+  },
+  "instrumented_android_15": {
+    "errors": 0,
+    "tests": 10,
+    "failures": 0
+  },
+  "lint": {
+    "warnings": 20,
+    "errors": 0
+  },
+  "debug_apk": ".verification/VCCAprender-Magia-debug.apk"
+}

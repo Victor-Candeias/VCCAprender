@@ -1,0 +1,11 @@
+{
+  "apk": "C:\\__GitPrivate\\VCCAprender\\.verification\\VCCAprender-v0.1.0-build1-release.apk",
+  "versionName": "0.1.0",
+  "versionCode": "1",
+  "signed": true,
+  "keyAlias": "vccprojects",
+  "certificateSha256": "a334f539e112ef9c2fad14d47ed9762a69f6fb4165a47cefc678da47b700848b",
+  "certificateMatchesKeystore": true,
+  "apkSha256": "CB2A52B1DBD93609398D3D1F94B745C8C6B63291FB8AB3E44C31AD0AA7FA7E3A",
+  "sizeBytes": 7642203
+}

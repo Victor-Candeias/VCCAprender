@@ -1,0 +1,14 @@
+[
+  {
+    "configuration": "portrait-three-buttons",
+    "passed": true
+  },
+  {
+    "configuration": "landscape-three-buttons",
+    "passed": true
+  },
+  {
+    "configuration": "portrait-gestures-cutout",
+    "passed": true
+  }
+]

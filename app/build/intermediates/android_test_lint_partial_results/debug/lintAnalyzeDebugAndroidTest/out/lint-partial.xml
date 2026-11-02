@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.3" type="partial_results">
+    <map id="UnusedResources">
+        <entry
+            name="model"
+            string="color[brand_blue(R)],drawable[ic_launcher_foreground(R),ic_launcher_monochrome(R)],mipmap[ic_launcher(R),ic_launcher_round(R)],style[Theme_VCCAprender_Splash(R)];;;;"/>
+    </map>
+
+</incidents>

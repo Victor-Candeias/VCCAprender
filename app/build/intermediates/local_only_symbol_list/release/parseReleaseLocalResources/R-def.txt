@@ -9,5 +9,6 @@ drawable ic_launcher_monochrome
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+style Base.VCCAprender
 style Theme.VCCAprender
 style Theme.VCCAprender.Splash

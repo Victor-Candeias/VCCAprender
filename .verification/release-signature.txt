@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Victor Candeias
+Signer #1 certificate SHA-256 digest: a334f539e112ef9c2fad14d47ed9762a69f6fb4165a47cefc678da47b700848b
+Signer #1 certificate SHA-1 digest: d1bf81b6f0d8980ea27804b63fc9f470a06035db
+Signer #1 certificate MD5 digest: bcd4b7b4c5fc08399b75a0e7f044d0be
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: a84e85f8fcf173194238204dab6380e3f360e0e9e876d92a2f9adb76ded6be40
+Signer #1 public key SHA-1 digest: 37916f9d621ee1086e61482ae19c077e034d93cc
+Signer #1 public key MD5 digest: d162db25a096efc5e1518a37d4c4ceae

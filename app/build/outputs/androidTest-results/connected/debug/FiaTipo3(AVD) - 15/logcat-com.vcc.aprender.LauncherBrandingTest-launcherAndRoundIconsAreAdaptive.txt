@@ -1,0 +1,2 @@
+11-01 21:36:18.842  7110  7125 I TestRunner: started: launcherAndRoundIconsAreAdaptive(com.vcc.aprender.LauncherBrandingTest)
+11-01 21:36:18.937  7110  7125 I TestRunner: finished: launcherAndRoundIconsAreAdaptive(com.vcc.aprender.LauncherBrandingTest)

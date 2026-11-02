@@ -4,7 +4,7 @@
             "outputFile": "com.vcc.aprender.app-mergeDebugResources-58:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/home/codespace/.gradle/caches/8.9/transforms/af19c7e1dff59c494b00b46e212ebbae/transformed/core-1.13.1/res/values-v21/values-v21.xml",
+                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\40a544bed6d92e1cabd924a74f6da805\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

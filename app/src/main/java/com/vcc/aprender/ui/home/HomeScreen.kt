@@ -38,10 +38,17 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.ui.components.TopicIllustration
+import com.vcc.aprender.ui.components.BrandArtwork
+import com.vcc.aprender.ui.components.BrandSymbol
 import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
-fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningTopic) -> Unit) {
+fun HomeScreen(
+    state: HomeUiState,
+    onRetry: () -> Unit,
+    onTopicClick: (LearningTopic) -> Unit,
+    onFingerMagicClick: (() -> Unit)? = null
+) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 300.dp),
@@ -71,6 +78,24 @@ fun HomeScreen(state: HomeUiState, onRetry: () -> Unit, onTopicClick: (LearningT
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Text("O que vamos descobrir hoje?", style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.semantics { heading() }.padding(top = 10.dp, bottom = 4.dp))
+            }
+            if (onFingerMagicClick != null) {
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    ElevatedCard(onClick = onFingerMagicClick, shape = RoundedCornerShape(24.dp),
+                        modifier = Modifier.fillMaxWidth().testTag("home-finger-magic")) {
+                        Row(Modifier.fillMaxWidth().background(AprenderColors.Lavender).padding(20.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                            BrandArtwork(
+                                BrandSymbol.Star,
+                                modifier = Modifier.size(64.dp), description = null)
+                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                Text("Magia na ponta do dedo", style = MaterialTheme.typography.titleLarge)
+                                Text("20 perguntas para descobrir sorrisos com o teu dedo!", style = MaterialTheme.typography.bodyLarge)
+                            }
+                        }
+                    }
+                }
             }
             when (state) {
                 HomeUiState.Loading -> item(span = { GridItemSpan(maxLineSpan) }) {
