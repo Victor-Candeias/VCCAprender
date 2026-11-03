@@ -89,12 +89,13 @@ object GameProtocol {
     }
 
     fun readRequest(intent: Intent?): GameRequest? {
-        if (intent?.action != GameContract.ACTION_PLAY) return null
-        if (intent.getIntExtra(GameContract.EXTRA_PROTOCOL_VERSION, -1) != GameContract.PROTOCOL_VERSION) return null
+        val data = intent ?: return null
+        if (data.action != GameContract.ACTION_PLAY) return null
+        if (data.getIntExtra(GameContract.EXTRA_PROTOCOL_VERSION, -1) != GameContract.PROTOCOL_VERSION) return null
         val request = GameRequest(
-            intent.getStringExtra(GameContract.EXTRA_GAME_ID) ?: return null,
-            intent.getStringExtra(GameContract.EXTRA_SESSION_ID) ?: return null,
-            intent.getLongExtra(GameContract.EXTRA_PROFILE_ID, -1L)
+            data.getStringExtra(GameContract.EXTRA_GAME_ID) ?: return null,
+            data.getStringExtra(GameContract.EXTRA_SESSION_ID) ?: return null,
+            data.getLongExtra(GameContract.EXTRA_PROFILE_ID, -1L)
         )
         return request.takeIf(GameValidation::validRequest)
     }
