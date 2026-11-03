@@ -666,7 +666,7 @@ internal fun DrawScope.drawCardPicture(picture: MagicPicture) {
             polygon(Gray, 44f, 58f, 92f, 54f, 92f, 50f, 48f, 48f)
             dot(52f, 50f, 4f, DarkGray)
         }
-        else -> Unit
+        else -> drawExpansionPicture(picture)
     }
 }
 
