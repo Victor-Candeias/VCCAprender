@@ -1,8 +1,6 @@
 package com.vcc.aprender.ui.home
 
-import com.vcc.aprender.domain.magic.FingerMagicContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,39 +15,32 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.domain.magic.FingerMagicContent
 import com.vcc.aprender.ui.components.BrandArtwork
 import com.vcc.aprender.ui.components.BrandSymbol
-import com.vcc.aprender.ui.components.TopicIllustration
 import com.vcc.aprender.ui.theme.AprenderColors
 
+/**
+ * VA-034: one activity only. Account, progress and parental tools remain under Settings.
+ * Do not surface LearningTopic cards here; they are historical progress metadata.
+ */
 @Composable
 fun HomeScreen(
-    state: HomeUiState,
-    onRetry: () -> Unit,
-    onTopicClick: (LearningTopic) -> Unit,
-    onFingerMagicClick: (() -> Unit)? = null,
-    onSettingsClick: () -> Unit = {}
+    onFingerMagicClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyVerticalGrid(
@@ -67,76 +58,62 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     BrandArtwork(BrandSymbol.Book, description = null)
-                    Text("VCCAprender", modifier = Modifier.semantics {
-                        heading()
-                        contentDescription = "VCCAprender"
-                    }, style = MaterialTheme.typography.headlineLarge,
-                        color = AprenderColors.Navy)
-                    Text("Aprender, brincar e descobrir!", style = MaterialTheme.typography.titleMedium,
-                        color = AprenderColors.Navy)
-                    Text("Escolhe uma aventura e começa a explorar.",
-                        style = MaterialTheme.typography.bodyLarge, color = AprenderColors.Ink)
+                    Text(
+                        "VCCAprender",
+                        modifier = Modifier.semantics {
+                            heading()
+                            contentDescription = "VCCAprender"
+                        },
+                        style = MaterialTheme.typography.headlineLarge,
+                        color = AprenderColors.Navy
+                    )
+                    Text(
+                        "Uma aventura, muitas descobertas!",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = AprenderColors.Navy
+                    )
+                    Text(
+                        "Joga, aprende e encontra todos os sorrisos.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = AprenderColors.Ink
+                    )
                 }
             }
             item(span = { GridItemSpan(maxLineSpan) }) {
-                Text("O que vamos descobrir hoje?", style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.semantics { heading() }.padding(top = 10.dp, bottom = 4.dp))
+                Text(
+                    "Vamos jogar?",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.semantics { heading() }.padding(top = 10.dp, bottom = 4.dp)
+                )
             }
-            if (onFingerMagicClick != null) {
-                item(span = { GridItemSpan(maxLineSpan) }) {
-                    ElevatedCard(onClick = onFingerMagicClick, shape = RoundedCornerShape(24.dp),
-                        modifier = Modifier.fillMaxWidth().testTag("home-finger-magic")) {
-                        Row(Modifier.fillMaxWidth().background(AprenderColors.Lavender).padding(20.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                            BrandArtwork(
-                                BrandSymbol.Star,
-                                modifier = Modifier.size(64.dp), description = null)
-                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("Magia na ponta do dedo", style = MaterialTheme.typography.titleLarge)
-                                Text("${FingerMagicContent.questions.size} perguntas para descobrir sorrisos com o teu dedo!", style = MaterialTheme.typography.bodyLarge)
-                            }
-                        }
-                    }
-                }
-            }
-            when (state) {
-                HomeUiState.Loading -> item(span = { GridItemSpan(maxLineSpan) }) {
-                    Box(modifier = Modifier.fillMaxWidth().padding(24.dp),
-                        contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
-                    }
-                }
-                is HomeUiState.Error -> item(span = { GridItemSpan(maxLineSpan) }) {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text(state.message, color = MaterialTheme.colorScheme.error)
-                        Button(onClick = onRetry, modifier = Modifier.heightIn(min = 48.dp)) {
-                            Text("Tentar novamente")
-                        }
-                    }
-                }
-                is HomeUiState.Success -> items(state.topics, key = { it.name }) { topic ->
-                    var focusActive by remember(topic) { mutableStateOf(false) }
-                    ElevatedCard(
-                        onClick = { onTopicClick(topic) },
-                        modifier = Modifier.fillMaxWidth().heightIn(min = 120.dp)
-                            .onFocusChanged { focusActive = it.hasFocus }
-                            .border(if (focusActive) 3.dp else 0.dp, AprenderColors.Blue,
-                                RoundedCornerShape(24.dp))
-                            .semantics { contentDescription = "Abrir ${topic.title}: ${topic.description}" },
-                        shape = RoundedCornerShape(24.dp)
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                ElevatedCard(
+                    onClick = onFingerMagicClick,
+                    shape = RoundedCornerShape(24.dp),
+                    modifier = Modifier.fillMaxWidth().testTag("home-finger-magic")
+                ) {
+                    Row(
+                        Modifier.fillMaxWidth().background(AprenderColors.Lavender).padding(20.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(14.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                        BrandArtwork(
+                            BrandSymbol.Star,
+                            modifier = Modifier.size(64.dp),
+                            description = null
+                        )
+                        Column(
+                            Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
-                            TopicIllustration(topic, modifier = Modifier.size(72.dp), decorative = true)
-                            Column(modifier = Modifier.weight(1f),
-                                verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text(topic.title, style = MaterialTheme.typography.titleMedium)
-                                Text(topic.description, style = MaterialTheme.typography.bodyLarge)
-                            }
+                            Text(
+                                "Magia na ponta dos dedos",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(
+                                "${FingerMagicContent.questions.size} perguntas para descobrir sorrisos!",
+                                style = MaterialTheme.typography.bodyLarge
+                            )
                         }
                     }
                 }
@@ -145,9 +122,7 @@ fun HomeScreen(
                 Button(
                     onClick = onSettingsClick,
                     modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
-                ) {
-                    Text("Configurações")
-                }
+                ) { Text("Configurações") }
             }
         }
     }
