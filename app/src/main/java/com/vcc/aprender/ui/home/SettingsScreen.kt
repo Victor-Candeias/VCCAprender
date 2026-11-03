@@ -16,14 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * Only settings that support Finger Magic remain in the application menu.
+ * The old reading, ABC-card game and card editor are no longer reachable.
+ */
 @Composable
 fun SettingsScreen(
     onProfiles: () -> Unit,
     onProgress: () -> Unit,
     onParents: () -> Unit,
-    onReading: () -> Unit,
-    onDecks: () -> Unit,
-    onEditor: () -> Unit,
     onBack: () -> Unit
 ) {
     Column(
@@ -32,16 +33,13 @@ fun SettingsScreen(
     ) {
         Text("Configurações", style = MaterialTheme.typography.headlineMedium)
         Text(
-            "Escolhe uma opção para gerir o perfil, consultar o progresso ou ajustar a experiência.",
+            "Gere os perfis, acompanha os resultados do jogo e ajusta as preferências.",
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start
         )
         SettingsButton("Mudar de perfil", onProfiles)
         SettingsButton("Ver progresso", onProgress)
         SettingsButton("Área parental e preferências", onParents)
-        SettingsButton("Leitura e reconhecimento de palavras", onReading)
-        SettingsButton("Descobre a Resposta A/B/C", onDecks)
-        SettingsButton("Editor de atividades", onEditor)
         Button(onClick = onBack, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)) {
             Text("Voltar ao início")
         }
