@@ -169,7 +169,7 @@ class FingerMagicUiTest {
         compose.runOnIdle {
             val initial = model.state.value.session
             assertEquals(expectedFirst, initial.questions.map { it.id })
-            assertEquals(111, initial.questions.size)
+            assertEquals(86, initial.questions.size)
             // Re-accessing the Compose state must never shuffle the deck again.
             assertEquals(expectedFirst, model.state.value.session.questions.map { it.id })
             assertEquals(0, initial.index)
@@ -205,7 +205,7 @@ class FingerMagicUiTest {
                 FingerMagicScreen(FingerMagicUiState(session = completed), {}, {}, {}, {}, {}, { restarted = true }, {})
             }
         }
-        compose.onNodeWithText("Parabéns! Descobriste os 111 sorrisos!").assertIsDisplayed()
+        compose.onNodeWithText("Parabéns! Descobriste os 86 sorrisos!").assertIsDisplayed()
         compose.onNodeWithText("Jogar novamente").performScrollTo().performClick()
         compose.runOnIdle { assertTrue(restarted) }
     }
