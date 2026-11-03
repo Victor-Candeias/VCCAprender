@@ -33,7 +33,7 @@ class FingerMagicViewModel(
     val state = mutableState.asStateFlow()
     private var holdJob: Job? = null
     private var holdStartedNanos: Long? = null
-    private val hideJobs = mutableMapOf<Int, Job>()
+    private var correctRevealJob: Job? = null
     private var accessibleHold = false
 
     fun press(option: Int, accessible: Boolean = false) {
@@ -64,6 +64,17 @@ class FingerMagicViewModel(
         val after = before.reveal(option)
         if (after == before) return
         mutableState.value = current.copy(session = after, revealProgress = 1f)
+        if (!after.solved) {
+            correctRevealJob?.cancel()
+            val questionId = after.question.id
+            correctRevealJob = viewModelScope.launch {
+                delay(FingerMagicContent.WRONG_VISIBLE_MILLIS)
+                val latest = mutableState.value
+                if (latest.session.question.id == questionId && latest.session.answered) {
+                    mutableState.value = latest.copy(session = latest.session.revealCorrectAnswer())
+                }
+            }
+        }
         if (option !in before.attempted) {
             viewModelScope.launch {
                 runCatching {
@@ -88,20 +99,10 @@ class FingerMagicViewModel(
         accessibleHold = false
         val current = mutableState.value
         mutableState.value = current.copy(heldOption = null, revealProgress = 0f)
-        if (option in current.session.visibleWrong) {
-            hideJobs[option]?.cancel()
-            val questionId = current.session.question.id
-            hideJobs[option] = viewModelScope.launch {
-                delay(FingerMagicContent.WRONG_VISIBLE_MILLIS)
-                val latest = mutableState.value
-                if (latest.session.question.id == questionId) {
-                    mutableState.value = latest.copy(session = latest.session.hideWrong(option))
-                }
-            }
-        }
+
     }
 
-    /** Touch cancellation, backgrounding and disposal must not reveal an unattended square. */
+    /** Touch cancellation, backgrounding and disposal must not reveal an unattended image. */
     fun cancelTouch() {
         mutableState.value.heldOption?.let(::release)
     }
@@ -127,8 +128,8 @@ class FingerMagicViewModel(
         holdJob?.cancel()
         holdJob = null
         holdStartedNanos = null
-        hideJobs.values.forEach { it.cancel() }
-        hideJobs.clear()
+        correctRevealJob?.cancel()
+        correctRevealJob = null
         accessibleHold = false
     }
 }
