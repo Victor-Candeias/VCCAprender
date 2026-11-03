@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Only the host may define the permission. Same-signature plugins can be launched. -->
+    <permission android:name="com.vcc.aprender.permission.PLAY_GAME"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.vcc.aprender.permission.PLAY_GAME"/>
     <queries>
+        <intent>
+            <action android:name="com.vcc.aprender.plugin.action.PLAY"/>
+        </intent>
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE"/>
         </intent>
