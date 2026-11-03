@@ -16,7 +16,7 @@ class FingerMagicDeckTest {
     @Test fun shufflePreservesEveryQuestionExactlyOnce() {
         val canonical = FingerMagicContent.questions.map { it.id }
         val shuffled = FingerMagicDeck.newSession(Random(77)).questions.map { it.id }
-        assertEquals(111, shuffled.size)
+        assertEquals(86, shuffled.size)
         assertEquals(shuffled.size, shuffled.distinct().size)
         assertEquals(canonical.toSet(), shuffled.toSet())
         assertNotEquals(canonical, shuffled)
@@ -42,7 +42,7 @@ class FingerMagicDeckTest {
             assertEquals(expected, session.questions.map { it.id })
         }
         assertTrue(session.completed)
-        assertEquals(111, session.questions.size)
+        assertEquals(86, session.questions.size)
     }
 
     @Test fun correctAnswerAlwaysTravelsWithItsShuffledQuestion() {
