@@ -1,22 +1,25 @@
-🌟 **VCC Aprender — Aprender, Brincar e Descobrir!** 🎨🚀
+# VCCAprender — Magia na ponta dos dedos 🌟
 
-Transforma cada momento numa aventura de aprendizagem! Desenvolvida para crianças dos 3 aos 8 anos, a VCC Aprender combina diversão e educação através de jogos interativos, desafios e atividades coloridas.
+A **VCCAprender** é uma aplicação Android educativa e offline, em português de Portugal, destinada a crianças dos 3 aos 8 anos. A experiência jogável da app foi simplificada: **existe apenas um jogo, «Magia na ponta dos dedos»**.
 
-🔤 Descobre letras e palavras, 🔢 explora números, 🎨 aprende cores e formas, 🐾 conhece animais e sons e 🧩 desenvolve a memória, a lógica e o raciocínio.
+## Jogo
+- **111 perguntas** com três opções ilustradas A/B/C; a criança descobre a resposta mantendo o dedo sobre um dos quadrados.
+- Ordem aleatória no início de cada partida, **sem repetições** até concluir o baralho. **Jogar novamente** inicia outra sequência.
+- Perguntas sobre animais, alimentos, universo, marcas de automóveis, clubes de futebol, contas simples e conhecimentos gerais, com explicações em pt-PT.
+- Desenhos vetoriais e cartões originais, disponíveis **offline**; não são incluídos logótipos comerciais ou escudos oficiais.
+- Toque prolongado de **800 ms** para revelar o sorriso ou uma carinha triste. As respostas erradas ocultam-se 3 segundos após levantar o dedo; a resposta correta mantém-se visível até avançar.
+- Leitura opcional por voz e acesso com TalkBack/teclado, com feedback adequado.
 
-😄 Com o divertido jogo **«Descobre a Resposta»**, as crianças escolhem entre três imagens e revelam smiles surpresa ao tocar nos quadrados mágicos!
+## Acompanhamento e preferências
+Na área **Configurações** estão disponíveis a mudança de perfil, a consulta do progresso e a área parental (áudio, velocidade da fala e animações). Perfis e histórico de respostas mantêm-se guardados no dispositivo.
 
-✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e 111 perguntas em ordem aleatória sem repetições por partida, cada uma com três imagens/opções A/B/C e três quadrados: 20 perguntas originais, 31 perguntas de curiosidades e 60 novas perguntas sobre universo, automóveis, futebol, somas e conhecimento geral (animais, alimentos, corpo humano, espaço e objetos) inspiradas nas cartas do jogo físico «Magia na Ponta do Dedo», com ilustrações vetoriais próprias. Mantém o dedo num quadrado durante 2 segundos para revelar a carinha. Nas respostas erradas, a cara triste fica visível enquanto manténs o dedo e durante mais 3 segundos depois de o levantares; depois volta a ficar tapada e podes tentar outra resposta. O sorriso da resposta correta permanece visível e permite avançar com «Seguinte». O jogo inclui ilustrações vetoriais offline, leitura opcional da pergunta, registo do progresso por perfil e ativação acessível por TalkBack ou teclado.
+## VA-034 — Aplicação com um único jogo
+Foram retiradas do ecrã inicial as entradas jogáveis **Letras, Números, Cores, Formas, Animais, Sons e Palavras**. Nas configurações foram retirados **Leitura e reconhecimento de palavras**, **Descobre a Resposta A/B/C** (minijogo separado) e o **Editor de atividades** associado às cartas.
 
-🏆 Inclui recompensas, leitura em voz alta, desafios adaptados à idade e acompanhamento da evolução pelos pais.
+Estas funcionalidades deixam de ter rotas de navegação na aplicação. **Não se eliminam as opções A/B/C internas ao jogo Magia**, nem os dados persistentes dos perfis e histórico. Tipos de dados e classes legadas podem permanecer no código para compatibilidade e manutenção futura; a sua eventual eliminação física deverá ser realizada com validação de dependências e migrações.
 
-💡 **100% offline, sem publicidade e com conteúdos em português de Portugal.**
+## Documentação técnica
+- [VA-033 — 111 perguntas e baralho aleatório](docs/VA-033-MAGIC-QUESTIONS-RANDOM.md)
+- [VA-034 — Simplificação para um único jogo](docs/VA-034-ONLY-FINGER-MAGIC.md)
 
-**VCC Aprender — Pequenas descobertas, grandes conquistas!** 🌈
-
-
-### VA-033 — Magia na ponta do dedo (111 perguntas)
-
-As 111 perguntas são embaralhadas uma única vez no início da partida e novamente ao escolher **Jogar novamente**. A ordem mantém-se estável durante a sessão; cada questão aparece apenas uma vez. As respostas mantêm a respetiva posição A/B/C e cada pergunta possui uma explicação educativa. Os novos temas usam figuras vetoriais e cartões de texto **offline**, sem logótipos oficiais de marcas ou clubes. A opção de áudio e os controlos de acessibilidade existentes continuam disponíveis. O progresso apresentado é baseado na posição na partida e não no identificador fixo da pergunta.
-
-A validação pedagógica e visual dos novos conteúdos encontra-se documentada em `docs/VA-033-MAGIC-QUESTIONS-RANDOM.md`.
+Sem ligação obrigatória à Internet, sem publicidade e com conteúdos em português de Portugal.
