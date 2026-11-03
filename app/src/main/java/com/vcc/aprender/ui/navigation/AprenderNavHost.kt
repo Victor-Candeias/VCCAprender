@@ -1,94 +1,59 @@
 package com.vcc.aprender.ui.navigation
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.vcc.aprender.data.settings.ParentalSettings
-import com.vcc.aprender.ui.components.GameMotionProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.vcc.aprender.data.settings.ParentalSettings
+import com.vcc.aprender.di.AppContainer
+import com.vcc.aprender.ui.components.GameMotionProvider
+import com.vcc.aprender.ui.home.HomeScreen
+import com.vcc.aprender.ui.home.SettingsScreen
+import com.vcc.aprender.ui.magic.FingerMagicScreen
+import com.vcc.aprender.ui.magic.FingerMagicViewModel
+import com.vcc.aprender.ui.magic.FingerMagicViewModelFactory
+import com.vcc.aprender.ui.parents.ParentalSettingsScreen
+import com.vcc.aprender.ui.parents.ParentalSettingsViewModel
+import com.vcc.aprender.ui.parents.ParentalSettingsViewModelFactory
 import com.vcc.aprender.ui.profiles.ProfileScreen
 import com.vcc.aprender.ui.profiles.ProfileViewModel
 import com.vcc.aprender.ui.profiles.ProfileViewModelFactory
 import com.vcc.aprender.ui.progress.ProgressScreen
 import com.vcc.aprender.ui.progress.ProgressViewModel
 import com.vcc.aprender.ui.progress.ProgressViewModelFactory
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.vcc.aprender.di.AppContainer
-import com.vcc.aprender.domain.model.LearningTopic
-import com.vcc.aprender.data.cards.OfflineCardCatalog
-import com.vcc.aprender.data.cards.toDiscoverCard
-import com.vcc.aprender.ui.editor.ActivityEditorScreen
-import com.vcc.aprender.ui.editor.ActivityEditorViewModel
-import com.vcc.aprender.ui.editor.ActivityEditorViewModelFactory
-import com.vcc.aprender.ui.cards.DeckSelectionScreen
-import com.vcc.aprender.domain.cards.CardDifficulty
-import com.vcc.aprender.domain.cards.DeckFilter
-import com.vcc.aprender.ui.cards.DiscoverCardsScreen
-import com.vcc.aprender.ui.cards.DiscoverCardsViewModel
-import com.vcc.aprender.ui.cards.DiscoverCardsViewModelFactory
-import com.vcc.aprender.ui.activities.ActivityScreen
-import com.vcc.aprender.ui.activities.ActivityViewModel
-import com.vcc.aprender.ui.activities.ActivityViewModelFactory
-import com.vcc.aprender.ui.alphabet.AlphabetScreen
-import com.vcc.aprender.ui.alphabet.AlphabetViewModel
-import com.vcc.aprender.ui.alphabet.AlphabetViewModelFactory
-import com.vcc.aprender.ui.parents.ParentalSettingsScreen
-import com.vcc.aprender.ui.parents.ParentalSettingsViewModel
-import com.vcc.aprender.ui.parents.ParentalSettingsViewModelFactory
-import com.vcc.aprender.ui.home.HomeScreen
-import com.vcc.aprender.ui.home.HomeViewModel
-import com.vcc.aprender.ui.home.HomeViewModelFactory
-import com.vcc.aprender.ui.home.SettingsScreen
-import com.vcc.aprender.ui.magic.FingerMagicScreen
-import com.vcc.aprender.ui.magic.FingerMagicViewModel
-import com.vcc.aprender.ui.magic.FingerMagicViewModelFactory
 
+// VA-034: only the Finger Magic game is a playable destination.
+// Legacy alphabet, learning topics, cards, reading and editor routes are removed.
 private const val PROFILES = "profiles"
 private const val HOME = "home"
 private const val SETTINGS = "settings"
 private const val PROGRESS = "progress"
-private const val READING = "reading"
 private const val PARENTS = "parents"
-private const val TOPIC = "topic/{topicId}"
-private const val ALPHABET = "alphabet"
-private const val CARDS = "discover-cards"
-private const val DECKS = "discover-decks"
-private const val EDITOR = "activity-editor"
 private const val FINGER_MAGIC = "finger-magic"
-private const val CARDS_FILTERED = "discover-cards/{topic}/{level}"
 
 @Composable
 fun AprenderNavHost(container: AppContainer) {
     val navController = rememberNavController()
-    // Delay animations until DataStore has emitted the saved preference.
     val motionSettings by container.parentalSettingsRepository.settings.collectAsStateWithLifecycle(
         initialValue = ParentalSettings(animationsEnabled = false)
     )
-    val profileModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory(container.profileRepository))
+    val profileModel: ProfileViewModel = viewModel(
+        factory = ProfileViewModelFactory(container.profileRepository)
+    )
     val profiles by profileModel.profiles.collectAsStateWithLifecycle()
     val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
-    val error by profileModel.error.collectAsStateWithLifecycle()
-    val progressModel: ProgressViewModel = viewModel(factory = ProgressViewModelFactory(container.progressRepository))
+    val profileError by profileModel.error.collectAsStateWithLifecycle()
+    val progressModel: ProgressViewModel = viewModel(
+        factory = ProgressViewModelFactory(container.progressRepository)
+    )
     val progress by progressModel.progress.collectAsStateWithLifecycle()
     val answerHistory by progressModel.history.collectAsStateWithLifecycle()
-    LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
 
+    LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
     LaunchedEffect(selectedId, profiles) {
         if (selectedId != null && profiles.any { it.id == selectedId }) {
             navController.navigate(HOME) {
@@ -104,228 +69,75 @@ fun AprenderNavHost(container: AppContainer) {
     }
 
     GameMotionProvider(parentalEnabled = motionSettings.animationsEnabled) {
-    NavHost(navController = navController, startDestination = PROFILES) {
-        composable(PROFILES) {
-            ProfileScreen(
-                profiles = profiles, error = error,
-                onClearError = profileModel::clearError,
-                onSave = profileModel::save,
-                onSelect = profileModel::select,
-                onDelete = profileModel::delete,
-                onDeleteAll = profileModel::deleteAll
-            )
-        }
-        composable(HOME) {
-            if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
-            val model: HomeViewModel = viewModel(factory = HomeViewModelFactory(container.getLearningTopics))
-            val state by model.uiState.collectAsStateWithLifecycle()
-            Box(modifier = Modifier.fillMaxSize()) {
+        NavHost(navController = navController, startDestination = PROFILES) {
+            composable(PROFILES) {
+                ProfileScreen(
+                    profiles = profiles,
+                    error = profileError,
+                    onClearError = profileModel::clearError,
+                    onSave = profileModel::save,
+                    onSelect = profileModel::select,
+                    onDelete = profileModel::delete,
+                    onDeleteAll = profileModel::deleteAll
+                )
+            }
+            composable(HOME) {
+                if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
                 HomeScreen(
-                    state = state,
-                    onRetry = model::refresh,
                     onFingerMagicClick = { navController.navigate(FINGER_MAGIC) },
-                    onSettingsClick = { navController.navigate(SETTINGS) },
-                    onTopicClick = { topic ->
-                        navController.navigate(
-                            if (topic == LearningTopic.LETTERS) ALPHABET else "topic/${topic.name}"
-                        )
-                    }
+                    onSettingsClick = { navController.navigate(SETTINGS) }
                 )
             }
-        }
-        composable(SETTINGS) {
-            SettingsScreen(
-                onProfiles = { navController.navigate(PROFILES) },
-                onProgress = { navController.navigate(PROGRESS) },
-                onParents = { navController.navigate(PARENTS) },
-                onReading = { navController.navigate(READING) },
-                onDecks = { navController.navigate(DECKS) },
-                onEditor = { navController.navigate(EDITOR) },
-                onBack = { navController.popBackStack() }
-            )
-        }
-        composable(FINGER_MAGIC) {
-            val childId = selectedId
-            if (childId != null && profiles.any { it.id == childId }) {
-                val model: FingerMagicViewModel = viewModel(
-                    key = "finger-magic-$childId",
-                    factory = FingerMagicViewModelFactory(childId, container.progressRepository)
-                )
-                val magicState by model.state.collectAsStateWithLifecycle()
-                FingerMagicScreen(
-                    state = magicState,
-                    onPress = { model.press(it) },
-                    onRelease = model::releaseTouch,
-                    onAccessibleReveal = { model.press(it, accessible = true) },
-                    onCancelTouch = model::cancelTouch,
-                    onNext = model::next,
-                    onRestart = model::restart,
+            composable(SETTINGS) {
+                SettingsScreen(
+                    onProfiles = { navController.navigate(PROFILES) },
+                    onProgress = { navController.navigate(PROGRESS) },
+                    onParents = { navController.navigate(PARENTS) },
                     onBack = { navController.popBackStack() }
                 )
             }
-        }
-        composable(EDITOR) {
-            val model: ActivityEditorViewModel = viewModel(
-                factory = ActivityEditorViewModelFactory(container.customCardRepository)
-            )
-            val cards by model.cards.collectAsStateWithLifecycle()
-            val message by model.message.collectAsStateWithLifecycle()
-            ActivityEditorScreen(
-                cards = cards, message = message,
-                onSave = model::save, onDelete = model::delete,
-                onImport = model::importFrom, onExport = model::exportTo,
-                onBack = { navController.popBackStack() }
-            )
-        }
-        composable(DECKS) {
-            val customCards by container.customCardRepository.cards.collectAsStateWithLifecycle(initialValue = emptyList())
-            DeckSelectionScreen(
-                cards = OfflineCardCatalog.cards + customCards.mapNotNull { it.toDiscoverCard() },
-                onStart = { filter ->
-                    navController.navigate("discover-cards/${filter.topic?.name ?: "ALL"}/${filter.difficulty?.name ?: "ALL"}")
-                },
-                onBack = { navController.popBackStack() }
-            )
-        }
-        composable(
-            route = CARDS_FILTERED,
-            arguments = listOf(
-                navArgument("topic") { type = NavType.StringType },
-                navArgument("level") { type = NavType.StringType }
-            )
-        ) { entry ->
-            val topic = entry.arguments?.getString("topic")?.let { name ->
-                LearningTopic.entries.firstOrNull { it.name == name }
+            composable(FINGER_MAGIC) {
+                val childId = selectedId
+                if (childId != null && profiles.any { it.id == childId }) {
+                    val model: FingerMagicViewModel = viewModel(
+                        key = "finger-magic-$childId",
+                        factory = FingerMagicViewModelFactory(childId, container.progressRepository)
+                    )
+                    val game by model.state.collectAsStateWithLifecycle()
+                    FingerMagicScreen(
+                        state = game,
+                        onPress = { model.press(it) },
+                        onRelease = model::releaseTouch,
+                        onAccessibleReveal = { model.press(it, accessible = true) },
+                        onCancelTouch = model::cancelTouch,
+                        onNext = model::next,
+                        onRestart = model::restart,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
             }
-            val level = entry.arguments?.getString("level")?.let { name ->
-                CardDifficulty.entries.firstOrNull { it.name == name }
-            }
-            val filter = DeckFilter(topic, level)
-            val childId = selectedId
-            if (childId != null && profiles.any { it.id == childId }) {
-                val model: DiscoverCardsViewModel = viewModel(
-                    key = "cards-$childId-${topic?.name ?: "ALL"}-${level?.name ?: "ALL"}",
-                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, filter, container.customCardRepository)
+            composable(PARENTS) {
+                val model: ParentalSettingsViewModel = viewModel(
+                    factory = ParentalSettingsViewModelFactory(container.parentalSettingsRepository)
                 )
-                val cardsState by model.state.collectAsStateWithLifecycle()
-                DiscoverCardsScreen(
-                    state = cardsState,
-                    onChoose = model::choose,
-                    onReveal = model::reveal,
-                    onNext = model::next,
-                    onRestart = model::restart,
+                val settings by model.settings.collectAsStateWithLifecycle()
+                ParentalSettingsScreen(
+                    settings = settings,
+                    onAudioChanged = model::setAudioEnabled,
+                    onSpeechRateChanged = model::setSpeechRate,
+                    onAnimationsChanged = model::setAnimationsEnabled,
                     onBack = { navController.popBackStack() }
                 )
             }
-        }
-        composable(CARDS) {
-            val childId = selectedId
-            if (childId != null && profiles.any { it.id == childId }) {
-                val model: DiscoverCardsViewModel = viewModel(
-                    key = "cards-$childId",
-                    factory = DiscoverCardsViewModelFactory(childId, container.progressRepository, customCardRepository = container.customCardRepository)
-                )
-                val cardsState by model.state.collectAsStateWithLifecycle()
-                DiscoverCardsScreen(
-                    state = cardsState,
-                    onChoose = model::choose,
-                    onReveal = model::reveal,
-                    onNext = model::next,
-                    onRestart = model::restart,
-                    onBack = { navController.popBackStack() }
-                )
+            composable(PROGRESS) {
+                if (selectedId != null) {
+                    ProgressScreen(
+                        progress = progress,
+                        history = answerHistory,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
             }
         }
-        composable(READING) {
-            val childId = selectedId
-            if (childId != null && profiles.any { it.id == childId }) {
-                val model: ActivityViewModel = viewModel(
-                    key = "reading-$childId",
-                    factory = ActivityViewModelFactory(LearningTopic.WORDS, childId, container.progressRepository, readingMode = true)
-                )
-                val readingState by model.state.collectAsStateWithLifecycle()
-                ActivityScreen(
-                    state = readingState,
-                    onAnswer = model::answer,
-                    onPrevious = model::previous,
-                    onNext = model::next,
-                    onBack = { navController.popBackStack() }
-                )
-            }
-        }
-        composable(ALPHABET) {
-            val childId = selectedId
-            if (childId != null && profiles.any { it.id == childId }) {
-                val model: AlphabetViewModel = viewModel(
-                    key = "alphabet-$childId",
-                    factory = AlphabetViewModelFactory(container.progressRepository, childId)
-                )
-                val alphabetState by model.state.collectAsStateWithLifecycle()
-                AlphabetScreen(
-                    state = alphabetState,
-                    onPrevious = model::previous,
-                    onNext = model::next,
-                    onAnswer = model::answer,
-                    onBack = { navController.popBackStack() }
-                )
-            }
-        }
-        composable(PARENTS) {
-            val model: ParentalSettingsViewModel = viewModel(
-                factory = ParentalSettingsViewModelFactory(container.parentalSettingsRepository)
-            )
-            val settings by model.settings.collectAsStateWithLifecycle()
-            ParentalSettingsScreen(
-                settings = settings,
-                onAudioChanged = model::setAudioEnabled,
-                onSpeechRateChanged = model::setSpeechRate,
-                onAnimationsChanged = model::setAnimationsEnabled,
-                onBack = { navController.popBackStack() }
-            )
-        }
-        composable(PROGRESS) {
-            if (selectedId != null) ProgressScreen(progress = progress, history = answerHistory, onBack = { navController.popBackStack() })
-        }
-        composable(
-            route = TOPIC,
-            arguments = listOf(navArgument("topicId") { type = NavType.StringType })
-        ) { entry ->
-            val topic = entry.arguments?.getString("topicId")?.let { id ->
-                LearningTopic.entries.firstOrNull { it.name == id }
-            }
-            val childId = selectedId
-            if (topic in listOf(LearningTopic.NUMBERS, LearningTopic.COLORS, LearningTopic.SHAPES, LearningTopic.ANIMALS, LearningTopic.SOUNDS, LearningTopic.WORDS)
-                && childId != null && profiles.any { it.id == childId }) {
-                val model: ActivityViewModel = viewModel(
-                    key = "activity-${topic!!.name}-$childId",
-                    factory = ActivityViewModelFactory(topic, childId, container.progressRepository)
-                )
-                val activityState by model.state.collectAsStateWithLifecycle()
-                ActivityScreen(
-                    state = activityState,
-                    onAnswer = model::answer,
-                    onPrevious = model::previous,
-                    onNext = model::next,
-                    onBack = { navController.popBackStack() }
-                )
-            } else {
-                TopicScreen(topic = topic, onBack = { navController.popBackStack() })
-            }
-        }
-    }
-    }
-}
-
-@Composable
-private fun TopicScreen(topic: LearningTopic?, onBack: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(topic?.title ?: "Atividade não encontrada", style = MaterialTheme.typography.headlineLarge)
-        Text(topic?.description ?: "Volta ao início e escolhe outra atividade.")
-        if (topic != null) Text("As atividades estarão disponíveis em breve.")
-        Button(onClick = onBack) { Text("Voltar ao início") }
     }
 }
