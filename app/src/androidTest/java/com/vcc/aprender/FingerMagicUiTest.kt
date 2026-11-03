@@ -19,7 +19,6 @@ import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.domain.magic.FingerMagicContent
 import com.vcc.aprender.domain.magic.FingerMagicSession
 import com.vcc.aprender.ui.home.HomeScreen
-import com.vcc.aprender.ui.home.HomeUiState
 import com.vcc.aprender.ui.magic.FingerMagicScreen
 import com.vcc.aprender.ui.magic.FingerMagicViewModel
 import com.vcc.aprender.ui.magic.FingerMagicUiState
@@ -62,7 +61,7 @@ class FingerMagicUiTest {
         var opened = false
         compose.setContent {
             AprenderTheme {
-                HomeScreen(HomeUiState.Success(LearningTopic.entries), {}, {}, { opened = true })
+                HomeScreen(onFingerMagicClick = { opened = true }, onSettingsClick = {})
             }
         }
         compose.onNodeWithTag("home-finger-magic").performScrollTo().performClick()

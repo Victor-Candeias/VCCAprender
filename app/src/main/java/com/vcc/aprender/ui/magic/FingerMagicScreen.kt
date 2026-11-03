@@ -76,7 +76,7 @@ fun FingerMagicScreen(
                 TextButton(onClick = onBack, modifier = Modifier.align(Alignment.Start).heightIn(min = 48.dp)) {
                     Text("Voltar ao início")
                 }
-                Text("Magia na ponta do dedo", style = MaterialTheme.typography.headlineMedium,
+                Text("Magia na ponta dos dedos", style = MaterialTheme.typography.headlineMedium,
                     color = AprenderColors.Navy, modifier = Modifier.semantics { heading() })
                 if (session.completed) {
                     BrandArtwork(BrandSymbol.Trophy, modifier = Modifier.size(100.dp), description = null)
