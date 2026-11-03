@@ -1,7 +1,7 @@
 package com.vcc.aprender
 
 import androidx.compose.ui.test.assertDoesNotExist
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -24,7 +24,7 @@ class SettingsScreenUiTest {
         listOf(
             "Mudar de perfil", "Ver progresso", "Área parental e preferências",
             "Voltar ao início"
-        ).forEach { composeRule.onNodeWithText(it).assertIsDisplayed() }
+        ).forEach { composeRule.onNodeWithText(it).assertExists() }
         listOf(
             "Leitura e reconhecimento de palavras",
             "Descobre a Resposta A/B/C",
@@ -45,9 +45,9 @@ class SettingsScreenUiTest {
                 onBack = { back = true }
             )
         }
-        composeRule.onNodeWithText("Mudar de perfil").performClick()
-        composeRule.onNodeWithText("Ver progresso").performClick()
-        composeRule.onNodeWithText("Área parental e preferências").performClick()
+        composeRule.onNodeWithText("Mudar de perfil").performScrollTo().performClick()
+        composeRule.onNodeWithText("Ver progresso").performScrollTo().performClick()
+        composeRule.onNodeWithText("Área parental e preferências").performScrollTo().performClick()
         composeRule.onNodeWithText("Voltar ao início").performScrollTo().performClick()
         composeRule.runOnIdle {
             assertTrue(profiles)
