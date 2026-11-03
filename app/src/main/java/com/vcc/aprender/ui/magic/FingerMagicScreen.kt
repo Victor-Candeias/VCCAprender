@@ -27,6 +27,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.vcc.aprender.domain.magic.MagicQuestion
+import com.vcc.aprender.domain.magic.MagicCategory
 import com.vcc.aprender.ui.audio.SpeechControls
 import com.vcc.aprender.ui.components.BrandArtwork
 import com.vcc.aprender.ui.components.BrandSymbol
@@ -89,6 +90,14 @@ fun FingerMagicScreen(
                 } else {
                     val question = session.question
                     GameProgress(session.index + 1, session.questions.size, "Pergunta")
+                    if (question.category != MagicCategory.CLASSIC) {
+                        Text(
+                            question.category.title,
+                            color = AprenderColors.Navy,
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.semantics { heading() }
+                        )
+                    }
                     Text(question.prompt, style = MaterialTheme.typography.headlineSmall,
                         textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().semantics { heading() })
                     Text("Mantém o dedo num quadrado durante 1 segundo para descobrir a carinha.",

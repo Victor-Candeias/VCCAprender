@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.vcc.aprender.data.progress.ProgressRepository
 import com.vcc.aprender.domain.magic.FingerMagicContent
+import com.vcc.aprender.domain.magic.FingerMagicDeck
 import com.vcc.aprender.domain.magic.FingerMagicSession
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 data class FingerMagicUiState(
     val session: FingerMagicSession = FingerMagicSession(),
@@ -22,9 +24,12 @@ data class FingerMagicUiState(
 class FingerMagicViewModel(
     private val profileId: Long,
     private val progressRepository: ProgressRepository,
-    private val nanoTime: () -> Long = System::nanoTime
+    private val nanoTime: () -> Long = System::nanoTime,
+    private val random: Random = Random.Default
 ) : ViewModel() {
-    private val mutableState = MutableStateFlow(FingerMagicUiState())
+    private val mutableState = MutableStateFlow(
+        FingerMagicUiState(session = FingerMagicDeck.newSession(random))
+    )
     val state = mutableState.asStateFlow()
     private var holdJob: Job? = null
     private var holdStartedNanos: Long? = null
@@ -115,7 +120,7 @@ class FingerMagicViewModel(
 
     fun restart() {
         clearTimers()
-        mutableState.value = FingerMagicUiState()
+        mutableState.value = FingerMagicUiState(session = FingerMagicDeck.newSession(random))
     }
 
     private fun clearTimers() {
