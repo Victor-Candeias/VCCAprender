@@ -16,12 +16,12 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import com.vcc.aprender.domain.magic.MagicPicture
 import com.vcc.aprender.ui.theme.AprenderColors
 
-private val Ink = AprenderColors.Ink
-private val Red = Color(0xFFE04449)
-private val Green = Color(0xFF348555)
-private val Gold = Color(0xFFFFCB45)
-private val Orange = Color(0xFFEF923D)
-private val Brown = Color(0xFF945C3B)
+internal val Ink = AprenderColors.Ink
+internal val Red = Color(0xFFE04449)
+internal val Green = Color(0xFF348555)
+internal val Gold = Color(0xFFFFCB45)
+internal val Orange = Color(0xFFEF923D)
+internal val Brown = Color(0xFF945C3B)
 
 /** Original question-specific vectors, available offline at every display density. */
 @Composable
@@ -198,6 +198,7 @@ fun MagicArtwork(picture: MagicPicture, modifier: Modifier = Modifier) {
                     line(50f, 50f, 50f, 28f, Ink, 3f); line(50f, 50f, 65f, 59f, Ink, 4f)
                     dot(50f, 50f, 3f, Red)
                 }
+                else -> drawCardPicture(picture)
             }
         }
     }
@@ -216,14 +217,14 @@ fun MagicFace(happy: Boolean, modifier: Modifier = Modifier) {
     }
 }
 
-private fun DrawScope.dot(x: Float, y: Float, radius: Float, color: Color) = drawCircle(color, radius, Offset(x, y))
-private fun DrawScope.oval(color: Color, x: Float, y: Float, w: Float, h: Float) = drawOval(color, Offset(x, y), Size(w, h))
-private fun DrawScope.line(x: Float, y: Float, endX: Float, endY: Float, color: Color, width: Float) =
+internal fun DrawScope.dot(x: Float, y: Float, radius: Float, color: Color) = drawCircle(color, radius, Offset(x, y))
+internal fun DrawScope.oval(color: Color, x: Float, y: Float, w: Float, h: Float) = drawOval(color, Offset(x, y), Size(w, h))
+internal fun DrawScope.line(x: Float, y: Float, endX: Float, endY: Float, color: Color, width: Float) =
     drawLine(color, Offset(x, y), Offset(endX, endY), width, StrokeCap.Round)
-private fun DrawScope.eyes(left: Float, right: Float, y: Float) {
+internal fun DrawScope.eyes(left: Float, right: Float, y: Float) {
     dot(left, y, 3f, Ink); dot(right, y, 3f, Ink)
 }
-private fun DrawScope.polygon(color: Color, vararg coordinates: Float) {
+internal fun DrawScope.polygon(color: Color, vararg coordinates: Float) {
     val path = Path().apply {
         moveTo(coordinates[0], coordinates[1])
         for (i in 2 until coordinates.size step 2) lineTo(coordinates[i], coordinates[i + 1])

@@ -1,5 +1,6 @@
 package com.vcc.aprender.ui.home
 
+import com.vcc.aprender.domain.magic.FingerMagicContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -93,7 +94,7 @@ fun HomeScreen(
                                 modifier = Modifier.size(64.dp), description = null)
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                 Text("Magia na ponta do dedo", style = MaterialTheme.typography.titleLarge)
-                                Text("20 perguntas para descobrir sorrisos com o teu dedo!", style = MaterialTheme.typography.bodyLarge)
+                                Text("${FingerMagicContent.questions.size} perguntas para descobrir sorrisos com o teu dedo!", style = MaterialTheme.typography.bodyLarge)
                             }
                         }
                     }

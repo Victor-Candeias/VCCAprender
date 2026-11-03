@@ -6,10 +6,10 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class FingerMagicSessionTest {
-    @Test fun twentyQuestionsHaveThreeDistinctImagesAndOneCorrectAnswer() {
+    @Test fun allQuestionsHaveThreeDistinctImagesAndOneCorrectAnswer() {
         val questions = FingerMagicContent.questions
-        assertEquals(20, questions.size)
-        assertEquals(20, questions.map { it.id }.distinct().size)
+        assertEquals(51, questions.size)
+        assertEquals(51, questions.map { it.id }.distinct().size)
         questions.forEach { question ->
             assertEquals(3, question.options.distinct().size)
             assertTrue(question.correctIndex in 0..2)
@@ -49,9 +49,9 @@ class FingerMagicSessionTest {
         assertTrue(next.visibleWrong.isEmpty())
     }
 
-    @Test fun allTwentyQuestionsMustBeSolvedBeforeFinishing() {
+    @Test fun allQuestionsMustBeSolvedBeforeFinishing() {
         var session = FingerMagicSession()
-        repeat(20) { index ->
+        repeat(FingerMagicContent.questions.size) { index ->
             assertEquals(index, session.index)
             assertFalse(session.completed)
             assertEquals(session, session.next())
