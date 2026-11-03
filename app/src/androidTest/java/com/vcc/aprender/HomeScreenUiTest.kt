@@ -2,7 +2,6 @@ package com.vcc.aprender
 
 import android.content.ComponentName
 import com.vcc.aprender.plugins.InstalledGame
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
