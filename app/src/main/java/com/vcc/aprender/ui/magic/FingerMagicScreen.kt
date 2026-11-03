@@ -100,42 +100,38 @@ fun FingerMagicScreen(
                     }
                     Text(question.prompt, style = MaterialTheme.typography.headlineSmall,
                         textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().semantics { heading() })
-                    Text("Mantém o dedo num quadrado durante 1 segundo para descobrir a carinha.",
+                    Text("Mantém o dedo sobre a imagem durante 1 segundo para escolher a resposta. Só tens uma tentativa.",
                         textAlign = TextAlign.Center)
-                    // Keep the three images and the three squares in matching columns.
-                    // Separate rows ensure different label heights never misalign the squares.
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         question.options.forEachIndexed { index, picture ->
+                            val selected = index in session.attempted
+                            val correctVisible = session.showCorrectAnswer && index == question.correctIndex
+                            val revealed = selected || correctVisible
+                            val progress = if (state.heldOption == index && !session.answered)
+                                state.revealProgress else 0f
                             Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                MagicArtwork(picture, Modifier.fillMaxWidth().widthIn(max = 150.dp)
-                                    .background(Color.White, RoundedCornerShape(20.dp)).padding(6.dp))
+                                MagicAnswerImage(
+                                    question = question,
+                                    index = index,
+                                    progress = progress,
+                                    revealed = revealed,
+                                    happy = correctVisible,
+                                    enabled = !session.answered,
+                                    onPress = { onPress(index) },
+                                    onRelease = { onRelease(index) },
+                                    onAccessibleReveal = { onAccessibleReveal(index) }
+                                )
                                 Text("${'A' + index} · ${picture.label}", textAlign = TextAlign.Center,
                                     style = MaterialTheme.typography.titleMedium)
                             }
                         }
                     }
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        question.options.forEachIndexed { index, picture ->
-                            val visible = index in session.visibleWrong || (session.solved && index == question.correctIndex)
-                            val progress = if (visible) 1f else if (state.heldOption == index) state.revealProgress else 0f
-                            Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                Text("${'A' + index}", style = MaterialTheme.typography.titleLarge,
-                                    modifier = Modifier.clearAndSetSemantics { })
-                                MagicSquare(
-                                    question = question, index = index, progress = progress, revealed = visible,
-                                    happy = index == question.correctIndex,
-                                    enabled = !session.solved && !visible,
-                                    onPress = { onPress(index) }, onRelease = { onRelease(index) },
-                                    onAccessibleReveal = { onAccessibleReveal(index) }
-                                )
-                            }
-                        }
-                    }
                     val feedback = when {
-                        session.solved -> "Encontraste o sorriso! ${question.explanation}"
-                        session.visibleWrong.isNotEmpty() -> "Uma carinha triste. Experimenta outro quadrado!"
+                        session.solved -> "Muito bem! ${question.explanation}"
+                        session.answered && !session.showCorrectAnswer ->
+                            "Resposta errada. A revelar a resposta correta..."
+                        session.answered -> "Esta era a resposta correta! ${question.explanation}"
                         else -> null
                     }
                     if (feedback != null) {
@@ -144,9 +140,9 @@ fun FingerMagicScreen(
                                 .background(if (session.solved) AprenderColors.Mint else AprenderColors.Sunshine, RoundedCornerShape(16.dp))
                                 .padding(16.dp).semantics { liveRegion = LiveRegionMode.Polite })
                     }
-                    if (session.solved) {
+                    if (session.canAdvance) {
                         Button(onClick = onNext, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)) {
-                            Text(if (session.index == session.questions.lastIndex) "Concluir" else "Seguinte")
+                            Text(if (session.index == session.questions.lastIndex) "Concluir" else "Pergunta seguinte")
                         }
                     }
                     key(question.id) {
@@ -165,7 +161,7 @@ fun FingerMagicScreen(
 }
 
 @Composable
-private fun MagicSquare(
+private fun MagicAnswerImage(
     question: MagicQuestion,
     index: Int,
     progress: Float,
@@ -183,14 +179,17 @@ private fun MagicSquare(
     val shape = RoundedCornerShape(16.dp)
     val status = when {
         revealed && happy -> "Sorriso. Resposta correta"
-        revealed -> "Cara triste. Tenta outra resposta"
+        revealed -> "Cara triste. Resposta errada"
         progress > 0f -> "A revelar"
         else -> "Por revelar"
     }
     Box(
         modifier = Modifier.fillMaxWidth().widthIn(max = 150.dp).aspectRatio(1f)
-            .testTag("magic-square-$index")
-            .border(if (focused) 4.dp else 2.dp, if (focused) AprenderColors.Blue else AprenderColors.Navy, shape)
+            .testTag("magic-image-$index")
+            .border(if (focused) 4.dp else 2.dp,
+                if (focused) AprenderColors.Blue else if (revealed)
+                    (if (happy) AprenderColors.Mint else AprenderColors.Sunshine)
+                else AprenderColors.Navy, shape)
             .clip(shape).background(Color.White)
             .pointerInput(question.id) {
                 awaitEachGesture {
@@ -214,22 +213,35 @@ private fun MagicSquare(
             }
             .onKeyEvent { event ->
                 if (event.key in listOf(Key.Enter, Key.NumPadEnter, Key.Spacebar, Key.DirectionCenter)) {
-                    if (enabled && event.type == KeyEventType.KeyDown) press()
+                    if (canPress && event.type == KeyEventType.KeyDown) press()
                     if (event.type == KeyEventType.KeyUp) release()
                     true
                 } else false
             }
             .semantics(mergeDescendants = true) {
                 role = Role.Button
-                contentDescription = "Quadrado ${'A' + index}, ${question.options[index].label}"
+                contentDescription = "Imagem ${'A' + index}, ${question.options[index].label}"
                 stateDescription = status
-                if (enabled) onClick(label = "Revelar carinha em 1 segundo") { onAccessibleReveal(); true }
+                if (enabled) onClick(label = "Selecionar imagem") { onAccessibleReveal(); true }
                 else disabled()
             }.focusable(),
         contentAlignment = Alignment.Center
     ) {
-        // No answer is exposed to accessibility until its square is fully revealed.
-        MagicFace(happy, Modifier.fillMaxSize().padding(4.dp))
-        Box(Modifier.fillMaxSize().background(AprenderColors.Ink.copy(alpha = 1f - progress)))
+        MagicArtwork(question.options[index], Modifier.fillMaxSize().padding(6.dp))
+        if (progress > 0f && !revealed) {
+            Box(
+                Modifier.fillMaxSize()
+                    .background(AprenderColors.Ink.copy(alpha = progress * 0.30f))
+            )
+        }
+        if (revealed) {
+            Box(
+                Modifier.fillMaxSize()
+                    .background(Color.White.copy(alpha = 0.72f)),
+                contentAlignment = Alignment.Center
+            ) {
+                MagicFace(happy, Modifier.fillMaxSize(0.70f))
+            }
+        }
     }
 }
