@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="com.vcc.aprender.permission.PLAY_GAME"/>
+    <application android:label="Jogo Exemplo VCC" android:allowBackup="false"
+        android:supportsRtl="true" android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        <activity android:name=".SampleGameActivity"
+            android:exported="true"
+            android:permission="com.vcc.aprender.permission.PLAY_GAME">
+            <intent-filter>
+                <action android:name="com.vcc.aprender.plugin.action.PLAY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="com.vcc.aprender.plugin.GAME_ID"
+                android:value="com.vcc.aprender.sample.quiz"/>
+            <meta-data android:name="com.vcc.aprender.plugin.GAME_TITLE"
+                android:value="Jogo exemplo: Descobre a cor"/>
+            <meta-data android:name="com.vcc.aprender.plugin.PROTOCOL_VERSION"
+                android:value="1"/>
+        </activity>
+    </application>
+</manifest>
