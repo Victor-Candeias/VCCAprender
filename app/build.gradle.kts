@@ -77,6 +77,7 @@ tasks.matching { it.name == "preReleaseBuild" }.configureEach {
     }
 }
 dependencies {
+    implementation(project(":game-plugin-sdk"))
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.activity:activity-compose:1.9.3")

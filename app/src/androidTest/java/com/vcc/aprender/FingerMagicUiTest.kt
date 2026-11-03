@@ -71,7 +71,7 @@ class FingerMagicUiTest {
     @Test fun shortPressCancelsAndFullPressKeepsCorrectSmileUntilNext() {
         val model = showGame()
         val correct = model.state.value.session.question.correctIndex
-        val square = compose.onNodeWithTag("magic-square-$correct")
+        val square = compose.onNodeWithTag("magic-image-$correct")
         square.performScrollTo().performTouchInput { down(center); advanceEventTime(250); up() }
         compose.runOnIdle {
             assertFalse(model.state.value.session.solved)
@@ -86,29 +86,33 @@ class FingerMagicUiTest {
         compose.waitUntil(5_000) { (System.nanoTime() - start) / 1_000_000 > 3_300 }
         compose.runOnIdle { assertTrue(model.state.value.session.solved); assertEquals(0, model.state.value.session.index) }
         square.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Sorriso. Resposta correta"))
-        compose.onNodeWithText("Seguinte").performScrollTo().performClick()
+        compose.onNodeWithText("Pergunta seguinte").performScrollTo().performClick()
         compose.runOnIdle { assertEquals(1, model.state.value.session.index); assertFalse(model.state.value.session.solved) }
     }
 
-    @Test fun wrongSmileRemainsWhileHeldThenHidesThreeSecondsAfterRelease() {
+    @Test fun wrongAnswerLocksImagesThenRevealsCorrectSmileAndNext() {
         val model = showGame()
-        val wrong = (model.state.value.session.question.correctIndex + 1) % 3
-        val square = compose.onNodeWithTag("magic-square-$wrong")
-        square.performScrollTo().performTouchInput { down(center) }
-        compose.waitUntil(4_000) { wrong in model.state.value.session.visibleWrong }
-        val heldSince = System.nanoTime()
-        compose.waitUntil(5_000) { (System.nanoTime() - heldSince) / 1_000_000 > 3_300 }
-        compose.runOnIdle { assertTrue(wrong in model.state.value.session.visibleWrong) }
-        square.performTouchInput { up() }
-        compose.runOnIdle { assertTrue(wrong in model.state.value.session.visibleWrong) }
-        val releasedAt = System.nanoTime()
-        compose.waitUntil(3_000) { (System.nanoTime() - releasedAt) / 1_000_000 > 2_300 }
-        compose.runOnIdle { assertTrue(wrong in model.state.value.session.visibleWrong) }
-        square.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Cara triste. Tenta outra resposta"))
-        compose.onNodeWithText("Seguinte").assertDoesNotExist()
-        compose.waitUntil(4_000) { model.state.value.session.visibleWrong.isEmpty() }
-        compose.runOnIdle { assertFalse(model.state.value.session.solved) }
-        square.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Por revelar"))
+        val correct = model.state.value.session.question.correctIndex
+        val wrong = (correct + 1) % 3
+        val image = compose.onNodeWithTag("magic-image-$wrong")
+        image.performScrollTo().performTouchInput { down(center) }
+        compose.waitUntil(4_000) { model.state.value.session.answered }
+        image.performTouchInput { up() }
+        compose.runOnIdle {
+            assertEquals(setOf(wrong), model.state.value.session.attempted)
+            assertFalse(model.state.value.session.solved)
+            assertFalse(model.state.value.session.canReveal(correct))
+        }
+        image.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Cara triste. Resposta errada"))
+        compose.onNodeWithTag("magic-image-$correct")
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Por revelar"))
+        compose.onNodeWithText("Pergunta seguinte").assertDoesNotExist()
+        compose.waitUntil(5_000) { model.state.value.session.showCorrectAnswer }
+        compose.onNodeWithTag("magic-image-$correct")
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Sorriso. Resposta correta"))
+        image.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Cara triste. Resposta errada"))
+        compose.onNodeWithText("Pergunta seguinte").performScrollTo().performClick()
+        compose.runOnIdle { assertEquals(1, model.state.value.session.index); assertFalse(model.state.value.session.answered) }
     }
 
     @Test fun accessibilityClickRevealsWithoutPhysicalHoldAndCancellationDoesNotAnswer() {
@@ -116,7 +120,7 @@ class FingerMagicUiTest {
         val correct = model.state.value.session.question.correctIndex
         compose.runOnIdle { model.press(correct); model.cancelTouch() }
         compose.runOnIdle { assertNull(model.state.value.heldOption); assertFalse(model.state.value.session.solved) }
-        compose.onNodeWithTag("magic-square-$correct").performScrollTo()
+        compose.onNodeWithTag("magic-image-$correct").performScrollTo()
             .performSemanticsAction(SemanticsActions.OnClick) { it() }
         compose.waitUntil(4_000) { model.state.value.session.solved }
         compose.runOnIdle { assertNull(model.state.value.heldOption) }
@@ -139,9 +143,9 @@ class FingerMagicUiTest {
             assertTrue(model.state.value.session.solved)
             assertNull(model.state.value.heldOption)
         }
-        compose.onNodeWithTag("magic-square-$correct")
+        compose.onNodeWithTag("magic-image-$correct")
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Sorriso. Resposta correta"))
-        compose.onNodeWithText("Seguinte").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Pergunta seguinte").performScrollTo().assertIsDisplayed()
     }
 
     @Test fun nextIsReachableWithTextAtTwoHundredPercent() {
@@ -156,7 +160,7 @@ class FingerMagicUiTest {
                 }
             }
         }
-        compose.onNodeWithText("Seguinte").performScrollTo().assertIsDisplayed().performClick()
+        compose.onNodeWithText("Pergunta seguinte").performScrollTo().assertIsDisplayed().performClick()
         compose.runOnIdle { assertTrue(advanced) }
     }
 
@@ -169,7 +173,7 @@ class FingerMagicUiTest {
         compose.runOnIdle {
             val initial = model.state.value.session
             assertEquals(expectedFirst, initial.questions.map { it.id })
-            assertEquals(111, initial.questions.size)
+            assertEquals(86, initial.questions.size)
             // Re-accessing the Compose state must never shuffle the deck again.
             assertEquals(expectedFirst, model.state.value.session.questions.map { it.id })
             assertEquals(0, initial.index)
@@ -205,7 +209,7 @@ class FingerMagicUiTest {
                 FingerMagicScreen(FingerMagicUiState(session = completed), {}, {}, {}, {}, {}, { restarted = true }, {})
             }
         }
-        compose.onNodeWithText("Parabéns! Descobriste os 111 sorrisos!").assertIsDisplayed()
+        compose.onNodeWithText("Parabéns! Descobriste os 86 sorrisos!").assertIsDisplayed()
         compose.onNodeWithText("Jogar novamente").performScrollTo().performClick()
         compose.runOnIdle { assertTrue(restarted) }
     }

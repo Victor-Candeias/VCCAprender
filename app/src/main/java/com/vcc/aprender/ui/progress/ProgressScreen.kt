@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.progress.AnswerHistory
+import com.vcc.aprender.data.plugins.ExternalGameSession
 import com.vcc.aprender.data.progress.LearningProgress
 import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.domain.progress.CompetencyReportCalculator
@@ -38,6 +39,7 @@ import java.util.Locale
 fun ProgressScreen(
     progress: List<LearningProgress>,
     history: List<AnswerHistory> = emptyList(),
+    externalSessions: List<ExternalGameSession> = emptyList(),
     onBack: () -> Unit
 ) {
     val report = CompetencyReportCalculator.calculate(history)
@@ -68,6 +70,24 @@ fun ProgressScreen(
                         Text("Respostas certas: ${summary.correctAnswers} de ${summary.totalAnswers}")
                         Text("Taxa de acerto: ${summary.accuracyPercent}%")
                         FamilyProgress(summary.accuracyPercent, "Taxa de acerto")
+                    }
+                }
+            }
+            if (externalSessions.isNotEmpty()) {
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    Text(
+                        "Jogos adicionais instalados",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+                items(externalSessions.take(20), key = { "plugin-session-${it.id}" }) { session ->
+                    FamilySection(session.gameId, BrandSymbol.Trophy, AprenderColors.Mint) {
+                        Text("${session.correctAnswers} de ${session.totalQuestions} respostas certas")
+                        Text(
+                            DateFormat.getDateTimeInstance(
+                                DateFormat.SHORT, DateFormat.SHORT, portuguese
+                            ).format(Date(session.completedAt))
+                        )
                     }
                 }
             }
