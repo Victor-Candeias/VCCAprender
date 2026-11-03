@@ -125,17 +125,17 @@ class FingerMagicUiTest {
 
     @Test fun releaseAtRevealDeadlineKeepsResultEvenBeforeNextTimerTick() {
         var nowNanos = 0L
-        val model = showGame { nowNanos }
+        val model = showGame(nanoTime = { nowNanos })
         val correct = model.state.value.session.question.correctIndex
         compose.runOnIdle {
             model.press(correct)
-            nowNanos = 1_999_999_999L
+            nowNanos = FingerMagicContent.REVEAL_MILLIS * 1_000_000L - 1L
             model.releaseTouch(correct)
             assertFalse(model.state.value.session.solved)
             assertTrue(model.state.value.session.attempted.isEmpty())
 
             model.press(correct)
-            nowNanos += 1_000_000_000L
+            nowNanos += FingerMagicContent.REVEAL_MILLIS * 1_000_000L
             model.releaseTouch(correct)
             assertTrue(model.state.value.session.solved)
             assertNull(model.state.value.heldOption)
