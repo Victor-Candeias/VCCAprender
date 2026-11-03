@@ -49,6 +49,8 @@ class GameMotionUiTest {
             }
         }
         composeRule.onNodeWithText("Boa tentativa!").assertIsDisplayed()
-        composeRule.onNodeWithContentDescription("Continua a tentar").assertExists()
+        composeRule.onNodeWithText("Boa tentativa").assertExists()
+        composeRule.onNodeWithText("Resposta correta").assertDoesNotExist()
+        composeRule.onNodeWithContentDescription("Continua a tentar").assertDoesNotExist()
     }
 }

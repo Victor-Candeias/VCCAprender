@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.alphabet.AlphabetContent
-import com.vcc.aprender.domain.model.LearningTopic
 import com.vcc.aprender.ui.audio.SpeechControls
 import com.vcc.aprender.ui.components.AdaptiveTwoPaneScreen
 import com.vcc.aprender.ui.components.GameAnswerButton
@@ -23,7 +22,7 @@ import com.vcc.aprender.ui.components.GameFeedback
 import com.vcc.aprender.ui.components.GameNavigation
 import com.vcc.aprender.ui.components.GameProgress
 import com.vcc.aprender.ui.components.GameQuestionTransition
-import com.vcc.aprender.ui.components.TopicIllustration
+import com.vcc.aprender.ui.components.LearningArtwork
 
 @Composable
 fun AlphabetScreen(
@@ -50,7 +49,7 @@ fun AlphabetScreen(
                     ) {
                         Text("${card.letter}  ${card.letter.lowercaseChar()}",
                             style = MaterialTheme.typography.displayLarge)
-                        TopicIllustration(LearningTopic.LETTERS)
+                        LearningArtwork(card.illustration, decorative = true)
                         Text(card.word, style = MaterialTheme.typography.headlineMedium)
                     }
                     SpeechControls(

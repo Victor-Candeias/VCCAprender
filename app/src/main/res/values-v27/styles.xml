@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.VCCAprender" parent="Base.VCCAprender">
-        <item name="android:navigationBarColor">@color/brand_cream</item>
-        <item name="android:windowLightNavigationBar">true</item>
-    </style>
-</resources>
+<resources><style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender"><item name="android:navigationBarColor">@color/brand_cream</item><item name="android:windowLightNavigationBar">true</item></style></resources>

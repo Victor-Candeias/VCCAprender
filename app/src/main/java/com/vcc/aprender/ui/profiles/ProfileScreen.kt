@@ -42,6 +42,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.profile.ChildProfile
 import com.vcc.aprender.ui.components.BrandArtwork
+import com.vcc.aprender.ui.components.BrandSymbol
 import com.vcc.aprender.ui.components.FamilyHeader
 import com.vcc.aprender.ui.components.FamilySection
 import com.vcc.aprender.ui.components.avatarSymbol
@@ -83,7 +84,7 @@ fun ProfileScreen(
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
-                FamilyHeader("👧 🧒", "Quem vai aprender?",
+                FamilyHeader(BrandSymbol.Person, "Quem vai aprender?",
                     "Escolhe o teu perfil para começar a aventura!", AprenderColors.Lavender)
             }
             item(span = { GridItemSpan(maxLineSpan) }) {
@@ -93,7 +94,7 @@ fun ProfileScreen(
                 )
             }
             items(profiles, key = { it.id }) { profile ->
-                FamilySection(profile.name, profile.avatar, AprenderColors.Sky) {
+                FamilySection(profile.name, avatarSymbol(profile.avatar), AprenderColors.Sky) {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text("${profile.age} anos", style = MaterialTheme.typography.bodyLarge)
                         Button(

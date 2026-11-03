@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp" android:height="160dp"
+    android:viewportWidth="100" android:viewportHeight="100">
+    <path android:fillColor="#AD754D" android:strokeColor="#243B53" android:strokeWidth="2" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M21,50a29,39 0 1,0 58,0a29,39 0 1,0 -58,0" />
+    <path android:fillColor="#278653" android:strokeColor="#243B53" android:strokeWidth="2" android:strokeLineJoin="round" android:strokeLineCap="round" android:pathData="M26,50a24,33 0 1,0 48,0a24,33 0 1,0 -48,0" />
+    <path android:fillColor="#EAF6BC" android:pathData="M41,50a9,14 0 1,0 18,0a9,14 0 1,0 -18,0" />
+    <path android:fillColor="#243B53" android:pathData="M64.2,50.0a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M61.14427190999916,62.93127555043441a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M53.14427190999916,70.92324335849338a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M43.255728090000844,70.92324335849338a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M35.255728090000844,62.931275550434414a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M32.2,50.0a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M35.255728090000844,37.06872444956559a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M43.255728090000844,29.076756641506623a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M53.14427190999916,29.07675664150662a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+    <path android:fillColor="#243B53" android:pathData="M61.14427190999916,37.068724449565586a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+</vector>

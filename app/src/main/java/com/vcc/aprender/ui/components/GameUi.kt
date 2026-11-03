@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -76,7 +77,8 @@ fun GameAnswerButton(
     enabled: Boolean,
     selected: Boolean = false,
     correct: Boolean = false,
-    prefix: String? = null
+    prefix: String? = null,
+    illustration: String? = null
 ) {
     val motion = LocalGameAnimationsEnabled.current
     val tint = when {
@@ -121,6 +123,9 @@ fun GameAnswerButton(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             if (prefix != null) Text(prefix, style = MaterialTheme.typography.titleMedium)
+            if (illustration != null) LearningArtwork(
+                illustration, modifier = Modifier.size(40.dp), decorative = true
+            )
             Text(text, modifier = Modifier.weight(1f, fill = false),
                 style = MaterialTheme.typography.titleMedium)
             // Shape and label accompany colour; do not rely on colour alone.

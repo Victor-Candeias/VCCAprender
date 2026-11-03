@@ -27,7 +27,7 @@ class HomeScreenUiTest {
                 onTopicClick = { selected = it }
             )
         }
-        composeRule.onNodeWithText("🌈  VCCAprender").assertIsDisplayed()
+        composeRule.onNodeWithText("VCCAprender").assertIsDisplayed()
         composeRule.onNodeWithText(LearningTopic.ANIMALS.title).performScrollTo().performClick()
         composeRule.runOnIdle { assertEquals(LearningTopic.ANIMALS, selected) }
     }
@@ -44,5 +44,19 @@ class HomeScreenUiTest {
         composeRule.onNodeWithText("Falha ao carregar").assertIsDisplayed()
         composeRule.onNodeWithText("Tentar novamente").performClick()
         composeRule.runOnIdle { assertEquals(true, retried) }
+    }
+
+    @Test fun settingsOptionIsAvailableAtTheEndOfTheMenu() {
+        var opened = false
+        composeRule.setContent {
+            HomeScreen(
+                state = HomeUiState.Success(listOf(LearningTopic.ANIMALS)),
+                onRetry = {},
+                onTopicClick = {},
+                onSettingsClick = { opened = true }
+            )
+        }
+        composeRule.onNodeWithText("Configurações").performScrollTo().performClick()
+        composeRule.runOnIdle { assertEquals(true, opened) }
     }
 }

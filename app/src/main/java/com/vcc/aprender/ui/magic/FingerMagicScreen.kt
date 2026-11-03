@@ -3,7 +3,8 @@ package com.vcc.aprender.ui.magic
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.focusable
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +18,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextAlign
@@ -59,11 +61,7 @@ fun FingerMagicScreen(
     Surface(color = AprenderColors.Cream, modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier.background(AprenderColors.Blue)
-                .windowInsetsPadding(WindowInsets.statusBars)
-                .background(AprenderColors.Cream)
-                .windowInsetsPadding(WindowInsets.navigationBars.union(
-                    WindowInsets.displayCutout.only(WindowInsetsSides.Horizontal)
-                )),
+                .background(AprenderColors.Cream),
             contentAlignment = Alignment.TopCenter
         ) {
             val scroll = rememberScrollState()
@@ -93,7 +91,7 @@ fun FingerMagicScreen(
                     GameProgress(session.index + 1, session.questions.size, "Pergunta")
                     Text(question.prompt, style = MaterialTheme.typography.headlineSmall,
                         textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().semantics { heading() })
-                    Text("Mantém o dedo num quadrado durante 2 segundos para descobrir a carinha.",
+                    Text("Mantém o dedo num quadrado durante 1 segundo para descobrir a carinha.",
                         textAlign = TextAlign.Center)
                     // Keep the three images and the three squares in matching columns.
                     // Separate rows ensure different label heights never misalign the squares.
@@ -186,12 +184,20 @@ private fun MagicSquare(
             .border(if (focused) 4.dp else 2.dp, if (focused) AprenderColors.Blue else AprenderColors.Navy, shape)
             .clip(shape).background(Color.White)
             .pointerInput(question.id) {
-                detectTapGestures(onPress = {
-                    if (canPress) {
-                        press()
-                        try { tryAwaitRelease() } finally { release() }
+                awaitEachGesture {
+                    val down = awaitFirstDown(requireUnconsumed = false)
+                    if (!canPress) return@awaitEachGesture
+                    press()
+                    try {
+                        var pressed = true
+                        while (pressed) {
+                            val event = awaitPointerEvent(PointerEventPass.Final)
+                            pressed = event.changes.any { it.id == down.id && it.pressed }
+                        }
+                    } finally {
+                        release()
                     }
-                })
+                }
             }
             .onFocusChanged {
                 if (focused && !it.isFocused) release()
@@ -208,7 +214,7 @@ private fun MagicSquare(
                 role = Role.Button
                 contentDescription = "Quadrado ${'A' + index}, ${question.options[index].label}"
                 stateDescription = status
-                if (enabled) onClick(label = "Revelar carinha em 2 segundos") { onAccessibleReveal(); true }
+                if (enabled) onClick(label = "Revelar carinha em 1 segundo") { onAccessibleReveal(); true }
                 else disabled()
             }.focusable(),
         contentAlignment = Alignment.Center

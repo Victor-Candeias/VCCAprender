@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.cards.AnswerFeedbackFactory
 import com.vcc.aprender.ui.audio.SpeechControls
 import com.vcc.aprender.ui.components.AdaptiveTwoPaneScreen
+import com.vcc.aprender.ui.components.LearningArtwork
 import com.vcc.aprender.ui.components.GameAnswerButton
 import com.vcc.aprender.ui.components.GameCompletionBanner
 import com.vcc.aprender.ui.components.GameProgress
@@ -88,7 +89,7 @@ fun DiscoverCardsScreen(
                                         )
                                         Text("Quadrados por revelar: ${state.tiles.remaining}")
                                     } else {
-                                        Text(illustration, style = MaterialTheme.typography.displayLarge)
+                                        LearningArtwork(illustration)
                                     }
                                 }
                                 Text(
@@ -104,7 +105,8 @@ fun DiscoverCardsScreen(
                         visibleCard.options.forEachIndexed { index, option ->
                             val letter = ('A' + index)
                             GameAnswerButton(
-                                text = listOfNotNull(option.illustration, option.label).joinToString("  "),
+                                text = option.label,
+                                illustration = option.illustration,
                                 prefix = "$letter)",
                                 onClick = { onChoose(option.id) },
                                 enabled = current && state.answer == null,

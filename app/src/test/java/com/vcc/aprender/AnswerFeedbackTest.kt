@@ -14,7 +14,7 @@ class AnswerFeedbackTest {
     @Test fun correctAnswerShowsPositiveFeedback() {
         val feedback = AnswerFeedbackFactory.from(card, card.evaluate(card.correctOptionId))
         assertEquals(FeedbackKind.CORRECT, feedback.kind)
-        assertEquals("🥳", feedback.emoji)
+        assertEquals("Muito bem!", feedback.title)
     }
 
     @Test fun wrongAnswerExplainsCorrectChoice() {

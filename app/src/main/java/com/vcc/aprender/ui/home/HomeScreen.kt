@@ -37,9 +37,9 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.model.LearningTopic
-import com.vcc.aprender.ui.components.TopicIllustration
 import com.vcc.aprender.ui.components.BrandArtwork
 import com.vcc.aprender.ui.components.BrandSymbol
+import com.vcc.aprender.ui.components.TopicIllustration
 import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
@@ -47,7 +47,8 @@ fun HomeScreen(
     state: HomeUiState,
     onRetry: () -> Unit,
     onTopicClick: (LearningTopic) -> Unit,
-    onFingerMagicClick: (() -> Unit)? = null
+    onFingerMagicClick: (() -> Unit)? = null,
+    onSettingsClick: () -> Unit = {}
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyVerticalGrid(
@@ -64,7 +65,8 @@ fun HomeScreen(
                         .padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("🌈  VCCAprender", modifier = Modifier.semantics {
+                    BrandArtwork(BrandSymbol.Book, description = null)
+                    Text("VCCAprender", modifier = Modifier.semantics {
                         heading()
                         contentDescription = "VCCAprender"
                     }, style = MaterialTheme.typography.headlineLarge,
@@ -136,6 +138,14 @@ fun HomeScreen(
                             }
                         }
                     }
+                }
+            }
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                Button(
+                    onClick = onSettingsClick,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
+                ) {
+                    Text("Configurações")
                 }
             }
         }

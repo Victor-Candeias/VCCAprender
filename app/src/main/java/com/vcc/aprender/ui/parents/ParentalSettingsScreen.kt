@@ -17,6 +17,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.data.settings.ParentalSettings
 import com.vcc.aprender.ui.components.AdaptiveTwoPaneScreen
+import com.vcc.aprender.ui.components.BrandSymbol
 import com.vcc.aprender.ui.components.FamilyHeader
 import com.vcc.aprender.ui.components.FamilySection
 import com.vcc.aprender.ui.theme.AprenderColors
@@ -32,9 +33,9 @@ fun ParentalSettingsScreen(
     AdaptiveTwoPaneScreen(
         minimumWidthDp = 760f,
         primary = {
-            FamilyHeader("🛡️", "Área parental",
+            FamilyHeader(BrandSymbol.Shield, "Área parental",
                 "Personaliza a experiência de aprendizagem.", AprenderColors.Sky)
-            FamilySection("Leitura por voz", "🔊", AprenderColors.Mint) {
+            FamilySection("Leitura por voz", BrandSymbol.Sound, AprenderColors.Mint) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -63,7 +64,7 @@ fun ParentalSettingsScreen(
             }
         },
         secondary = {
-            FamilySection("Movimento e animações", "⭐", AprenderColors.Lavender) {
+            FamilySection("Movimento e animações", BrandSymbol.Star, AprenderColors.Lavender) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -82,7 +83,7 @@ fun ParentalSettingsScreen(
                 }
                 Text("Desativa os movimentos para uma experiência mais tranquila. As preferências de acessibilidade do Android também são respeitadas.")
             }
-            FamilySection("Privacidade", "🔒", AprenderColors.Sunshine) {
+            FamilySection("Privacidade", BrandSymbol.Lock, AprenderColors.Sunshine) {
                 Text("As preferências ficam guardadas neste dispositivo. Não é necessária ligação à Internet.")
                 Text("A gestão dos perfis e o progresso de aprendizagem estão disponíveis no menu inicial.")
             }

@@ -1,5 +1,17 @@
 # VA-030 — Layouts responsivos, tablets e orientação horizontal
 
+## Correção das barras do sistema — 1 de novembro de 2026
+
+A captura `Documents/Screenshot_20261101-220847.png` mostrou o menu sobreposto à barra de estado e cartões por baixo dos botões de navegação do Android.
+
+- `MainActivity` configura explicitamente o modo edge-to-edge com ícones escuros sobre o fundo claro da aplicação.
+- A raiz comum de todas as rotas aplica `safeDrawingPadding`, reservando e consumindo uma única vez as margens das barras, dos recortes do ecrã e do teclado. As páginas mantêm os seus espaçamentos próprios.
+- `SystemBarsUiTest` abre a atividade real e compara os quatro limites da área útil com as margens comunicadas pelo Android, detetando sobreposições e margens duplicadas.
+- Validação no Android 15: três botões em retrato, três botões em paisagem e gestos em retrato com recorte de câmara simulado. Os três cenários passaram.
+- Compilação Debug/Release e lint concluídos: zero erros de lint, 20 avisos existentes.
+- Nova release `0.1.0`, build `2`, assinada e verificada com o mesmo certificado da build 1. APK: `.verification/VCCAprender-v0.1.0-build2-release.apk`.
+- Captura revista: `.verification/home-system-bars-fixed.png`. Relatórios: `.verification/system-bars-results.json` e `.verification/release-build2-verification.json`.
+
 **Issue:** [#68](https://github.com/Victor-Candeias/VCCAprender/issues/68)  
 **Branch:** `feature/VA-030-responsive-tablet-layouts`  
 **Base:** `feature/VA-029-game-animations`  

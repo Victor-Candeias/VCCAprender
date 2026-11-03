@@ -24,26 +24,26 @@ import androidx.compose.ui.unit.dp
 import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
-fun FamilyHeader(icon: String, title: String, subtitle: String, background: Color = AprenderColors.Sky) {
+fun FamilyHeader(icon: BrandSymbol, title: String, subtitle: String, background: Color = AprenderColors.Sky) {
     Column(
         modifier = Modifier.fillMaxWidth().background(background, RoundedCornerShape(24.dp)).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        BrandArtwork(familySymbol(icon), description = null)
+        BrandArtwork(icon, description = null)
         Text(title, modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.headlineMedium, color = AprenderColors.Ink)
         Text(subtitle, style = MaterialTheme.typography.bodyLarge, color = AprenderColors.Ink)
     }
 }
 
 @Composable
-fun FamilySection(title: String, icon: String, background: Color = AprenderColors.Mint, content: @Composable () -> Unit) {
+fun FamilySection(title: String, icon: BrandSymbol, background: Color = AprenderColors.Mint, content: @Composable () -> Unit) {
     Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(20.dp)) {
         Column(
             modifier = Modifier.fillMaxWidth().background(background).padding(18.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                BrandArtwork(familySymbol(icon), description = title)
+                BrandArtwork(icon, description = null)
                 Text(title, modifier = Modifier.semantics { heading() }, style = MaterialTheme.typography.titleLarge, color = AprenderColors.Ink)
             }
             content()
@@ -63,20 +63,4 @@ fun FamilyProgress(value: Int, label: String) {
             trackColor = AprenderColors.Sky
         )
     }
-}
-
-private fun familySymbol(icon: String): BrandSymbol = when {
-    icon.contains("🐻") -> BrandSymbol.Bear
-    icon.contains("🦊") -> BrandSymbol.Fox
-    icon.contains("🐼") -> BrandSymbol.Panda
-    icon.contains("👧") || icon.contains("🧒") -> BrandSymbol.Person
-    icon.contains("🛡") || icon.contains("🔒") -> BrandSymbol.Shield
-    icon.contains("🔊") || icon.contains("🎵") -> BrandSymbol.Sound
-    icon.contains("🏆") || icon.contains("⭐") || icon.contains("🌟") -> BrandSymbol.Trophy
-    icon.contains("📊") -> BrandSymbol.Chart
-    icon.contains("📅") -> BrandSymbol.Calendar
-    icon.contains("📚") || icon.contains("📖") -> BrandSymbol.Book
-    icon.contains("🎯") -> BrandSymbol.Target
-    icon.contains("💪") -> BrandSymbol.Encourage
-    else -> BrandSymbol.Star
 }

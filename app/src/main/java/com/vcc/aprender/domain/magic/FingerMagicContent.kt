@@ -27,7 +27,7 @@ data class MagicQuestion(
 }
 
 object FingerMagicContent {
-    const val REVEAL_MILLIS = 2_000L
+    const val REVEAL_MILLIS = 800L
     const val WRONG_VISIBLE_MILLIS = 3_000L
 
     val questions: List<MagicQuestion> = listOf(

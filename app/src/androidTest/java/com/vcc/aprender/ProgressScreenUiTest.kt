@@ -2,6 +2,8 @@ package com.vcc.aprender
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -30,7 +32,7 @@ class ProgressScreenUiTest {
                 onBack = { back = true }
             )
         }
-        composeRule.onNodeWithText("Taxa de acerto: 75%").assertExists()
+        composeRule.onAllNodesWithText("Taxa de acerto: 75%").onFirst().assertIsDisplayed()
         composeRule.onNodeWithText("Voltar ao início").performClick()
         composeRule.runOnIdle { assertTrue(back) }
     }

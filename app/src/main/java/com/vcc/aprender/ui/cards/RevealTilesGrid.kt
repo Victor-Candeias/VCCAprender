@@ -26,9 +26,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vcc.aprender.domain.cards.RevealTiles
+import com.vcc.aprender.ui.components.LearningArtwork
 import com.vcc.aprender.ui.theme.AprenderColors
 
 @Composable
@@ -41,11 +41,10 @@ fun RevealTilesGrid(
     // Squares are at least ~100dp in a 320dp game pane (3x3 default grid).
     Box(modifier = Modifier.widthIn(max = 360.dp).fillMaxWidth(),
         contentAlignment = Alignment.Center) {
-        Text(
+        LearningArtwork(
             illustration,
-            modifier = Modifier.fillMaxWidth().padding(18.dp),
-            style = MaterialTheme.typography.displayLarge,
-            textAlign = TextAlign.Center
+            modifier = Modifier.matchParentSize().padding(18.dp),
+            decorative = tiles.remaining > 0
         )
         Column(modifier = Modifier.fillMaxWidth()) {
             repeat(tiles.rows) { row ->

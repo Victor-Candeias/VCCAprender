@@ -130,7 +130,7 @@ class FingerMagicUiTest {
             assertTrue(model.state.value.session.attempted.isEmpty())
 
             model.press(correct)
-            nowNanos += 2_000_000_000L
+            nowNanos += 1_000_000_000L
             model.releaseTouch(correct)
             assertTrue(model.state.value.session.solved)
             assertNull(model.state.value.heldOption)

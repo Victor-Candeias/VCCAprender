@@ -54,7 +54,7 @@ class GameDesignSystemUiTest {
 
     @Test fun familyHeaderDisplaysTitleAndSubtitle() {
         composeRule.setContent {
-            FamilyHeader("📊", "Evolução", "Descobre o teu progresso")
+            FamilyHeader(com.vcc.aprender.ui.components.BrandSymbol.Chart, "Evolução", "Descobre o teu progresso")
         }
         composeRule.onNodeWithText("Evolução").assertIsDisplayed()
         composeRule.onNodeWithText("Descobre o teu progresso").assertExists()

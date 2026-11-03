@@ -19,20 +19,20 @@ class LauncherBrandingTest {
 
     @Test fun launcherAndRoundIconsAreAdaptive() {
         val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
-        // Android may select the round resource as the application icon.
-        assertTrue(appInfo.icon in listOf(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round))
-        // ApplicationInfo does not expose roundIcon in the public Android SDK.
-        var roundIcon = 0
+        // Android may select the round resource as ApplicationInfo.icon on round-icon launchers.
+        assertTrue(appInfo.icon in setOf(R.mipmap.ic_launcher, R.mipmap.ic_launcher_round))
         context.assets.openXmlResourceParser("AndroidManifest.xml").use { manifest ->
-            while (manifest.eventType != XmlPullParser.END_DOCUMENT) {
-                if (manifest.eventType == XmlPullParser.START_TAG && manifest.name == "application") {
-                    roundIcon = manifest.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "roundIcon", 0)
-                    break
-                }
+            while (manifest.eventType != XmlPullParser.END_DOCUMENT &&
+                !(manifest.eventType == XmlPullParser.START_TAG && manifest.name == "application")) {
                 manifest.next()
             }
+            assertEquals(R.mipmap.ic_launcher, manifest.getAttributeResourceValue(
+                "http://schemas.android.com/apk/res/android", "icon", 0
+            ))
+            assertEquals(R.mipmap.ic_launcher_round, manifest.getAttributeResourceValue(
+                "http://schemas.android.com/apk/res/android", "roundIcon", 0
+            ))
         }
-        assertEquals(R.mipmap.ic_launcher_round, roundIcon)
         assertTrue(context.getDrawable(R.mipmap.ic_launcher) is AdaptiveIconDrawable)
         assertTrue(context.getDrawable(R.mipmap.ic_launcher_round) is AdaptiveIconDrawable)
     }
