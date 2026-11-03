@@ -16,6 +16,7 @@ import com.vcc.aprender.data.profile.ChildProfile
 import com.vcc.aprender.data.profile.ProfileDatabase
 import com.vcc.aprender.data.progress.ProgressRepository
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.domain.magic.FingerMagicContent
 import com.vcc.aprender.domain.magic.FingerMagicSession
 import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeUiState
@@ -157,7 +158,7 @@ class FingerMagicUiTest {
     }
 
     @Test fun completingTheDeckOffersRestart() {
-        val last = FingerMagicSession(index = 19)
+        val last = FingerMagicSession(index = FingerMagicContent.questions.lastIndex)
         val completed = last.reveal(last.question.correctIndex).next()
         var restarted = false
         compose.setContent {
@@ -165,7 +166,7 @@ class FingerMagicUiTest {
                 FingerMagicScreen(FingerMagicUiState(session = completed), {}, {}, {}, {}, {}, { restarted = true }, {})
             }
         }
-        compose.onNodeWithText("Parabéns! Descobriste os 20 sorrisos!").assertIsDisplayed()
+        compose.onNodeWithText("Parabéns! Descobriste os 111 sorrisos!").assertIsDisplayed()
         compose.onNodeWithText("Jogar novamente").performScrollTo().performClick()
         compose.runOnIdle { assertTrue(restarted) }
     }
