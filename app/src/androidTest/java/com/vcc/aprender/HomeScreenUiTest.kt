@@ -28,7 +28,7 @@ class HomeScreenUiTest {
             )
         }
         composeRule.onNodeWithText("VCCAprender").assertIsDisplayed()
-        composeRule.onNodeWithText("Magia na ponta dos dedos").assertIsDisplayed()
+        composeRule.onNodeWithText("Magia na ponta dos dedos").performScrollTo().assertIsDisplayed()
         composeRule.onNodeWithTag("home-finger-magic").performScrollTo().performClick()
         composeRule.runOnIdle { assertEquals(true, opened) }
     }

@@ -1,16 +1,25 @@
-🌟 **VCC Aprender — Aprender, Brincar e Descobrir!** 🎨🚀
+# VCCAprender — Magia na ponta dos dedos 🌟
 
-Transforma cada momento numa aventura de aprendizagem! Desenvolvida para crianças dos 3 aos 8 anos, a VCC Aprender combina diversão e educação através de jogos interativos, desafios e atividades coloridas.
+A **VCCAprender** é uma aplicação Android educativa e offline, em português de Portugal, destinada a crianças dos 3 aos 8 anos. A experiência jogável da app foi simplificada: **existe apenas um jogo, «Magia na ponta dos dedos»**.
 
-🔤 Descobre letras e palavras, 🔢 explora números, 🎨 aprende cores e formas, 🐾 conhece animais e sons e 🧩 desenvolve a memória, a lógica e o raciocínio.
+## Jogo
+- **111 perguntas** com três opções ilustradas A/B/C; a criança descobre a resposta mantendo o dedo sobre um dos quadrados.
+- Ordem aleatória no início de cada partida, **sem repetições** até concluir o baralho. **Jogar novamente** inicia outra sequência.
+- Perguntas sobre animais, alimentos, universo, marcas de automóveis, clubes de futebol, contas simples e conhecimentos gerais, com explicações em pt-PT.
+- Desenhos vetoriais e cartões originais, disponíveis **offline**; não são incluídos logótipos comerciais ou escudos oficiais.
+- Toque prolongado de **800 ms** para revelar o sorriso ou uma carinha triste. As respostas erradas ocultam-se 3 segundos após levantar o dedo; a resposta correta mantém-se visível até avançar.
+- Leitura opcional por voz e acesso com TalkBack/teclado, com feedback adequado.
 
-😄 Com o divertido jogo **«Descobre a Resposta»**, as crianças escolhem entre três imagens e revelam smiles surpresa ao tocar nos quadrados mágicos!
+## Acompanhamento e preferências
+Na área **Configurações** estão disponíveis a mudança de perfil, a consulta do progresso e a área parental (áudio, velocidade da fala e animações). Perfis e histórico de respostas mantêm-se guardados no dispositivo.
 
 ✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, surge o smile triste e, cerca de 3 segundos depois, a aplicação revela automaticamente o smile feliz na imagem correta. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
 
-🏆 Inclui recompensas, leitura em voz alta, desafios adaptados à idade e acompanhamento da evolução pelos pais.
+Estas funcionalidades deixam de ter rotas de navegação na aplicação. **Não se eliminam as opções A/B/C internas ao jogo Magia**, nem os dados persistentes dos perfis e histórico. Tipos de dados e classes legadas podem permanecer no código para compatibilidade e manutenção futura; a sua eventual eliminação física deverá ser realizada com validação de dependências e migrações.
 
-💡 **100% offline, sem publicidade e com conteúdos em português de Portugal.**
+## Documentação técnica
+- [VA-033 — 111 perguntas e baralho aleatório](docs/VA-033-MAGIC-QUESTIONS-RANDOM.md)
+- [VA-034 — Simplificação para um único jogo](docs/VA-034-ONLY-FINGER-MAGIC.md)
 
 **VCC Aprender — Pequenas descobertas, grandes conquistas!** 🌈
 
