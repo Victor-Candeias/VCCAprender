@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "VCCAprender"
-include(":app")
+include(":app", ":game-plugin-sdk", ":sample-game-plugin")
