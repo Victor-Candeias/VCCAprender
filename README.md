@@ -6,7 +6,7 @@ Transforma cada momento numa aventura de aprendizagem! Desenvolvida para crianç
 
 😄 Com o divertido jogo **«Descobre a Resposta»**, as crianças escolhem entre três imagens e revelam smiles surpresa ao tocar nos quadrados mágicos!
 
-✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas, três quadrados de descoberta e explicação educativa. Mantém o dedo num quadrado durante cerca de 0,8 segundos para revelar a carinha. As respostas erradas ficam visíveis durante mais 3 segundos depois de levantar o dedo; o sorriso da resposta correta permanece até selecionar «Seguinte». As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
+✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, surge o smile triste e, cerca de 3 segundos depois, a aplicação revela automaticamente o smile feliz na imagem correta. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
 
 🏆 Inclui recompensas, leitura em voz alta, desafios adaptados à idade e acompanhamento da evolução pelos pais.
 
@@ -32,3 +32,8 @@ Um workflow Debug compila SDK, host e APK exemplo; um workflow Release independe
 **Nota:** a migração do jogo Magic integrado para um APK externo é uma fase posterior; os perfis e as 86 perguntas atuais permanecem funcionais.
 
 [Guia de arquitetura, criação de plugins e testes](docs/VA-035-ANDROID-GAME-PLUGINS.md) · [Work Item #84](https://github.com/Victor-Candeias/VCCAprender/issues/84)
+
+
+## VA-037 — Responder diretamente nas imagens
+
+Os quadrados pretos foram removidos. Cada imagem A/B/C recebe diretamente o toque prolongado, apresenta o smile de resultado sobre a própria figura e fica bloqueada após uma única resposta. Um erro revela automaticamente a opção correta e permite avançar; a lógica de progresso e acessibilidade foi atualizada.
