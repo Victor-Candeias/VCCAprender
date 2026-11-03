@@ -1,6 +1,9 @@
 package com.vcc.aprender
 
+import android.content.ComponentName
+import com.vcc.aprender.plugins.InstalledGame
 import androidx.compose.ui.test.assertDoesNotExist
+import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -38,6 +41,29 @@ class HomeScreenUiTest {
         }
         listOf("Letras", "Números", "Cores", "Formas", "Animais", "Sons", "Palavras")
             .forEach { composeRule.onNodeWithText(it).assertDoesNotExist() }
+    }
+
+
+    @Test fun trustedAdditionalGameHasItsOwnClickableCard() {
+        val game = InstalledGame(
+            gameId = "com.vcc.aprender.sample.quiz",
+            title = "Jogo exemplo: Descobre a cor",
+            component = ComponentName("com.vcc.aprender.samplegame", "com.vcc.aprender.samplegame.SampleGameActivity")
+        )
+        var selected: InstalledGame? = null
+        composeRule.setContent {
+            HomeScreen(
+                onFingerMagicClick = {},
+                onSettingsClick = {},
+                installedGames = listOf(game),
+                onInstalledGameClick = { selected = it }
+            )
+        }
+        composeRule.onNodeWithText("Magia na ponta dos dedos").assertExists()
+        composeRule.onNodeWithText(game.title).assertExists()
+        composeRule.onNodeWithTag("installed-game-${game.gameId}")
+            .performScrollTo().performClick()
+        composeRule.runOnIdle { assertEquals(game, selected) }
     }
 
     @Test fun settingsOptionRemainsAvailable() {
