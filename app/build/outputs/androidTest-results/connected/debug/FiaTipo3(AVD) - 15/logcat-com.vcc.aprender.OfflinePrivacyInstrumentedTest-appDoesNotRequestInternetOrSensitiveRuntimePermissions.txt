@@ -1,2 +1,0 @@
-11-01 21:36:37.643  7110  7125 I TestRunner: started: appDoesNotRequestInternetOrSensitiveRuntimePermissions(com.vcc.aprender.OfflinePrivacyInstrumentedTest)
-11-01 21:36:37.658  7110  7125 I TestRunner: finished: appDoesNotRequestInternetOrSensitiveRuntimePermissions(com.vcc.aprender.OfflinePrivacyInstrumentedTest)

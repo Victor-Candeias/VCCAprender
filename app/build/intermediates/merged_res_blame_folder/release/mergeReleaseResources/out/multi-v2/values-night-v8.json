@@ -4,7 +4,7 @@
             "outputFile": "com.vcc.aprender.app-mergeReleaseResources-54:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\5b5774cae4615a3bb8d429a5ef748e44\\transformed\\core-splashscreen-1.0.1\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.9\\transforms\\7d3db08e91cfb5c5708c405571f8cdda\\transformed\\core-splashscreen-1.0.1\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

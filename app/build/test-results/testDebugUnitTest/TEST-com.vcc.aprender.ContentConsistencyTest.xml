@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.vcc.aprender.ContentConsistencyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:42:46" hostname="C0979902-2" time="0.023">
+<testsuite name="com.vcc.aprender.ContentConsistencyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-03T08:16:00" hostname="C0979902-2" time="0.001">
   <properties/>
-  <testcase name="eachAvailableTopicHasValidContent" classname="com.vcc.aprender.ContentConsistencyTest" time="0.011"/>
-  <testcase name="alphabetHasAllLettersInOrder" classname="com.vcc.aprender.ContentConsistencyTest" time="0.001"/>
-  <testcase name="alphabetChoicesAreDistinctAndContainCorrectLetter" classname="com.vcc.aprender.ContentConsistencyTest" time="0.006"/>
+  <testcase name="eachAvailableTopicHasValidContent" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
+  <testcase name="alphabetHasAllLettersInOrder" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
+  <testcase name="alphabetChoicesAreDistinctAndContainCorrectLetter" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
   <testcase name="allCardsHaveUniqueIdsAndValidOptions" classname="com.vcc.aprender.ContentConsistencyTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

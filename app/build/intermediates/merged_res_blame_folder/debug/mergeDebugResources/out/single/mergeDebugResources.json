@@ -1,22 +1,266 @@
 [
     {
-        "merged": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-debug-60:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-main-62:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_mouse.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_mouse.xml"
     },
     {
-        "merged": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-debug-60:\\drawable_ic_launcher_legacy.xml.flat",
-        "source": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-main-62:\\drawable\\ic_launcher_legacy.xml"
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_red.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_red.xml"
     },
     {
-        "merged": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-debug-60:\\drawable_ic_launcher_monochrome.xml.flat",
-        "source": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-main-62:\\drawable\\ic_launcher_monochrome.xml"
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_bag.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_bag.xml"
     },
     {
-        "merged": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-debug-60:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-main-62:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_bee.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_bee.xml"
     },
     {
-        "merged": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-debug-60:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-main-62:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_purple.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_purple.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_grapes.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_grapes.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_moon.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_moon.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_milk.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_milk.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_cake.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_cake.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_key.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_key.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_hand.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_hand.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_rectangle.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_rectangle.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_sound.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_sound.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_zebra.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_zebra.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_circle.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_circle.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_kiwi.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_kiwi.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_frog.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_frog.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_cheese.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_cheese.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_rabbit.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_rabbit.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_dog.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_dog.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_blue.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_blue.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_cat.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_cat.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_bread.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_bread.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_sheep.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_sheep.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_flower.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_flower.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_book.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_book.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_tooth.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_tooth.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_butterfly.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_butterfly.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_star.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_star.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_table.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_table.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_letters.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_letters.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_ship.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_ship.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_square.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_square.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_ic_launcher_monochrome.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/ic_launcher_monochrome.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_apple.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_apple.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_helicopter.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_helicopter.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_fish.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_fish.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_finger.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_finger.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_waffle.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_waffle.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_elephant.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_elephant.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_orange.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_orange.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_cow.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_cow.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_die.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_die.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_xylophone.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_xylophone.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_rooster.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_rooster.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_turtle.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_turtle.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_road.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_road.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_triangle.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_triangle.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_yellow.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_yellow.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_suitcase.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_suitcase.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_island.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_island.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_heart.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_heart.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_sun.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_sun.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_car.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_car.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_yoga.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_yoga.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_duck.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_duck.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_glove.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_glove.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_lion.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_lion.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_window.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_window.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_ball.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_ball.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_green.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_green.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_learn_house.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/learn_house.xml"
+    },
+    {
+        "merged": "com.vcc.aprender.app-debug-60:/drawable_ic_launcher_legacy.xml.flat",
+        "source": "com.vcc.aprender.app-main-62:/drawable/ic_launcher_legacy.xml"
     }
 ]

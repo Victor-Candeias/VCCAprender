@@ -26,6 +26,6 @@
       applicationId="com.vcc.aprender"
       generatedSourceFolders="build\generated\ksp\release\java;build\generated\ksp\release\kotlin;build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\979902\.gradle\caches\8.10.2\transforms\cddedd5a207d130e8577420e13c5df35\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\979902\.gradle\caches\8.9\transforms\dc9ea58b60d0413ac737607da90e03b9\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>

@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
+      "versionCode": 6,
       "versionName": "0.1.0",
-      "outputFile": "VCCAprender-v0.1.0-build1-release.apk"
+      "outputFile": "VCCAprender-v0.1.0-build6-release.apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/VCCAprender-v0.1.0-build1-release.dm"
+        "baselineProfiles/1/VCCAprender-v0.1.0-build6-release.dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/VCCAprender-v0.1.0-build1-release.dm"
+        "baselineProfiles/0/VCCAprender-v0.1.0-build6-release.dm"
       ]
     }
   ],

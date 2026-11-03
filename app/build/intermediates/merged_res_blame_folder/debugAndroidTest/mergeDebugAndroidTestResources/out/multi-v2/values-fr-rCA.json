@@ -4,7 +4,7 @@
             "outputFile": "com.vcc.aprender.test.app-mergeDebugAndroidTestResources-34:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\47bf6a4121f325328de8a98cdcb0db90\\transformed\\ui-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.9\\transforms\\1b5f938fdcf7511299cff6e006cace3a\\transformed\\ui-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\40a544bed6d92e1cabd924a74f6da805\\transformed\\core-1.13.1\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.9\\transforms\\af19c7e1dff59c494b00b46e212ebbae\\transformed\\core-1.13.1\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

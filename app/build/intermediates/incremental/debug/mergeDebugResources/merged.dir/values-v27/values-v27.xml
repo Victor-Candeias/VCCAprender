@@ -8,8 +8,5 @@
     <style name="Base.v27.Theme.SplashScreen.Light" parent="Base.v21.Theme.SplashScreen.Light">
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
-    <style name="Theme.VCCAprender" parent="Base.VCCAprender">
-        <item name="android:navigationBarColor">@color/brand_cream</item>
-        <item name="android:windowLightNavigationBar">true</item>
-    </style>
+    <style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender"><item name="android:navigationBarColor">@color/brand_cream</item><item name="android:windowLightNavigationBar">true</item></style>
 </resources>

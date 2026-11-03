@@ -4,17 +4,7 @@
     <color name="brand_cream">#FFFBF2</color>
     <color name="brand_star">#FFC44D</color>
     <string name="app_name">VCCAprender</string>
-    <style name="Base.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:statusBarColor">@color/brand_blue</item>
-        <item name="android:navigationBarColor">@color/brand_blue</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">@color/brand_cream</item>
-    </style>
-    <style name="Theme.VCCAprender" parent="Base.VCCAprender"/>
-    <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/brand_blue</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.VCCAprender</item>
-    </style>
+    <style name="Base.Theme.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar"><item name="android:windowActionModeOverlay">true</item><item name="android:statusBarColor">@color/brand_blue</item><item name="android:navigationBarColor">@color/brand_blue</item><item name="android:windowLightStatusBar">false</item><item name="android:windowBackground">@color/brand_cream</item></style>
+    <style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender"/>
+    <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen"><item name="windowSplashScreenBackground">@color/brand_blue</item><item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item><item name="postSplashScreenTheme">@style/Theme.VCCAprender</item></style>
 </resources>

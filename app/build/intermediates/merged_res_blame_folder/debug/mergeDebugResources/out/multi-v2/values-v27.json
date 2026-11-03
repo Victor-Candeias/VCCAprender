@@ -6,45 +6,22 @@
                 {
                     "source": "C:\\__GitPrivate\\VCCAprender\\app\\src\\main\\res\\values-v27\\styles.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "266"
+                        "startLines": "1",
+                        "startColumns": "11",
+                        "startOffsets": "50",
+                        "endColumns": "205",
+                        "endOffsets": "244"
                     },
                     "to": {
                         "startLines": "10",
                         "startColumns": "4",
                         "startOffsets": "593",
-                        "endLines": "13",
-                        "endColumns": "12",
-                        "endOffsets": "804"
+                        "endColumns": "198",
+                        "endOffsets": "787"
                     }
                 },
                 {
-                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\5b5774cae4615a3bb8d429a5ef748e44\\transformed\\core-splashscreen-1.0.1\\res\\values-v27\\values-v27.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,7",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,136,229,405",
-                        "endLines": "2,3,6,9",
-                        "endColumns": "80,92,12,12",
-                        "endOffsets": "131,224,400,588"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\979902\\.gradle\\daemon\\8.10.2\\com.vcc.aprender.app-mergeDebugResources-58:\\values-v27\\values-v27.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.10.2\\transforms\\5b5774cae4615a3bb8d429a5ef748e44\\transformed\\core-splashscreen-1.0.1\\res\\values-v27\\values-v27.xml",
+                    "source": "C:\\Users\\979902\\.gradle\\caches\\8.9\\transforms\\7d3db08e91cfb5c5708c405571f8cdda\\transformed\\core-splashscreen-1.0.1\\res\\values-v27\\values-v27.xml",
                     "from": {
                         "startLines": "2,3,4,7",
                         "startColumns": "4,4,4,4",

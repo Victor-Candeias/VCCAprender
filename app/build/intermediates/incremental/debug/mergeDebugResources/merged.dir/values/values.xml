@@ -210,13 +210,7 @@
     <style name="Base.Theme.SplashScreen" parent="Base.v21.Theme.SplashScreen"/>
     <style name="Base.Theme.SplashScreen.DayNight" parent="Base.Theme.SplashScreen.Light"/>
     <style name="Base.Theme.SplashScreen.Light" parent="Base.v21.Theme.SplashScreen.Light"/>
-    <style name="Base.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:statusBarColor">@color/brand_blue</item>
-        <item name="android:navigationBarColor">@color/brand_blue</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">@color/brand_cream</item>
-    </style>
+    <style name="Base.Theme.VCCAprender" parent="@android:style/Theme.Material.Light.NoActionBar"><item name="android:windowActionModeOverlay">true</item><item name="android:statusBarColor">@color/brand_blue</item><item name="android:navigationBarColor">@color/brand_blue</item><item name="android:windowLightStatusBar">false</item><item name="android:windowBackground">@color/brand_cream</item></style>
     <style name="Base.v21.Theme.SplashScreen" parent="android:Theme.DeviceDefault.NoActionBar">
     </style>
     <style name="Base.v21.Theme.SplashScreen.Light" parent="android:Theme.DeviceDefault.Light.NoActionBar">
@@ -281,12 +275,8 @@
         <item name="android:windowBackground">@drawable/compat_splash_screen</item>
         <item name="splashScreenIconSize">@dimen/splashscreen_icon_size_with_background</item>
     </style>
-    <style name="Theme.VCCAprender" parent="Base.VCCAprender"/>
-    <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/brand_blue</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.VCCAprender</item>
-    </style>
+    <style name="Theme.VCCAprender" parent="Base.Theme.VCCAprender"/>
+    <style name="Theme.VCCAprender.Splash" parent="Theme.SplashScreen"><item name="windowSplashScreenBackground">@color/brand_blue</item><item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item><item name="postSplashScreenTheme">@style/Theme.VCCAprender</item></style>
     <style name="Widget.Compat.NotificationActionContainer" parent=""/>
     <style name="Widget.Compat.NotificationActionText" parent=""/>
     <declare-styleable name="ActivityNavigator">
@@ -323,14 +313,23 @@
         <attr format="reference" name="fontProviderCerts"/>
         
         <attr name="fontProviderFetchStrategy">
-            
+            <!-- The blocking font fetch works as follows.
+              First, check the local cache, then if the requested font is not cached, request the
+              font from the provider and wait until it is finished.  You can change the length of
+              the timeout by modifying fontProviderFetchTimeout.  If the timeout happens, the
+              default typeface will be used instead. -->
             <enum name="blocking" value="0"/>
-            
+            <!-- The async font fetch works as follows.
+              First, check the local cache, then if the requeted font is not cached, trigger a
+              request the font and continue with layout inflation. Once the font fetch succeeds, the
+              target text view will be refreshed with the downloaded font data. The
+              fontProviderFetchTimeout will be ignored if async loading is specified. -->
             <enum name="async" value="1"/>
         </attr>
         
         <attr format="integer" name="fontProviderFetchTimeout">
-            
+            <!-- A special value for the timeout. In this case, the blocking font fetching will not
+              timeout and wait until a reply is received from the font provider. -->
             <enum name="forever" value="-1"/>
         </attr>
         
