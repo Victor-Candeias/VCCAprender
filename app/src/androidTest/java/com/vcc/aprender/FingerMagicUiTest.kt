@@ -16,6 +16,7 @@ import com.vcc.aprender.data.profile.ChildProfile
 import com.vcc.aprender.data.profile.ProfileDatabase
 import com.vcc.aprender.data.progress.ProgressRepository
 import com.vcc.aprender.domain.model.LearningTopic
+import com.vcc.aprender.domain.magic.FingerMagicContent
 import com.vcc.aprender.domain.magic.FingerMagicSession
 import com.vcc.aprender.ui.home.HomeScreen
 import com.vcc.aprender.ui.home.HomeUiState
@@ -29,6 +30,7 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.random.Random
 
 @RunWith(AndroidJUnit4::class)
 class FingerMagicUiTest {
@@ -37,11 +39,14 @@ class FingerMagicUiTest {
 
     @After fun closeDatabase() { database?.close() }
 
-    private fun showGame(nanoTime: () -> Long = System::nanoTime): FingerMagicViewModel {
+    private fun showGame(
+        nanoTime: () -> Long = System::nanoTime,
+        random: Random = Random.Default
+    ): FingerMagicViewModel {
         val db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), ProfileDatabase::class.java).build()
         database = db
         val profileId = runBlocking { db.profileDao().save(ChildProfile(name = "Magia", age = 5, avatar = "🐻")) }
-        val model = FingerMagicViewModel(profileId, ProgressRepository(db), nanoTime)
+        val model = FingerMagicViewModel(profileId, ProgressRepository(db), nanoTime, random)
         compose.setContent {
             val state by model.state.collectAsStateWithLifecycle()
             AprenderTheme {
@@ -156,8 +161,44 @@ class FingerMagicUiTest {
         compose.runOnIdle { assertTrue(advanced) }
     }
 
+
+    @Test fun randomDeckIsStableDuringPlayAndReorderedAfterRestart() {
+        val expectedRandom = Random(4202)
+        val expectedFirst = FingerMagicContent.questions.shuffled(expectedRandom).map { it.id }
+        val expectedSecond = FingerMagicContent.questions.shuffled(expectedRandom).map { it.id }
+        val model = showGame(random = Random(4202))
+        compose.runOnIdle {
+            val initial = model.state.value.session
+            assertEquals(expectedFirst, initial.questions.map { it.id })
+            assertEquals(111, initial.questions.size)
+            // Re-accessing the Compose state must never shuffle the deck again.
+            assertEquals(expectedFirst, model.state.value.session.questions.map { it.id })
+            assertEquals(0, initial.index)
+            model.restart()
+        }
+        compose.runOnIdle {
+            val restarted = model.state.value.session
+            assertEquals(expectedSecond, restarted.questions.map { it.id })
+            assertEquals(0, restarted.index)
+            assertTrue(restarted.attempted.isEmpty())
+            assertFalse(restarted.solved)
+        }
+    }
+
+    @Test fun expansionCategoryIsVisibleInGame() {
+        val question = com.vcc.aprender.domain.magic.FingerMagicExpansion.questions.first()
+        val session = FingerMagicSession(questions = listOf(question))
+        compose.setContent {
+            AprenderTheme {
+                FingerMagicScreen(FingerMagicUiState(session = session), {}, {}, {}, {}, {}, {}, {})
+            }
+        }
+        compose.onNodeWithText("Universo e espaço").assertIsDisplayed()
+        compose.onNodeWithText(question.prompt).assertIsDisplayed()
+    }
+
     @Test fun completingTheDeckOffersRestart() {
-        val last = FingerMagicSession(index = 19)
+        val last = FingerMagicSession(index = FingerMagicContent.questions.lastIndex)
         val completed = last.reveal(last.question.correctIndex).next()
         var restarted = false
         compose.setContent {
@@ -165,7 +206,7 @@ class FingerMagicUiTest {
                 FingerMagicScreen(FingerMagicUiState(session = completed), {}, {}, {}, {}, {}, { restarted = true }, {})
             }
         }
-        compose.onNodeWithText("Parabéns! Descobriste os 20 sorrisos!").assertIsDisplayed()
+        compose.onNodeWithText("Parabéns! Descobriste os 111 sorrisos!").assertIsDisplayed()
         compose.onNodeWithText("Jogar novamente").performScrollTo().performClick()
         compose.runOnIdle { assertTrue(restarted) }
     }
