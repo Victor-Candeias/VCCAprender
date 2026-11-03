@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   validate:
-    name: Kotlin, unit tests and APK builds
+    name: Kotlin Debug and unit-test validation
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
@@ -33,11 +33,14 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Compile, test and assemble
+      - name: Compile and test Debug without a release signing key
+        env:
+          # A Linux absolute path overrides the tracked Windows keystore path.
+          # No release artifact is signed or published by this workflow.
+          VCC_RELEASE_STORE_FILE: /tmp/va033-ci-unconfigured-release.p12
         run: |
-          gradle :app:compileDebugKotlin :app:compileReleaseKotlin \
-            :app:compileDebugAndroidTestKotlin :app:testDebugUnitTest \
-            :app:assembleDebug :app:assembleRelease \
+          gradle :app:compileDebugKotlin :app:compileDebugAndroidTestKotlin \
+            :app:testDebugUnitTest :app:assembleDebug \
             --no-daemon --max-workers=2 --console=plain
 
       - name: Upload unit-test results
