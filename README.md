@@ -20,3 +20,15 @@ Transforma cada momento numa aventura de aprendizagem! Desenvolvida para crianç
 As 111 perguntas são embaralhadas uma única vez no início da partida e novamente ao escolher **Jogar novamente**. A ordem mantém-se estável durante a sessão; cada questão aparece apenas uma vez. As respostas mantêm a respetiva posição A/B/C e cada pergunta possui uma explicação educativa. Os novos temas usam figuras vetoriais e cartões de texto **offline**, sem logótipos oficiais de marcas ou clubes. A opção de áudio e os controlos de acessibilidade existentes continuam disponíveis. O progresso apresentado é baseado na posição na partida e não no identificador fixo da pergunta.
 
 A validação pedagógica e visual dos novos conteúdos encontra-se documentada em `docs/VA-033-MAGIC-QUESTIONS-RANDOM.md`.
+
+## VA-035 — Jogos como APKs independentes (Plugin SDK v1)
+
+A VCCAprender passa a atuar como **aplicação-base**. Para além de «Magia na ponta dos dedos», permite descobrir e executar jogos Android instalados separadamente e assinados com o **mesmo certificado** do host. O novo módulo `game-plugin-sdk` define o contrato de execução e resultados; o módulo `sample-game-plugin` contém um jogo funcional de exemplo.
+
+A descoberta usa visibilidade limitada de pacotes Android, Intents **explícitos** e permissão de assinatura. A aplicação-base valida o jogo antes de abrir, verifica o resultado e guarda o progresso por perfil, através de migração Room v4→v5 não destrutiva. Não existe carregamento de código externo na aplicação-base.
+
+Um workflow Debug compila SDK, host e APK exemplo; um workflow Release independente permite assinar o plugin com os **mesmos GitHub Secrets** usados para assinar a VCCAprender.
+
+**Nota:** a migração do jogo Magic integrado para um APK externo é uma fase posterior; os perfis e as 111 perguntas atuais permanecem funcionais.
+
+[Guia de arquitetura, criação de plugins e testes](docs/VA-035-ANDROID-GAME-PLUGINS.md) · [Work Item #84](https://github.com/Victor-Candeias/VCCAprender/issues/84)
