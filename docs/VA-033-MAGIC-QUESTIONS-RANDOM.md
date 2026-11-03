@@ -26,7 +26,7 @@
 - `FingerMagicSessionTest` atualizado para 111 perguntas, IDs sequenciais, cinco categorias de 12 perguntas e conclusão ao fim de toda a sessão.
 - `FingerMagicDeckTest` acrescenta cobertura de seeds reprodutíveis, ordens distintas, conteúdo sem duplicação, preservação de respostas e progressão até ao final.
 - `FingerMagicUiTest` atualizado para a conclusão de 111 perguntas; acrescenta testes de restart com seed e visibilidade da categoria.
-- O workflow `.github/workflows/android-ui-ci.yml` foi configurado para compilar Kotlin Debug/Release, compilar `AndroidTest`, executar testes JVM e gerar APK Debug/Release em pushes para a branch.
+- O workflow `.github/workflows/android-ui-ci.yml` foi configurado para compilar Kotlin Debug e `AndroidTest`, executar testes JVM e gerar APK Debug em pushes para a branch. A assinatura Release utiliza uma keystore privada e deve ser testada separadamente num ambiente com credenciais válidas, sem as expor na CI.
 - **A existência do workflow não garante que o build passou.** Consultar a execução mais recente do GitHub Actions.
 
 ### Executar em Codespaces / Android Studio
@@ -35,10 +35,14 @@
 git switch feature/VA-033-magic-111-random-questions
 git pull --ff-only origin feature/VA-033-magic-111-random-questions
 
-gradle :app:compileDebugKotlin :app:compileReleaseKotlin \
-  :app:compileDebugAndroidTestKotlin :app:testDebugUnitTest \
-  :app:assembleDebug :app:assembleRelease \
+# Na CI Linux usa-se VCC_RELEASE_STORE_FILE=/tmp/va033-ci-unconfigured-release.p12
+# para impedir a resolução do caminho Windows existente em keystore.properties.
+gradle :app:compileDebugKotlin :app:compileDebugAndroidTestKotlin \
+  :app:testDebugUnitTest :app:assembleDebug \
   --console=plain --no-daemon --max-workers=2
+
+# Apenas no ambiente de release com a keystore privada disponível:
+gradle :app:assembleRelease --console=plain --no-daemon --max-workers=2
 
 # Android ligado ou emulador iniciado:
 gradle :app:connectedDebugAndroidTest \
@@ -46,7 +50,7 @@ gradle :app:connectedDebugAndroidTest \
 ```
 
 ## Checklist de QA pendente
-- [ ] Builds Debug/Release e testes unitários/compilação AndroidTest a verde na última revisão da branch.
+- [ ] Build Debug, testes unitários e compilação AndroidTest a verde na última revisão da branch; **validar Release separadamente com keystore autorizada**.
 - [ ] Testes instrumentados executados com sucesso num dispositivo ou emulador.
 - [ ] Verificar imagens e legibilidade **de todas as novas opções** em telefones/tablets, retrato/paisagem e fontes a 200%.
 - [ ] Rever pedagogicamente as 60 perguntas (em particular factos culturais/desportivos) e as respetivas explicações antes de distribuição.
@@ -63,3 +67,6 @@ gradle :app:connectedDebugAndroidTest \
 - Os 111 desafios são apresentados num só baralho, por agora. Filtrar por categoria/idade e guardar uma sessão para retoma poderão constituir futuros Work Items.
 - As perguntas de somas utilizam `LearningTopic.NUMBERS` no progresso; as restantes usam `LearningTopic.WORDS`, mas mantêm a categoria própria na UI. Uma categorização histórica mais fina requer evolução do modelo de progresso.
 - Para evitar uso indevido de logótipos e escudos, não foram incorporados elementos oficiais de marcas ou clubes.
+
+## Nota de segurança fora de âmbito
+O repositório principal inclui um `keystore.properties` versionado com valores de credenciais. Este ficheiro deverá ser retirado do controlo de versões e os segredos associados revistos/rodados por quem gere as chaves de assinatura. **A alteração VA-033 não modificou nem expôs os valores dessas credenciais**. A CI evita consumi-los para assinar qualquer APK.
