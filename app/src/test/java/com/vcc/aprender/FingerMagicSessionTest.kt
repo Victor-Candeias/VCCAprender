@@ -9,6 +9,7 @@ import org.junit.Test
 class FingerMagicSessionTest {
     @Test fun allQuestionsHaveThreeDistinctImagesAndOneCorrectAnswer() {
         val questions = FingerMagicContent.questions
+        assertTrue(questions.none { it.category == it.id in emptyList<String>() })
         assertEquals(86, questions.size)
         assertEquals(86, questions.map { it.id }.distinct().size)
         questions.forEach { question ->
