@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.vcc.aprender.data.settings.ParentalSettings
 import com.vcc.aprender.di.AppContainer
 import com.vcc.aprender.ui.components.GameMotionProvider
-import com.vcc.aprender.ui.home.HomeScreen
+import com.vcc.aprender.ui.plugins.PluginHomeScreen
 import com.vcc.aprender.ui.home.SettingsScreen
 import com.vcc.aprender.ui.magic.FingerMagicScreen
 import com.vcc.aprender.ui.magic.FingerMagicViewModel
@@ -48,10 +48,11 @@ fun AprenderNavHost(container: AppContainer) {
     val selectedId by profileModel.selectedId.collectAsStateWithLifecycle()
     val profileError by profileModel.error.collectAsStateWithLifecycle()
     val progressModel: ProgressViewModel = viewModel(
-        factory = ProgressViewModelFactory(container.progressRepository)
+        factory = ProgressViewModelFactory(container.progressRepository, container.externalGameRepository)
     )
     val progress by progressModel.progress.collectAsStateWithLifecycle()
     val answerHistory by progressModel.history.collectAsStateWithLifecycle()
+    val externalSessions by progressModel.externalSessions.collectAsStateWithLifecycle()
 
     LaunchedEffect(selectedId) { progressModel.selectProfile(selectedId) }
     LaunchedEffect(selectedId, profiles) {
@@ -83,7 +84,9 @@ fun AprenderNavHost(container: AppContainer) {
             }
             composable(HOME) {
                 if (selectedId == null || profiles.none { it.id == selectedId }) return@composable
-                HomeScreen(
+                PluginHomeScreen(
+                    profileId = selectedId!!,
+                    repository = container.externalGameRepository,
                     onFingerMagicClick = { navController.navigate(FINGER_MAGIC) },
                     onSettingsClick = { navController.navigate(SETTINGS) }
                 )
@@ -134,6 +137,7 @@ fun AprenderNavHost(container: AppContainer) {
                     ProgressScreen(
                         progress = progress,
                         history = answerHistory,
+                        externalSessions = externalSessions,
                         onBack = { navController.popBackStack() }
                     )
                 }
