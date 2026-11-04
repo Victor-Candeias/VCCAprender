@@ -81,7 +81,7 @@ class FingerMagicUiTest {
         compose.waitUntil(4_000) { model.state.value.session.solved }
         square.performTouchInput { up() }
         square.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Sorriso. Resposta correta"))
-        // A completed square stays revealed well beyond the wrong-answer timeout.
+        // A correct smile stays visible until the child advances.
         val start = System.nanoTime()
         compose.waitUntil(5_000) { (System.nanoTime() - start) / 1_000_000 > 3_300 }
         compose.runOnIdle { assertTrue(model.state.value.session.solved); assertEquals(0, model.state.value.session.index) }
@@ -90,29 +90,32 @@ class FingerMagicUiTest {
         compose.runOnIdle { assertEquals(1, model.state.value.session.index); assertFalse(model.state.value.session.solved) }
     }
 
-    @Test fun wrongAnswerLocksImagesThenRevealsCorrectSmileAndNext() {
+    @Test fun wrongAnswerLeavesOnlyCorrectImageWithoutSmileAndCanAdvance() {
         val model = showGame()
         val correct = model.state.value.session.question.correctIndex
         val wrong = (correct + 1) % 3
-        val image = compose.onNodeWithTag("magic-image-$wrong")
-        image.performScrollTo().performTouchInput { down(center) }
+        val otherWrong = (correct + 2) % 3
+
+        // Accessible activation performs the same timed reveal as a finger hold.
+        compose.onNodeWithTag("magic-image-$wrong").performScrollTo()
+            .performSemanticsAction(SemanticsActions.OnClick) { it() }
         compose.waitUntil(4_000) { model.state.value.session.answered }
-        image.performTouchInput { up() }
         compose.runOnIdle {
             assertEquals(setOf(wrong), model.state.value.session.attempted)
             assertFalse(model.state.value.session.solved)
+            assertTrue(model.state.value.session.canAdvance)
             assertFalse(model.state.value.session.canReveal(correct))
         }
-        image.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Cara triste. Resposta errada"))
+        compose.onNodeWithTag("magic-image-$wrong").assertDoesNotExist()
+        compose.onNodeWithTag("magic-image-$otherWrong").assertDoesNotExist()
         compose.onNodeWithTag("magic-image-$correct")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Por revelar"))
-        compose.onNodeWithText("Pergunta seguinte").assertDoesNotExist()
-        compose.waitUntil(5_000) { model.state.value.session.showCorrectAnswer }
-        compose.onNodeWithTag("magic-image-$correct")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Sorriso. Resposta correta"))
-        image.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Cara triste. Resposta errada"))
+            .assertIsDisplayed()
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Resposta correta"))
         compose.onNodeWithText("Pergunta seguinte").performScrollTo().performClick()
-        compose.runOnIdle { assertEquals(1, model.state.value.session.index); assertFalse(model.state.value.session.answered) }
+        compose.runOnIdle {
+            assertEquals(1, model.state.value.session.index)
+            assertFalse(model.state.value.session.answered)
+        }
     }
 
     @Test fun accessibilityClickRevealsWithoutPhysicalHoldAndCancellationDoesNotAnswer() {
