@@ -13,7 +13,7 @@ A **VCCAprender** é uma aplicação Android educativa e offline, em português 
 ## Acompanhamento e preferências
 Na área **Configurações** estão disponíveis a mudança de perfil, a consulta do progresso e a área parental (áudio, velocidade da fala e animações). Perfis e histórico de respostas mantêm-se guardados no dispositivo.
 
-✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, surge o smile triste e, cerca de 3 segundos depois, a aplicação revela automaticamente o smile feliz na imagem correta. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
+✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, as duas opções erradas desaparecem e fica apenas a imagem correta, sem smile. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
 
 Estas funcionalidades deixam de ter rotas de navegação na aplicação. **Não se eliminam as opções A/B/C internas ao jogo Magia**, nem os dados persistentes dos perfis e histórico. Tipos de dados e classes legadas podem permanecer no código para compatibilidade e manutenção futura; a sua eventual eliminação física deverá ser realizada com validação de dependências e migrações.
 
@@ -46,3 +46,8 @@ Um workflow Debug compila SDK, host e APK exemplo; um workflow Release independe
 ## VA-037 — Responder diretamente nas imagens
 
 Os quadrados pretos foram removidos. Cada imagem A/B/C recebe diretamente o toque prolongado, apresenta o smile de resultado sobre a própria figura e fica bloqueada após uma única resposta. Um erro revela automaticamente a opção correta e permite avançar; a lógica de progresso e acessibilidade foi atualizada.
+
+
+## VA-038 — Áudio sem sobreposição e resposta incorreta sem smiles
+
+Os botões de ouvir a pergunta e o resultado ficam desativados durante a reprodução de qualquer um dos textos e só voltam a ser ativados quando o motor TTS notifica o fim, a interrupção ou um erro. Ao falhar uma questão, as duas opções incorretas desaparecem imediatamente e apenas a opção correta continua visível, sem mostrar smiles. A criança continua limitada a uma tentativa e pode avançar logo para a pergunta seguinte. Num acerto, mantém-se o smile feliz.

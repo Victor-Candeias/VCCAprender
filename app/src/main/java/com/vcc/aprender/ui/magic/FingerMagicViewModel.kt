@@ -33,7 +33,6 @@ class FingerMagicViewModel(
     val state = mutableState.asStateFlow()
     private var holdJob: Job? = null
     private var holdStartedNanos: Long? = null
-    private var correctRevealJob: Job? = null
     private var accessibleHold = false
 
     fun press(option: Int, accessible: Boolean = false) {
@@ -64,17 +63,6 @@ class FingerMagicViewModel(
         val after = before.reveal(option)
         if (after == before) return
         mutableState.value = current.copy(session = after, revealProgress = 1f)
-        if (!after.solved) {
-            correctRevealJob?.cancel()
-            val questionId = after.question.id
-            correctRevealJob = viewModelScope.launch {
-                delay(FingerMagicContent.WRONG_VISIBLE_MILLIS)
-                val latest = mutableState.value
-                if (latest.session.question.id == questionId && latest.session.answered) {
-                    mutableState.value = latest.copy(session = latest.session.revealCorrectAnswer())
-                }
-            }
-        }
         if (option !in before.attempted) {
             viewModelScope.launch {
                 runCatching {
@@ -128,8 +116,6 @@ class FingerMagicViewModel(
         holdJob?.cancel()
         holdJob = null
         holdStartedNanos = null
-        correctRevealJob?.cancel()
-        correctRevealJob = null
         accessibleHold = false
     }
 }

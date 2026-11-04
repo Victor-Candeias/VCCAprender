@@ -102,36 +102,36 @@ fun FingerMagicScreen(
                         textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().semantics { heading() })
                     Text("Mantém o dedo sobre a imagem durante 1 segundo para escolher a resposta. Só tens uma tentativa.",
                         textAlign = TextAlign.Center)
+                    val wrongAnswer = session.answered && !session.solved
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         question.options.forEachIndexed { index, picture ->
-                            val selected = index in session.attempted
-                            val correctVisible = session.showCorrectAnswer && index == question.correctIndex
-                            val revealed = selected || correctVisible
-                            val progress = if (state.heldOption == index && !session.answered)
-                                state.revealProgress else 0f
-                            Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                MagicAnswerImage(
-                                    question = question,
-                                    index = index,
-                                    progress = progress,
-                                    revealed = revealed,
-                                    happy = correctVisible,
-                                    enabled = !session.answered,
-                                    onPress = { onPress(index) },
-                                    onRelease = { onRelease(index) },
-                                    onAccessibleReveal = { onAccessibleReveal(index) }
-                                )
-                                Text("${'A' + index} · ${picture.label}", textAlign = TextAlign.Center,
-                                    style = MaterialTheme.typography.titleMedium)
+                            // After an incorrect attempt only the actual correct image remains.
+                            if (!wrongAnswer || index == question.correctIndex) {
+                                val showHappySmile = session.solved && index == question.correctIndex
+                                val progress = if (state.heldOption == index && !session.answered)
+                                    state.revealProgress else 0f
+                                Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    MagicAnswerImage(
+                                        question = question,
+                                        index = index,
+                                        progress = progress,
+                                        showHappySmile = showHappySmile,
+                                        correctOnly = wrongAnswer,
+                                        enabled = !session.answered,
+                                        onPress = { onPress(index) },
+                                        onRelease = { onRelease(index) },
+                                        onAccessibleReveal = { onAccessibleReveal(index) }
+                                    )
+                                    Text("${'A' + index} · ${picture.label}", textAlign = TextAlign.Center,
+                                        style = MaterialTheme.typography.titleMedium)
+                                }
                             }
                         }
                     }
                     val feedback = when {
                         session.solved -> "Muito bem! ${question.explanation}"
-                        session.answered && !session.showCorrectAnswer ->
-                            "Resposta errada. A revelar a resposta correta..."
-                        session.answered -> "Esta era a resposta correta! ${question.explanation}"
+                        wrongAnswer -> "A resposta correta é ${question.options[question.correctIndex].label}. ${question.explanation}"
                         else -> null
                     }
                     if (feedback != null) {
@@ -165,8 +165,8 @@ private fun MagicAnswerImage(
     question: MagicQuestion,
     index: Int,
     progress: Float,
-    revealed: Boolean,
-    happy: Boolean,
+    showHappySmile: Boolean,
+    correctOnly: Boolean,
     enabled: Boolean,
     onPress: () -> Unit,
     onRelease: () -> Unit,
@@ -178,8 +178,8 @@ private fun MagicAnswerImage(
     var focused by remember { mutableStateOf(false) }
     val shape = RoundedCornerShape(16.dp)
     val status = when {
-        revealed && happy -> "Sorriso. Resposta correta"
-        revealed -> "Cara triste. Resposta errada"
+        showHappySmile -> "Sorriso. Resposta correta"
+        correctOnly -> "Resposta correta"
         progress > 0f -> "A revelar"
         else -> "Por revelar"
     }
@@ -187,8 +187,8 @@ private fun MagicAnswerImage(
         modifier = Modifier.fillMaxWidth().widthIn(max = 150.dp).aspectRatio(1f)
             .testTag("magic-image-$index")
             .border(if (focused) 4.dp else 2.dp,
-                if (focused) AprenderColors.Blue else if (revealed)
-                    (if (happy) AprenderColors.Mint else AprenderColors.Sunshine)
+                if (focused) AprenderColors.Blue
+                else if (showHappySmile || correctOnly) AprenderColors.Mint
                 else AprenderColors.Navy, shape)
             .clip(shape).background(Color.White)
             .pointerInput(question.id) {
@@ -228,19 +228,19 @@ private fun MagicAnswerImage(
         contentAlignment = Alignment.Center
     ) {
         MagicArtwork(question.options[index], Modifier.fillMaxSize().padding(6.dp))
-        if (progress > 0f && !revealed) {
+        if (progress > 0f && !showHappySmile) {
             Box(
                 Modifier.fillMaxSize()
                     .background(AprenderColors.Ink.copy(alpha = progress * 0.30f))
             )
         }
-        if (revealed) {
+        if (showHappySmile) {
             Box(
                 Modifier.fillMaxSize()
                     .background(Color.White.copy(alpha = 0.72f)),
                 contentAlignment = Alignment.Center
             ) {
-                MagicFace(happy, Modifier.fillMaxSize(0.70f))
+                MagicFace(true, Modifier.fillMaxSize(0.70f))
             }
         }
     }

@@ -32,47 +32,36 @@ class FingerMagicSessionTest {
         assertEquals(setOf(0, 1, 2), questions.map { it.correctIndex }.toSet())
     }
 
-    @Test fun wrongAnswerIsTheOnlyAttemptAndCorrectAnswerAppearsAutomatically() {
+    @Test fun wrongAnswerEndsQuestionImmediatelyAndBlocksFurtherAttempts() {
         val initial = FingerMagicSession()
-        val wrong = (initial.question.correctIndex + 1) % 3
-        val revealed = initial.reveal(wrong)
-        assertFalse(revealed.solved)
-        assertTrue(revealed.answered)
-        assertEquals(setOf(wrong), revealed.attempted)
-        assertEquals(setOf(wrong), revealed.visibleWrong)
-        assertFalse(revealed.canAdvance)
-        assertFalse(revealed.canReveal(initial.question.correctIndex))
-        assertEquals(revealed, revealed.reveal(initial.question.correctIndex))
-        assertEquals(revealed, revealed.next())
-
-        val explained = revealed.revealCorrectAnswer()
-        assertTrue(explained.showCorrectAnswer)
-        assertTrue(explained.canAdvance)
-        assertEquals(setOf(wrong), explained.attempted)
-        assertEquals(setOf(wrong), explained.visibleWrong)
-        assertEquals(explained, explained.reveal(initial.question.correctIndex))
-        val next = explained.next()
+        val correct = initial.question.correctIndex
+        val wrong = (correct + 1) % 3
+        val answered = initial.reveal(wrong)
+        assertFalse(answered.solved)
+        assertTrue(answered.answered)
+        assertEquals(setOf(wrong), answered.attempted)
+        assertTrue(answered.canAdvance)
+        assertFalse(answered.canReveal(correct))
+        assertEquals(answered, answered.reveal(correct))
+        val next = answered.next()
         assertEquals(1, next.index)
         assertFalse(next.answered)
     }
 
-    @Test fun correctAnswerStaysVisibleAndOnlyExplicitNextChangesQuestion() {
+    @Test fun correctAnswerStaysSolvedAndOnlyExplicitNextChangesQuestion() {
         val initial = FingerMagicSession()
         val correct = initial.question.correctIndex
         val solved = initial.reveal(correct)
         assertTrue(solved.solved)
         assertTrue(solved.answered)
-        assertTrue(solved.showCorrectAnswer)
         assertTrue(solved.canAdvance)
         assertEquals(initial.index, solved.index)
         assertEquals(solved, solved.reveal((correct + 1) % 3))
-        assertEquals(solved, solved.revealCorrectAnswer())
         val next = solved.next()
         assertEquals(1, next.index)
         assertFalse(next.solved)
         assertFalse(next.answered)
         assertTrue(next.attempted.isEmpty())
-        assertTrue(next.visibleWrong.isEmpty())
     }
 
     @Test fun allQuestionsNeedOneAttemptBeforeFinishing() {
@@ -83,8 +72,8 @@ class FingerMagicSessionTest {
             assertEquals(session, session.next())
             val wrong = (session.question.correctIndex + 1) % 3
             session = session.reveal(wrong)
-            assertEquals(session, session.next())
-            session = session.revealCorrectAnswer().next()
+            assertTrue(session.canAdvance)
+            session = session.next()
         }
         assertTrue(session.completed)
         assertEquals(session, session.next())
