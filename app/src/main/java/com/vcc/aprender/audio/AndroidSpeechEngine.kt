@@ -14,6 +14,7 @@ class AndroidSpeechEngine(context: Context) : TextToSpeech.OnInitListener {
     val status = _status.asStateFlow()
 
     private val playbackGate = SpeechPlaybackGate()
+    private val playbackLock = Any()
     private val _isSpeaking = MutableStateFlow(false)
     val isSpeaking = _isSpeaking.asStateFlow()
 
@@ -58,9 +59,10 @@ class AndroidSpeechEngine(context: Context) : TextToSpeech.OnInitListener {
             !PortugueseSpeech.canSpeak(text)) return false
         val tts = engine ?: return false
         val utteranceId = UUID.randomUUID().toString()
-        if (!playbackGate.begin(utteranceId)) return false
-
-        _isSpeaking.value = true
+        synchronized(playbackLock) {
+            if (!playbackGate.begin(utteranceId)) return false
+            _isSpeaking.value = true
+        }
         val result = try {
             tts.speak(
                 PortugueseSpeech.normalized(text),
@@ -77,13 +79,17 @@ class AndroidSpeechEngine(context: Context) : TextToSpeech.OnInitListener {
 
     private fun finishSpeaking(utteranceId: String?) {
         // A late callback from an earlier utterance must not unblock the next one.
-        if (playbackGate.finish(utteranceId)) _isSpeaking.value = false
+        synchronized(playbackLock) {
+            if (playbackGate.finish(utteranceId)) _isSpeaking.value = false
+        }
     }
 
     fun stop() {
-        playbackGate.cancel()
-        _isSpeaking.value = false
-        engine?.stop()
+        synchronized(playbackLock) {
+            playbackGate.cancel()
+            _isSpeaking.value = false
+            engine?.stop()
+        }
     }
 
     fun release() {
