@@ -6,18 +6,12 @@ name: Android Release APK
 
 on:
   workflow_dispatch:
-    inputs:
-      app_version:
-        description: 'Versao da app (MAJOR.MINOR.PATCH)'
-        required: true
-        default: '0.1.0'
-        type: string
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: android-release-${{ github.ref }}
+  group: android-release-versions
   cancel-in-progress: false
 
 jobs:
@@ -27,6 +21,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Calculate next Release version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Publica as releases a partir da branch main."
+            exit 1
+          fi
+          python3 - <<'PY'
+          import os
+          import re
+          import subprocess
+
+          # Existing historical APKs were versioned manually up to 0.1.5.
+          baseline = (0, 1, 5)
+          tags = subprocess.check_output(
+              ["git", "tag", "--list", "v*"], text=True
+          ).splitlines()
+          versions = [
+              tuple(map(int, match.groups()))
+              for tag in tags
+              if (match := re.fullmatch(r"v([0-9]+)\.([0-9]+)\.([0-9]+)", tag))
+          ]
+          major, minor, patch = max(versions + [baseline])
+          version = f"{major}.{minor}.{patch + 1}"
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"app_version={version}\n")
+          print(f"Nova versão de Release: {version}")
+          PY
 
       - name: Configure JDK 17
         uses: actions/setup-java@v4
@@ -86,7 +113,7 @@ jobs:
       - name: Build signed Release APK
         shell: bash
         env:
-          APP_VERSION: ${{ inputs.app_version }}
+          APP_VERSION: ${{ steps.version.outputs.app_version }}
           BUILD_NUMBER: ${{ github.run_number }}
           VCC_RELEASE_STORE_FILE: ${{ runner.temp }}/VCCProjects.jks
           VCC_RELEASE_STORE_PASSWORD: ${{ secrets.VCC_RELEASE_STORE_PASSWORD }}
@@ -117,10 +144,28 @@ jobs:
       - name: Upload signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: VCCAprender-v${{ inputs.app_version }}-build${{ github.run_number }}-release
+          name: VCCAprender-v${{ steps.version.outputs.app_version }}-build${{ github.run_number }}-release
           path: app/build/outputs/apk/release/*.apk
           if-no-files-found: error
           retention-days: 30
+
+      - name: Register successful Release tag
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.app_version }}
+        run: |
+          set -euo pipefail
+          tag="v${RELEASE_VERSION}"
+          if git rev-parse --verify "refs/tags/${tag}" >/dev/null 2>&1; then
+            echo "::error::A tag ${tag} já existe. Nova execução necessária."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "${tag}" "${GITHUB_SHA}"
+          git push origin "refs/tags/${tag}"
+          echo "### Release ${tag}" >> "${GITHUB_STEP_SUMMARY}"
+          echo "APK assinado e disponibilizado nos artefactos desta execução." >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Remove temporary keystore
         if: always()
