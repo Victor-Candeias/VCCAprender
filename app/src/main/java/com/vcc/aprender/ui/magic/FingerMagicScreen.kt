@@ -129,15 +129,41 @@ fun FingerMagicScreen(
                             }
                         }
                     }
+                    val correctExplanation =
+                        "A resposta correta é ${question.options[question.correctIndex].label}. ${question.explanation}"
                     val feedback = when {
                         session.solved -> "Muito bem! ${question.explanation}"
-                        wrongAnswer -> "A resposta correta é ${question.options[question.correctIndex].label}. ${question.explanation}"
+                        wrongAnswer -> "Resposta errada! $correctExplanation"
                         else -> null
                     }
-                    if (feedback != null) {
-                        Text(feedback, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center,
+                    if (wrongAnswer) {
+                        Column(
                             modifier = Modifier.fillMaxWidth()
-                                .background(if (session.solved) AprenderColors.Mint else AprenderColors.Sunshine, RoundedCornerShape(16.dp))
+                                .background(AprenderColors.Sunshine, RoundedCornerShape(16.dp))
+                                .padding(16.dp)
+                                .semantics { liveRegion = LiveRegionMode.Polite },
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Text(
+                                "Resposta errada!",
+                                color = MaterialTheme.colorScheme.error,
+                                style = MaterialTheme.typography.titleLarge,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.testTag("magic-wrong-feedback")
+                            )
+                            Text(
+                                correctExplanation,
+                                color = AprenderColors.Navy,
+                                style = MaterialTheme.typography.titleMedium,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    } else if (feedback != null) {
+                        Text(feedback, style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                                .background(AprenderColors.Mint, RoundedCornerShape(16.dp))
                                 .padding(16.dp).semantics { liveRegion = LiveRegionMode.Polite })
                     }
                     if (session.canAdvance) {

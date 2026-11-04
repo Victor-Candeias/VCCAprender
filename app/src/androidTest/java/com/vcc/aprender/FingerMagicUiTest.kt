@@ -106,6 +106,8 @@ class FingerMagicUiTest {
             assertTrue(model.state.value.session.canAdvance)
             assertFalse(model.state.value.session.canReveal(correct))
         }
+        compose.onNodeWithTag("magic-wrong-feedback").assertIsDisplayed()
+        compose.onNodeWithText("Resposta errada!").assertIsDisplayed()
         compose.onNodeWithTag("magic-image-$wrong").assertDoesNotExist()
         compose.onNodeWithTag("magic-image-$otherWrong").assertDoesNotExist()
         compose.onNodeWithTag("magic-image-$correct")
