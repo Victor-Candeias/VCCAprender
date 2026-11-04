@@ -6,7 +6,7 @@ Transforma cada momento numa aventura de aprendizagem! Desenvolvida para crianç
 
 😄 Com o divertido jogo **«Descobre a Resposta»**, as crianças escolhem entre três imagens e revelam smiles surpresa ao tocar nos quadrados mágicos!
 
-✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, surge o smile triste e, cerca de 3 segundos depois, a aplicação revela automaticamente o smile feliz na imagem correta. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
+✨ **«Magia na ponta do dedo»** tem uma entrada própria no ecrã inicial e **86 perguntas** em ordem aleatória, sem repetições por partida. São 50 questões originais e de curiosidades e 36 questões adicionais de universo, somas e conhecimentos gerais. Cada pergunta inclui três opções ilustradas A/B/C e uma explicação educativa. Mantém o dedo sobre uma das imagens durante cerca de 0,8 segundos para escolher. Só existe uma tentativa por pergunta: se acertares, surge um smile feliz; se falhares, as duas opções erradas desaparecem e fica apenas a imagem correta, sem smile. O botão «Pergunta seguinte» permite avançar após a revelação, sem nova tentativa. As ilustrações vetoriais são originais e estão incluídas na app, funcionando offline.
 
 🏆 Inclui recompensas, leitura em voz alta, desafios adaptados à idade e acompanhamento da evolução pelos pais.
 
@@ -37,3 +37,8 @@ Um workflow Debug compila SDK, host e APK exemplo; um workflow Release independe
 ## VA-037 — Responder diretamente nas imagens
 
 Os quadrados pretos foram removidos. Cada imagem A/B/C recebe diretamente o toque prolongado, apresenta o smile de resultado sobre a própria figura e fica bloqueada após uma única resposta. Um erro revela automaticamente a opção correta e permite avançar; a lógica de progresso e acessibilidade foi atualizada.
+
+
+## VA-038 — Áudio sem sobreposição e resposta incorreta sem smiles
+
+Os botões de ouvir a pergunta e o resultado ficam desativados durante a reprodução de qualquer um dos textos e só voltam a ser ativados quando o motor TTS notifica o fim, a interrupção ou um erro. Ao falhar uma questão, as duas opções incorretas desaparecem imediatamente e apenas a opção correta continua visível, sem mostrar smiles. A criança continua limitada a uma tentativa e pode avançar logo para a pergunta seguinte. Num acerto, mantém-se o smile feliz.
