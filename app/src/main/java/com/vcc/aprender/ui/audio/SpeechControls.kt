@@ -33,6 +33,7 @@ fun SpeechControls(textToRead: String, feedbackText: String? = null) {
     val context = LocalContext.current
     val speech = remember(context) { AndroidSpeechEngine(context) }
     val status by speech.status.collectAsStateWithLifecycle()
+    val isSpeaking by speech.isSpeaking.collectAsStateWithLifecycle()
     val repository = remember(context) { ParentalSettingsRepository(context) }
     val settings by repository.settings.collectAsStateWithLifecycle(initialValue = ParentalSettings())
     LaunchedEffect(settings.audioEnabled, settings.speechRate) {
@@ -48,12 +49,14 @@ fun SpeechControls(textToRead: String, feedbackText: String? = null) {
         ) {
             OutlinedButton(
                 onClick = { speech.speak(textToRead) },
+                enabled = !isSpeaking,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
                     .semantics { contentDescription = "Ouvir pergunta e opções" }
             ) { Text("Ouvir pergunta") }
             if (!feedbackText.isNullOrBlank()) {
                 OutlinedButton(
                     onClick = { speech.speak(feedbackText) },
+                    enabled = !isSpeaking,
                     modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
                         .semantics { contentDescription = "Ouvir resultado da resposta" }
                 ) { Text("Ouvir resultado") }
